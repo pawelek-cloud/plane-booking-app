@@ -61,8 +61,8 @@ function changeDate() {
 
     var tomorrow = incDay(departureDate, 1);
 
-    let ghjk = document.getElementById("arrivalDate").value = tomorrow;
-    console.log(ghjk)
+    document.getElementById("arrivalDate").value = tomorrow;
+
 
     document.getElementById("arrivalDate").setAttribute("min", tomorrow)
 
@@ -93,4 +93,75 @@ select.addEventListener("change", function () {
 
         })
 
+})
+
+// submit button 
+
+
+
+
+function sendData() {
+
+    const departureTime = document.getElementById("departureDate").value
+
+    const arrivalTime = document.getElementById("arrivalDate").value
+
+    const city = document.getElementById("arrivalPlace").value;
+
+    const departurePlace = document.getElementById("departurePlace").value;
+
+    function changeCityNameToAirportName(city) {
+        switch (city) {
+            case 'London':
+                return 'LHR';
+                break;
+            case 'Rio de Janeiro':
+                return 'GIG';
+                break;
+            case 'Dubai':
+                return 'DXB';
+                break;
+            case 'Warszawa':
+                return 'WAW';
+                break;
+            default:
+                console.log('Not correct value')
+
+        }
+    }
+    const transformedCityName = changeCityNameToAirportName(city);
+
+    const transformCity = changeCityNameToAirportName(departurePlace)
+
+    fetch(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/PL/PLN/en-PL/${transformCity}-sky/${transformedCityName}-sky/${departureTime}?inboundpartialdate=${arrivalTime}`, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-key": "66b4be106amsh70082ce762891bcp1e18a4jsnf50eb105953a",
+                "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+            }
+        })
+        .then((resp) => resp.json())
+        .then(function (data) {
+            console.log(data)
+        })
+
+}
+
+/* disable arrivalDate option if oneway chosen */
+
+const oneWay = document.getElementById("oneWay")
+
+oneWay.addEventListener("click", function twoWaysDisabled() {
+
+    const arrival1 = document.getElementById("arrivalDate")
+
+    arrival1.setAttribute("disabled", "")
+
+    const twoWays = document.getElementById("twoWays")
+
+    twoWays.addEventListener("click", function () {
+
+        arrival1.removeAttribute("disabled")
+
+    })
 })

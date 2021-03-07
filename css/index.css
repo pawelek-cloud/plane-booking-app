@@ -1,18 +1,20 @@
-*, :after, :before {
+*,
+:after,
+:before {
     box-sizing: border-box;
 }
 
-body{
-    padding: 0; 
+body {
+    padding: 0;
     margin: 0;
 }
 
-.container{
+.container {
     display: grid;
     grid-template-rows: 12vh 76vh 12vh;
 }
 
-.header{
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,11 +26,13 @@ body{
     justify-content: space-around;
     width: 50vw;
 }
-.logo img{
+
+.logo img {
     width: 30%;
     height: auto;
 }
-.footer{
+
+.footer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,8 +40,26 @@ body{
 }
 
 
-header{
+header {
     background-color: lightcoral;
 }
-main{background-color: lightblue;}
-footer{background-color: lightgreen;}
+
+main {
+    background-color: lightblue;
+}
+
+footer {
+    background-color: lightgreen;
+}
+
+/* disable arrivalDate option if oneway chosen */
+
+.disable:disabled {
+    background: #dddddd;
+}
+
+
+/* display div inline */
+.displayInline {
+    display: inline-block;
+}
