@@ -1,3 +1,4 @@
+
 // current date
 
 
@@ -96,9 +97,6 @@ select.addEventListener("change", function () {
 })
 
 // submit button 
-
-
-
 
 function sendData() {
 
