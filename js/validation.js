@@ -39,28 +39,13 @@ function validate1() {
 const validateInputFields = document.getElementById('submitButton');
 
 validateInputFields.addEventListener('click', function () {
-
+    
     validate();
     validate1();
 
     if (validate() === !invalid && validate1() === !invalid) {
+        validateInputFields.setAttribute("type","submit")
 
-
-        function openWindow() {
-            window.open("registration.html", "")
-
-        }
-        openWindow();
-
-        // function redirect() {
-        //     window.location.replace("registration.html")
-        // }
-
-        // redirect();
-
-        sendData();
-
-        
     }
 
 })
