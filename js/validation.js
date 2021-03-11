@@ -44,8 +44,12 @@ validateInputFields.addEventListener('click', function () {
     validate1();
 
     if (validate() === !invalid && validate1() === !invalid) {
+
         validateInputFields.setAttribute("type","submit")
 
+           window.location.replace("registration.html");
+         
     }
+    
 
 })
