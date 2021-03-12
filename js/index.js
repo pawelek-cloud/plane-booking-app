@@ -1,4 +1,3 @@
-
 // current date
 
 
@@ -100,17 +99,31 @@ select.addEventListener("change", function () {
 
 const oneWay = document.getElementById("oneWay")
 
-oneWay.addEventListener("click", function twoWaysDisabled() {
+const twoWays = document.getElementById("twoWays")
 
-    const arrival1 = document.getElementById("arrivalDate")
+let arrival1 = document.getElementById("arrivalDate")
+
+oneWay.addEventListener("change", function twoWaysDisabled() {
 
     arrival1.setAttribute("disabled", "")
+    arrival1.setAttribute("checked", "")
 
-    const twoWays = document.getElementById("twoWays")
-
-    twoWays.addEventListener("click", function () {
-
-        arrival1.removeAttribute("disabled")
-
-    })
 })
+
+twoWays.addEventListener("change", function oneWay() {
+
+    arrival1.removeAttribute("disabled")
+    arrival1.removeAttribute("checked")
+
+})
+
+// disabled button after reload
+
+window.addEventListener("load", function disabledOnLoad() {
+
+    const oneWaycheckedLoad = document.getElementById("oneWay").checked;
+    if(oneWaycheckedLoad){
+        arrival1.setAttribute("disabled","");
+    }
+})
+
