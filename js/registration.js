@@ -76,7 +76,7 @@ window.addEventListener("load", () => {
                     } else {
 
                         for (let i = 0; i < data.Carriers.length; i++) {
-                            document.getElementById("routes").innerHTML += "Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + data.Dates.OutboundDates[0].PartialDate + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>"+"<button name='btn'>Wybierz lot</button>"+"<br/><br/>";
+                            document.getElementById("routes").innerHTML += "Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + data.Dates.OutboundDates[0].PartialDate + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" + "<button name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
                         }
                         if (arrivalDate === null) {
                             document.getElementById("returnFlights").innerHTML = "";
@@ -158,14 +158,31 @@ window.addEventListener("load", () => {
                 } else {
 
                     for (let i = 0; i < data.Carriers.length; i++) {
-                        document.getElementById("return").innerHTML += "Cena minimalna biletu z: " + data.Places[0].Name + " do: " + data.Places[1].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + data.Dates.OutboundDates[0].PartialDate + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>"+"<button name='btn'>Wybierz lot</button>" + "<br/><br/>";
+                        document.getElementById("return").innerHTML += "Cena minimalna biletu z: " + data.Places[0].Name + " do: " + data.Places[1].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + data.Dates.OutboundDates[0].PartialDate + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" +
+                            "<button id='button' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
+
+
+
                     }
                 }
+                // display classes
+
+                const showClasses = document.getElementsByTagName("button");
+
+                for (let i = 0; i < showClasses.length; i++) {
+                    showClasses[i].addEventListener('click', function showOrHideClasses() {
+                        createClasses();
+                    });
+                }
+
             })
+
 
     }
 
 })
+
+// after reload
 
 window.addEventListener("beforeunload", function (event) {
     event.returnValue = "Are you sure?";
@@ -177,3 +194,75 @@ document.getElementById("returnButton").addEventListener("click", function goBac
 
     history.back(-1);
 })
+
+// create dynamic button in html
+
+function createClasses() {
+
+    const divContainer = document.createElement("div");
+    divContainer.className = "container";
+    divContainer.setAttribute = ("id", "divContainer");
+
+    const divRow = document.createElement("div");
+    divRow.className = "row";
+    divContainer.appendChild(divRow);
+
+    const divCol = document.createElement("div");
+    divCol.className = "col";
+    divRow.appendChild(divCol);
+
+    const divCard = document.createElement("div");
+    divCard.className = "card";
+    divCard.style.width = "20rem";
+    divCol.appendChild(divCard);
+
+    const image = document.createElement("img");
+    image.className = "card-img-top";
+    image.setAttribute('src', 'http://www.azspagirls.com/files/2010/09/orange.jpg');
+    divCard.appendChild(image);
+
+    const divCardBlock = document.createElement("div");
+    divCardBlock.className = "card-block";
+    divCard.appendChild(divCardBlock);
+
+    const cardTitle = document.createElement("h4");
+    cardTitle.className = "card-title";
+    cardTitle.innerHTML = 'Orange';
+    divCardBlock.appendChild(cardTitle);
+
+    const pPrice = document.createElement("p");
+    pPrice.className = "card-text";
+    pPrice.innerHTML = 'Price: $0.5';
+    divCardBlock.appendChild(pPrice);
+
+    const a = document.createElement('a');
+    a.href = '#';
+    a.setAttribute("data-name", "Orange");
+    a.setAttribute("data-price", "0.5");
+    a.className = "add-to-cart btn btn-primary";
+    a.innerHTML = "Wybiesz klasę lotu";
+    divCardBlock.appendChild(a);
+
+    // insert after
+
+    function insertAfter(referenceNode, newNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
+
+    // add class under certain button
+
+    let button = document.getElementsByTagName("button");
+
+    document.addEventListener("click", function (e) {
+        if (!e.target.matches("button")) return;
+
+        let index = [...button].indexOf(e.target);
+        myFunction(index)
+    }, false);
+
+
+    function myFunction(index) {
+        button = document.getElementsByTagName("button")[index];
+        insertAfter(button, divContainer);
+    }
+}
