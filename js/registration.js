@@ -1,6 +1,13 @@
+let price = 0;
+let price1 = 0;
+let price2 = 0;
+let index = 0;
+
 window.addEventListener("load", () => {
 
     // flight details
+
+
 
     const params = (new URL(document.location)).searchParams
 
@@ -84,14 +91,33 @@ window.addEventListener("load", () => {
 
                         console.log(data);
 
+                        // display classes
+
+                        const showClasses = document.getElementsByTagName("button");
+
+                        for (let i = 0; i < showClasses.length; i++) {
+                            showClasses[i].addEventListener('click', function showOrHideClasses() {
+                                price = data.Quotes[i].MinPrice;
+                                price1 = data.Quotes[0].MinPrice;
+                                console.log(showClasses.length)
+                                switch (true) {
+                                    case showClasses.length>3:
+                                        price2 = data.Quotes[1].MinPrice;
+                                        break;
+                                    default:
+                                        console.log('Length not=4')
+                                }
+                                index = i;
+                                createClasses();
+                            });
+                        }
+
                         if (arrivalDate != null && data.Carriers[0] != undefined) {
                             returnData();
                         }
-
                     }
                 }
                 noDate();
-
             })
 
     }
@@ -159,25 +185,62 @@ window.addEventListener("load", () => {
 
                     for (let i = 0; i < data.Carriers.length; i++) {
                         document.getElementById("return").innerHTML += "Cena minimalna biletu z: " + data.Places[0].Name + " do: " + data.Places[1].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + data.Dates.OutboundDates[0].PartialDate + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" +
-                            "<button id='button' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
+                            "<button class='button' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
 
+                        const showClasses = document.getElementsByTagName("button");
+
+                        for (let i = 0; i < showClasses.length; i++) {
+                            showClasses[i].addEventListener('click', function showOrHideClasses() {
+
+                                console.log(i)
+                                switch (i) {
+                                    case i = 0:
+                                        price = price1;
+                                        console.log(1)
+                                        break;
+                                        
+                                    case showClasses.length > 3 && (i = 1):
+                                        price = price2;
+                                        console.log(2)
+                                        break;
+                                    case showClasses.length = 3 && (i = 1):
+                                        price = data.Quotes[0].MinPrice;
+                                        console.log(3)
+                                        break;
+                                    case showClasses.length > 3 && (i = 2):
+                                        price = data.Quotes[0].MinPrice;
+                                        console.log(4)
+                                        break;
+                                    case showClasses.length = 3 && (i = 2):
+                                        price = data.Quotes[1].MinPrice;
+                                        console.log(5)
+                                        break;
+                                    case showClasses.length = 4 && (i = 3):
+                                        price = data.Quotes[1].MinPrice;
+                                        console.log(6)
+                                        break;
+                                    case showClasses.length = 3 && (i = 3):
+                                        price = data.Quotes[1].MinPrice;
+                                        console.log(7)
+                                        break;
+                                    default:
+                                        console.log('Something went wrong')
+
+                                }
+
+
+                                index = i;
+                                createClasses();
+                            });
+                        }
 
 
                     }
-                }
-                // display classes
 
-                const showClasses = document.getElementsByTagName("button");
-
-                for (let i = 0; i < showClasses.length; i++) {
-                    showClasses[i].addEventListener('click', function showOrHideClasses() {
-                        createClasses();
-                    });
                 }
+
 
             })
-
-
     }
 
 })
@@ -199,49 +262,132 @@ document.getElementById("returnButton").addEventListener("click", function goBac
 
 function createClasses() {
 
-    const divContainer = document.createElement("div");
-    divContainer.className = "container";
-    divContainer.setAttribute = ("id", "divContainer");
+    // ECONOMY
 
-    const divRow = document.createElement("div");
+    let divContainer = document.createElement("div");
+    divContainer.className = "container";
+    divContainer.id = "divContainer";
+
+    let divRow = document.createElement("div");
     divRow.className = "row";
     divContainer.appendChild(divRow);
 
-    const divCol = document.createElement("div");
+    let divCol = document.createElement("div");
     divCol.className = "col";
     divRow.appendChild(divCol);
 
-    const divCard = document.createElement("div");
+    let divCard = document.createElement("div");
     divCard.className = "card";
     divCard.style.width = "20rem";
     divCol.appendChild(divCard);
 
-    const image = document.createElement("img");
+    let image = document.createElement("img");
     image.className = "card-img-top";
-    image.setAttribute('src', 'http://www.azspagirls.com/files/2010/09/orange.jpg');
+    image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142788&t=1600695071504');
     divCard.appendChild(image);
 
-    const divCardBlock = document.createElement("div");
+    let divCardBlock = document.createElement("div");
     divCardBlock.className = "card-block";
     divCard.appendChild(divCardBlock);
 
-    const cardTitle = document.createElement("h4");
+    let cardTitle = document.createElement("h4");
     cardTitle.className = "card-title";
-    cardTitle.innerHTML = 'Orange';
+    cardTitle.innerHTML = 'ECONOMY';
     divCardBlock.appendChild(cardTitle);
 
-    const pPrice = document.createElement("p");
+    let pPrice = document.createElement("p");
     pPrice.className = "card-text";
-    pPrice.innerHTML = 'Price: $0.5';
+    pPrice.innerHTML = 'Cena: PLN ' + price;
     divCardBlock.appendChild(pPrice);
 
-    const a = document.createElement('a');
+    let a = document.createElement('a');
     a.href = '#';
-    a.setAttribute("data-name", "Orange");
-    a.setAttribute("data-price", "0.5");
+    a.setAttribute("data-name", "Economy");
+    a.setAttribute("data-price", "price");
     a.className = "add-to-cart btn btn-primary";
     a.innerHTML = "Wybiesz klasę lotu";
     divCardBlock.appendChild(a);
+
+    // PREMIUM
+
+    divCol = document.createElement("div");
+    divCol.className = "col";
+    divRow.appendChild(divCol);
+
+    divCard = document.createElement("div");
+    divCard.className = "card";
+    divCard.style.width = "20rem";
+    divCol.appendChild(divCard);
+
+    image = document.createElement("img");
+    image.className = "card-img-top";
+    image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142802&t=1600695077795');
+    divCard.appendChild(image);
+
+    divCardBlock = document.createElement("div");
+    divCardBlock.className = "card-block";
+    divCard.appendChild(divCardBlock);
+
+    cardTitle = document.createElement("h4");
+    cardTitle.className = "card-title";
+    cardTitle.innerHTML = 'PREMIUM';
+    divCardBlock.appendChild(cardTitle);
+
+    let pricePremium = price + 1000;
+
+    pPrice = document.createElement("p");
+    pPrice.className = "card-text";
+    pPrice.innerHTML = 'Cena: PLN ' + pricePremium;
+    divCardBlock.appendChild(pPrice);
+
+    a = document.createElement('a');
+    a.href = '#';
+    a.setAttribute("data-name", "Premium");
+    a.setAttribute("data-price", "pricePremium");
+    a.className = "add-to-cart btn btn-primary";
+    a.innerHTML = "Wybiesz klasę lotu";
+    divCardBlock.appendChild(a);
+
+    // BUSINESS
+
+    let priceBusiness = pricePremium + 200;
+
+    divCol = document.createElement("div");
+    divCol.className = "col";
+    divRow.appendChild(divCol);
+
+    divCard = document.createElement("div");
+    divCard.className = "card";
+    divCard.style.width = "20rem";
+    divCol.appendChild(divCard);
+
+    image = document.createElement("img");
+    image.className = "card-img-top";
+    image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142820&t=1600695081474');
+    divCard.appendChild(image);
+
+    divCardBlock = document.createElement("div");
+    divCardBlock.className = "card-block";
+    divCard.appendChild(divCardBlock);
+
+    cardTitle = document.createElement("h4");
+    cardTitle.className = "card-title";
+    cardTitle.innerHTML = 'BUSINESS';
+    divCardBlock.appendChild(cardTitle);
+
+    pPrice = document.createElement("p");
+    pPrice.className = "card-text";
+    pPrice.innerHTML = 'Cena: PLN ' + priceBusiness;
+    divCardBlock.appendChild(pPrice);
+
+    a = document.createElement('a');
+    a.href = '#';
+    a.setAttribute("data-name", "Business");
+    a.setAttribute("data-price", "priceBusiness");
+    a.className = "add-to-cart btn btn-primary";
+    a.innerHTML = "Wybiesz klasę lotu";
+    divCardBlock.appendChild(a);
+
 
     // insert after
 
@@ -251,18 +397,55 @@ function createClasses() {
 
     // add class under certain button
 
-    let button = document.getElementsByTagName("button");
-
-    document.addEventListener("click", function (e) {
-        if (!e.target.matches("button")) return;
-
-        let index = [...button].indexOf(e.target);
-        myFunction(index)
-    }, false);
-
+    // button
 
     function myFunction(index) {
-        button = document.getElementsByTagName("button")[index];
+
+        let button = document.getElementsByTagName("button")[index];
+        let div = document.getElementById("divContainer");
+
         insertAfter(button, divContainer);
+
+        if (document.contains(div)) {
+            div.remove();
+
+        } else {
+            insertAfter(button, divContainer);
+        }
     }
+    myFunction(index)
+
+
+    // return button
+
+    // function myFunction1(index1) {
+
+    //     let div = document.getElementById("divContainer");
+
+    //     let button = document.getElementsByClassName("button")[index1];
+
+    //     insertAfter(button, divContainer);
+
+    //     if (document.contains(div)) {
+
+    //         div.remove();
+
+    //     } else {
+    //         insertAfter(button, divContainer);
+    //     }
+
+    // let returnButton = document.getElementsByClassName("returnButton")[index];
+    // console.log(index)
+
+    // insertAfter(returnButton, divContainer);
+
+    // if (document.contains(div)) {
+
+    //     div.remove();
+
+    // } else {
+    //     insertAfter(returnButton, divContainer);
+    // }
 }
+// myFunction1(index1);
+// }
