@@ -84,6 +84,8 @@ window.addEventListener("load", () => {
 
                         for (let i = 0; i < data.Carriers.length; i++) {
                             document.getElementById("routes").innerHTML += "Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + data.Dates.OutboundDates[0].PartialDate + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" + "<button name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
+
+
                         }
                         if (arrivalDate === null) {
                             document.getElementById("returnFlights").innerHTML = "";
@@ -98,18 +100,14 @@ window.addEventListener("load", () => {
                         for (let i = 0; i < showClasses.length; i++) {
                             showClasses[i].addEventListener('click', function showOrHideClasses() {
                                 price = data.Quotes[i].MinPrice;
-                                price1 = data.Quotes[0].MinPrice;
-                                console.log(showClasses.length)
-                                switch (true) {
-                                    case showClasses.length>3:
-                                        price2 = data.Quotes[1].MinPrice;
-                                        break;
-                                    default:
-                                        console.log('Length not=4')
-                                }
+
                                 index = i;
                                 createClasses();
-                            });
+                            })
+                        }
+                        price1 = data.Quotes[0].MinPrice;
+                        if(showClasses.length>1){
+                        price2 = data.Quotes[1].MinPrice;
                         }
 
                         if (arrivalDate != null && data.Carriers[0] != undefined) {
@@ -192,57 +190,55 @@ window.addEventListener("load", () => {
                         for (let i = 0; i < showClasses.length; i++) {
                             showClasses[i].addEventListener('click', function showOrHideClasses() {
 
-                                console.log(i)
                                 switch (i) {
+
                                     case i = 0:
                                         price = price1;
-                                        console.log(1)
                                         break;
-                                        
-                                    case showClasses.length > 3 && (i = 1):
+
+                                    case ((price2 <= 0) && (showClasses.length === 3) && (i = 1)):
+                                        price = data.Quotes[0].MinPrice;
+                                        break;
+                                    case ((price2 <= 0) && (showClasses.length === 3) && (i = 2)):
+                                        price = data.Quotes[1].MinPrice;
+                                        break;
+                                    case ((price2 > 0) && (showClasses.length === 3) && (i = 1)):
                                         price = price2;
-                                        console.log(2)
                                         break;
-                                    case showClasses.length = 3 && (i = 1):
+
+                                    case ((price2 > 0) && (showClasses.length === 3) && (i = 2)):
                                         price = data.Quotes[0].MinPrice;
-                                        console.log(3)
                                         break;
-                                    case showClasses.length > 3 && (i = 2):
+
+                                    case ((showClasses.length === 2) && (i = 1)):
+                                        price = data.Quotes[0]
+                                            .MinPrice;
+                                       
+                                        break;
+                                    case ((showClasses.length === 4) && (i = 1)):
+                                        price = price2;
+                                       
+                                        break;
+                                    case ((showClasses.length === 4) && (i = 2)):
                                         price = data.Quotes[0].MinPrice;
-                                        console.log(4)
+                                        
                                         break;
-                                    case showClasses.length = 3 && (i = 2):
+                                    case ((showClasses.length === 4) && (i = 3)):
                                         price = data.Quotes[1].MinPrice;
-                                        console.log(5)
+                                        
                                         break;
-                                    case showClasses.length = 4 && (i = 3):
-                                        price = data.Quotes[1].MinPrice;
-                                        console.log(6)
-                                        break;
-                                    case showClasses.length = 3 && (i = 3):
-                                        price = data.Quotes[1].MinPrice;
-                                        console.log(7)
-                                        break;
+
                                     default:
                                         console.log('Something went wrong')
-
                                 }
-
-
                                 index = i;
                                 createClasses();
                             });
                         }
-
-
                     }
-
                 }
-
-
             })
     }
-
 })
 
 // after reload
@@ -257,6 +253,8 @@ document.getElementById("returnButton").addEventListener("click", function goBac
 
     history.back(-1);
 })
+
+
 
 // create dynamic button in html
 
@@ -304,8 +302,9 @@ function createClasses() {
     a.href = '#';
     a.setAttribute("data-name", "Economy");
     a.setAttribute("data-price", "price");
+    a.id = 'economyButton';
     a.className = "add-to-cart btn btn-primary";
-    a.innerHTML = "Wybiesz klasę lotu";
+    a.innerHTML = "Wybierz bagaz";
     divCardBlock.appendChild(a);
 
     // PREMIUM
@@ -344,8 +343,9 @@ function createClasses() {
     a.href = '#';
     a.setAttribute("data-name", "Premium");
     a.setAttribute("data-price", "pricePremium");
+    a.id = 'premiumButton';
     a.className = "add-to-cart btn btn-primary";
-    a.innerHTML = "Wybiesz klasę lotu";
+    a.innerHTML = "Wybierz bagaz";
     divCardBlock.appendChild(a);
 
     // BUSINESS
@@ -385,9 +385,9 @@ function createClasses() {
     a.setAttribute("data-name", "Business");
     a.setAttribute("data-price", "priceBusiness");
     a.className = "add-to-cart btn btn-primary";
-    a.innerHTML = "Wybiesz klasę lotu";
+    a.id = 'businessButton';
+    a.innerHTML = "Wybierz bagaz";
     divCardBlock.appendChild(a);
-
 
     // insert after
 
@@ -415,37 +415,113 @@ function createClasses() {
     }
     myFunction(index)
 
+    const buttonEconomy = document.getElementById('economyButton');
 
-    // return button
+    buttonEconomy.addEventListener("click", function addEconomyLuggage() {
 
-    // function myFunction1(index1) {
+        // console.log("Hi")
 
-    //     let div = document.getElementById("divContainer");
+        // let divContainer = document.createElement("div");
+        // divContainer.className = "container";
+        // divContainer.id = "divContainer";
 
-    //     let button = document.getElementsByClassName("button")[index1];
+        createEconomyLuggage();
 
-    //     insertAfter(button, divContainer);
+    })
 
-    //     if (document.contains(div)) {
+    function createEconomyLuggage() {
 
-    //         div.remove();
 
-    //     } else {
-    //         insertAfter(button, divContainer);
-    //     }
 
-    // let returnButton = document.getElementsByClassName("returnButton")[index];
-    // console.log(index)
+        let divRow1 = document.createElement("div");
+        divRow1.className = "row";
+        divRow1.id = "divRow";
+        // divContainer.appendChild(divRow1);
 
-    // insertAfter(returnButton, divContainer);
+        let divCol = document.createElement("div");
+        divCol.className = "col";
+        divRow.appendChild(divCol);
 
-    // if (document.contains(div)) {
+        let divCard = document.createElement("div");
+        divCard.className = "card";
+        divCard.style.width = "20rem";
+        divCol.appendChild(divCard);
 
-    //     div.remove();
+        let image = document.createElement("img");
+        image.className = "card-img-top";
+        image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142788&t=1600695071504');
+        divCard.appendChild(image);
 
-    // } else {
-    //     insertAfter(returnButton, divContainer);
-    // }
+        let divCardBlock = document.createElement("div");
+        divCardBlock.className = "card-block";
+        divCard.appendChild(divCardBlock);
+
+        let cardTitle = document.createElement("h4");
+        cardTitle.className = "card-title";
+        cardTitle.innerHTML = 'ECONOMY';
+        divCardBlock.appendChild(cardTitle);
+
+        let pPrice = document.createElement("p");
+        pPrice.className = "card-text";
+        pPrice.innerHTML = 'Cena: PLN ' + price;
+        divCardBlock.appendChild(pPrice);
+
+        let a = document.createElement('a');
+        a.href = '#';
+        a.setAttribute("data-name", "Economy");
+        a.setAttribute("data-price", "price");
+        a.id = 'economyButton';
+        a.className = "add-to-cart btn btn-primary";
+        a.innerHTML = "Wybierz bagaz";
+        divCardBlock.appendChild(a);
+
+        // insert after
+
+        function insertAfter(referenceNode, newNode) {
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        }
+
+        // add class under certain button
+
+        // button
+
+        // function myFunction(index) {
+
+
+        //     console.log(index)
+
+        // let button = document.getElementById("economyButton")[index];
+        // divRow1 = document.getElementById("divRow");
+
+        // console.log(divRow1)
+
+        // divRow.style.display="inline-block";
+        // console.log(document.contains(divRow1))
+        if (document.contains(divRow1)) {
+            console.log("remove")
+            divRow1.remove();
+        }
+        // } else {
+        //     insertAfter(buttonEconomy, divRow1);
+        // }
+
+        // switch (true) {
+        //     case document.contains(divRow1):
+        //         divRow1.remove();
+        //         break;
+        //     case 2:
+        //         insertAfter(buttonEconomy, divRow1);
+        //         break;
+        //     default:
+        //         console.log("Something went wrong")
+
+        // }
+
+
+        // else {
+        // insertAfter(buttonEconomy, divRow1);
+        // }
+        // }
+        // myFunction(index)
+    }
 }
-// myFunction1(index1);
-// }
