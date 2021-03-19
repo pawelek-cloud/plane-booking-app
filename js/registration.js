@@ -2,6 +2,8 @@ let price = 0;
 let price1 = 0;
 let price2 = 0;
 let index = 0;
+let count = 0;
+let click = 1;
 
 window.addEventListener("load", () => {
 
@@ -106,8 +108,8 @@ window.addEventListener("load", () => {
                             })
                         }
                         price1 = data.Quotes[0].MinPrice;
-                        if(showClasses.length>1){
-                        price2 = data.Quotes[1].MinPrice;
+                        if (showClasses.length > 1) {
+                            price2 = data.Quotes[1].MinPrice;
                         }
 
                         if (arrivalDate != null && data.Carriers[0] != undefined) {
@@ -213,19 +215,19 @@ window.addEventListener("load", () => {
                                     case ((showClasses.length === 2) && (i = 1)):
                                         price = data.Quotes[0]
                                             .MinPrice;
-                                       
+
                                         break;
                                     case ((showClasses.length === 4) && (i = 1)):
                                         price = price2;
-                                       
+
                                         break;
                                     case ((showClasses.length === 4) && (i = 2)):
                                         price = data.Quotes[0].MinPrice;
-                                        
+
                                         break;
                                     case ((showClasses.length === 4) && (i = 3)):
                                         price = data.Quotes[1].MinPrice;
-                                        
+
                                         break;
 
                                     default:
@@ -299,7 +301,7 @@ function createClasses() {
     divCardBlock.appendChild(pPrice);
 
     let a = document.createElement('a');
-    a.href = '#';
+    // a.href = '#';
     a.setAttribute("data-name", "Economy");
     a.setAttribute("data-price", "price");
     a.id = 'economyButton';
@@ -340,7 +342,7 @@ function createClasses() {
     divCardBlock.appendChild(pPrice);
 
     a = document.createElement('a');
-    a.href = '#';
+    // a.href = '#';
     a.setAttribute("data-name", "Premium");
     a.setAttribute("data-price", "pricePremium");
     a.id = 'premiumButton';
@@ -381,7 +383,7 @@ function createClasses() {
     divCardBlock.appendChild(pPrice);
 
     a = document.createElement('a');
-    a.href = '#';
+    // a.href = '#';
     a.setAttribute("data-name", "Business");
     a.setAttribute("data-price", "priceBusiness");
     a.className = "add-to-cart btn btn-primary";
@@ -415,15 +417,11 @@ function createClasses() {
     }
     myFunction(index)
 
+
+
     const buttonEconomy = document.getElementById('economyButton');
 
     buttonEconomy.addEventListener("click", function addEconomyLuggage() {
-
-        // console.log("Hi")
-
-        // let divContainer = document.createElement("div");
-        // divContainer.className = "container";
-        // divContainer.id = "divContainer";
 
         createEconomyLuggage();
 
@@ -431,97 +429,57 @@ function createClasses() {
 
     function createEconomyLuggage() {
 
+        count = click++;
 
+        if (count % 2 != 0) {
 
-        let divRow1 = document.createElement("div");
-        divRow1.className = "row";
-        divRow1.id = "divRow";
-        // divContainer.appendChild(divRow1);
+            divRow = document.createElement("div");
+            divRow.className = "row";
+            divRow.id="divRow";
+            divContainer.appendChild(divRow);
 
-        let divCol = document.createElement("div");
-        divCol.className = "col";
-        divRow.appendChild(divCol);
+            divCol = document.createElement("div");
+            divCol.className = "col";
+            divRow.appendChild(divCol);
 
-        let divCard = document.createElement("div");
-        divCard.className = "card";
-        divCard.style.width = "20rem";
-        divCol.appendChild(divCard);
+            divCard = document.createElement("div");
+            divCard.className = "card";
+            divCard.style.width = "20rem";
+            divCol.appendChild(divCard);
 
-        let image = document.createElement("img");
-        image.className = "card-img-top";
-        image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142788&t=1600695071504');
-        divCard.appendChild(image);
+            image = document.createElement("img");
+            image.className = "card-img-top";
+            image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142788&t=1600695071504');
+            divCard.appendChild(image);
 
-        let divCardBlock = document.createElement("div");
-        divCardBlock.className = "card-block";
-        divCard.appendChild(divCardBlock);
+            divCardBlock1 = document.createElement("div");
+            divCardBlock1.className = "card-block";
+            divCard.appendChild(divCardBlock1);
 
-        let cardTitle = document.createElement("h4");
-        cardTitle.className = "card-title";
-        cardTitle.innerHTML = 'ECONOMY';
-        divCardBlock.appendChild(cardTitle);
+            cardTitle = document.createElement("h4");
+            cardTitle.className = "card-title";
+            cardTitle.innerHTML = 'ECONOMY';
+            divCardBlock1.appendChild(cardTitle);
 
-        let pPrice = document.createElement("p");
-        pPrice.className = "card-text";
-        pPrice.innerHTML = 'Cena: PLN ' + price;
-        divCardBlock.appendChild(pPrice);
+            pPrice = document.createElement("p");
+            pPrice.className = "card-text";
+            pPrice.innerHTML = 'Cena: PLN ' + price;
+            divCardBlock1.appendChild(pPrice);
 
-        let a = document.createElement('a');
-        a.href = '#';
-        a.setAttribute("data-name", "Economy");
-        a.setAttribute("data-price", "price");
-        a.id = 'economyButton';
-        a.className = "add-to-cart btn btn-primary";
-        a.innerHTML = "Wybierz bagaz";
-        divCardBlock.appendChild(a);
+            a = document.createElement('a');
+            // a.href = '#';
+            a.setAttribute("data-name", "Economy");
+            a.setAttribute("data-price", "price");
+            a.id = 'economyButton';
+            a.className = "add-to-cart btn btn-primary";
+            a.innerHTML = "Wybierz bagaz";
+            divCardBlock1.appendChild(a);
 
-        // insert after
+        } else if (count % 2 === 0) {
+            let divRow=document.getElementById("divRow");
 
-        function insertAfter(referenceNode, newNode) {
-            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+            divRow.remove();
         }
 
-        // add class under certain button
-
-        // button
-
-        // function myFunction(index) {
-
-
-        //     console.log(index)
-
-        // let button = document.getElementById("economyButton")[index];
-        // divRow1 = document.getElementById("divRow");
-
-        // console.log(divRow1)
-
-        // divRow.style.display="inline-block";
-        // console.log(document.contains(divRow1))
-        if (document.contains(divRow1)) {
-            console.log("remove")
-            divRow1.remove();
-        }
-        // } else {
-        //     insertAfter(buttonEconomy, divRow1);
-        // }
-
-        // switch (true) {
-        //     case document.contains(divRow1):
-        //         divRow1.remove();
-        //         break;
-        //     case 2:
-        //         insertAfter(buttonEconomy, divRow1);
-        //         break;
-        //     default:
-        //         console.log("Something went wrong")
-
-        // }
-
-
-        // else {
-        // insertAfter(buttonEconomy, divRow1);
-        // }
-        // }
-        // myFunction(index)
     }
 }
