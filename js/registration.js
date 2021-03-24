@@ -4,12 +4,12 @@ let price2 = 0;
 let index = 0;
 let count = 0;
 let click = 1;
+let optionVal = 0;
+
 
 window.addEventListener("load", () => {
 
     // flight details
-
-
 
     const params = (new URL(document.location)).searchParams
 
@@ -85,7 +85,7 @@ window.addEventListener("load", () => {
                     } else {
 
                         for (let i = 0; i < data.Carriers.length; i++) {
-                            document.getElementById("routes").innerHTML += "Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + data.Dates.OutboundDates[0].PartialDate + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" + "<button name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
+                            document.getElementById("routes").innerHTML += "Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + data.Dates.OutboundDates[0].PartialDate + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" + "<button class='button' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
 
 
                         }
@@ -97,7 +97,7 @@ window.addEventListener("load", () => {
 
                         // display classes
 
-                        const showClasses = document.getElementsByTagName("button");
+                        const showClasses = document.getElementsByClassName("button");
 
                         for (let i = 0; i < showClasses.length; i++) {
                             showClasses[i].addEventListener('click', function showOrHideClasses() {
@@ -187,7 +187,7 @@ window.addEventListener("load", () => {
                         document.getElementById("return").innerHTML += "Cena minimalna biletu z: " + data.Places[0].Name + " do: " + data.Places[1].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + data.Dates.OutboundDates[0].PartialDate + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" +
                             "<button class='button' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
 
-                        const showClasses = document.getElementsByTagName("button");
+                        const showClasses = document.getElementsByClassName("button");
 
                         for (let i = 0; i < showClasses.length; i++) {
                             showClasses[i].addEventListener('click', function showOrHideClasses() {
@@ -302,10 +302,10 @@ function createClasses() {
 
     let a = document.createElement('a');
     // a.href = '#';
-    a.setAttribute("data-name", "Economy");
-    a.setAttribute("data-price", "price");
+    // a.setAttribute("data-name", "Economy");
+    // a.setAttribute("data-price", "price");
     a.id = 'economyButton';
-    a.className = "add-to-cart btn btn-primary";
+    a.className = "btn btn-primary";
     a.innerHTML = "Wybierz bagaz";
     divCardBlock.appendChild(a);
 
@@ -343,10 +343,10 @@ function createClasses() {
 
     a = document.createElement('a');
     // a.href = '#';
-    a.setAttribute("data-name", "Premium");
-    a.setAttribute("data-price", "pricePremium");
+    // a.setAttribute("data-name", "Premium");
+    // a.setAttribute("data-price", "pricePremium");
     a.id = 'premiumButton';
-    a.className = "add-to-cart btn btn-primary";
+    a.className = "btn btn-primary";
     a.innerHTML = "Wybierz bagaz";
     divCardBlock.appendChild(a);
 
@@ -384,9 +384,9 @@ function createClasses() {
 
     a = document.createElement('a');
     // a.href = '#';
-    a.setAttribute("data-name", "Business");
-    a.setAttribute("data-price", "priceBusiness");
-    a.className = "add-to-cart btn btn-primary";
+    // a.setAttribute("data-name", "Business");
+    // a.setAttribute("data-price", "priceBusiness");
+    a.className = "btn btn-primary";
     a.id = 'businessButton';
     a.innerHTML = "Wybierz bagaz";
     divCardBlock.appendChild(a);
@@ -417,7 +417,7 @@ function createClasses() {
     }
     myFunction(index)
 
-
+    // ECONOMY LUGGAGE
 
     const buttonEconomy = document.getElementById('economyButton');
 
@@ -433,53 +433,215 @@ function createClasses() {
 
         if (count % 2 != 0) {
 
-            divRow = document.createElement("div");
-            divRow.className = "row";
-            divRow.id="divRow";
-            divContainer.appendChild(divRow);
+            divCardBlock = document.createElement("div");
+            divCardBlock.className = "card-block";
+            divCardBlock.id = "divLuggage"
+            divCard.appendChild(divCardBlock);
 
-            divCol = document.createElement("div");
-            divCol.className = "col";
-            divRow.appendChild(divCol);
+            let select = document.createElement("select");
+            select.name = "luggage";
+            select.id = "luggageOption";
+            select.style.width = "20rem";
+            select.style.fontSize = "17px";
 
-            divCard = document.createElement("div");
-            divCard.className = "card";
-            divCard.style.width = "20rem";
-            divCol.appendChild(divCard);
+            let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
 
-            image = document.createElement("img");
-            image.className = "card-img-top";
-            image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142788&t=1600695071504');
-            divCard.appendChild(image);
 
-            divCardBlock1 = document.createElement("div");
-            divCardBlock1.className = "card-block";
-            divCard.appendChild(divCardBlock1);
+            for (let i = 0; i < names.length; i++) {
+                let values = [0, 90, 200];
 
-            cardTitle = document.createElement("h4");
-            cardTitle.className = "card-title";
-            cardTitle.innerHTML = 'ECONOMY';
-            divCardBlock1.appendChild(cardTitle);
+                let option = document.createElement("option");
 
-            pPrice = document.createElement("p");
-            pPrice.className = "card-text";
-            pPrice.innerHTML = 'Cena: PLN ' + price;
-            divCardBlock1.appendChild(pPrice);
+                option.text = names[i];
+                option.value = values[i];
+                select.appendChild(option);
+
+            }
+
+            let label = document.createElement("label");
+            label.htmlFor = "luggage";
+
+            divCardBlock.appendChild(label).appendChild(select);
 
             a = document.createElement('a');
-            // a.href = '#';
+            a.className = "add-to-cart btn btn-primary";
             a.setAttribute("data-name", "Economy");
             a.setAttribute("data-price", "price");
-            a.id = 'economyButton';
-            a.className = "add-to-cart btn btn-primary";
-            a.innerHTML = "Wybierz bagaz";
-            divCardBlock1.appendChild(a);
+            a.id = 'luggageEconomyButton';
+            a.innerHTML = "Cena z bagażem: " + price + " PLN";
+            divCardBlock.appendChild(a);
+
+            let optionValue = document.getElementById("luggageOption");
+
+            optionValue.addEventListener("change", luggageOpt1)
+
+
+            function luggageOpt1(optionVal) {
+                {
+                    optionVal = this.value;
+                    let optionValInteger = parseInt(optionVal, 10);
+                    let sum = price + optionValInteger;
+                    document.getElementById("luggageEconomyButton").innerHTML = "Cena z bagażem: " + sum + " PLN";
+                }
+            }
 
         } else if (count % 2 === 0) {
-            let divRow=document.getElementById("divRow");
+            let divLuggage = document.getElementById("divLuggage");
 
-            divRow.remove();
+            divLuggage.remove();
         }
 
     }
+
+    // Premium Luggage
+
+    const buttonPremium = document.getElementById('premiumButton');
+
+    buttonPremium.addEventListener("click", function addPremiumLuggage() {
+
+        createPremiumLuggage();
+
+    })
+
+    function createPremiumLuggage() {
+
+        count = click++;
+
+        if (count % 2 != 0) {
+
+            divCardBlock = document.createElement("div");
+            divCardBlock.className = "card-block";
+            divCardBlock.id = "divLuggage"
+            divCard.appendChild(divCardBlock);
+
+            let select = document.createElement("select");
+            select.name = "luggage";
+            select.id = "luggageOption";
+            select.style.width = "20rem";
+            select.style.fontSize = "17px";
+
+            let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
+
+
+            for (let i = 0; i < names.length; i++) {
+                let values = [0, 90, 200];
+
+                let option = document.createElement("option");
+
+                option.text = names[i];
+                option.value = values[i];
+                select.appendChild(option);
+
+            }
+
+            let label = document.createElement("label");
+            label.htmlFor = "luggage";
+
+            divCardBlock.appendChild(label).appendChild(select);
+
+            a = document.createElement('a');
+            a.className = "add-to-cart btn btn-primary";
+            a.setAttribute("data-name", "Premium");
+            a.setAttribute("data-price", "pricePremium");
+            a.id = 'luggagePremiumButton';
+            a.innerHTML = "Cena z bagażem: " + pricePremium + " PLN";
+            divCardBlock.appendChild(a);
+
+            let optionValue = document.getElementById("luggageOption");
+
+            optionValue.addEventListener("change", luggageOpt1)
+
+
+            function luggageOpt1(optionVal) {
+                {
+                    optionVal = this.value;
+                    let optionValInteger = parseInt(optionVal, 10);
+                    let sum = pricePremium + optionValInteger;
+                    document.getElementById("luggagePremiumButton").innerHTML = "Cena łączna: " + sum + " PLN";
+                }
+            }
+
+        } else if (count % 2 === 0) {
+            let divLuggage = document.getElementById("divLuggage");
+
+            divLuggage.remove();
+        }
+
+    }
+
+    //Business Luggage
+    const buttonBusiness = document.getElementById('businessButton');
+
+    buttonBusiness.addEventListener("click", function addPremiumLuggage() {
+
+        createBusinessLuggage();
+
+    })
+
+    function createBusinessLuggage() {
+
+        count = click++;
+
+        if (count % 2 != 0) {
+
+            divCardBlock = document.createElement("div");
+            divCardBlock.className = "card-block";
+            divCardBlock.id = "divLuggage"
+            divCard.appendChild(divCardBlock);
+
+            let select = document.createElement("select");
+            select.name = "luggage";
+            select.id = "luggageOption";
+            select.style.width = "20rem";
+            select.style.fontSize = "17px";
+
+            let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
+
+
+            for (let i = 0; i < names.length; i++) {
+                let values = [0, 90, 200];
+
+                let option = document.createElement("option");
+
+                option.text = names[i];
+                option.value = values[i];
+                select.appendChild(option);
+
+            }
+
+            let label = document.createElement("label");
+            label.htmlFor = "luggage";
+
+            divCardBlock.appendChild(label).appendChild(select);
+
+            a = document.createElement('a');
+            a.className = "add-to-cart btn btn-primary";
+            a.setAttribute("data-name", "Business");
+            a.setAttribute("data-price", "priceBusiness");
+            a.id = 'luggageBusinessButton';
+            a.innerHTML = "Cena łączna: " + priceBusiness + " PLN";
+            divCardBlock.appendChild(a);
+
+            let optionValue = document.getElementById("luggageOption");
+
+            optionValue.addEventListener("change", luggageOpt1)
+
+
+            function luggageOpt1(optionVal) {
+                {
+                    optionVal = this.value;
+                    let optionValInteger = parseInt(optionVal, 10);
+                    let sum = priceBusiness + optionValInteger;
+                    document.getElementById("luggageBusinessButton").innerHTML = "Cena łączna: " + sum + " PLN";
+                }
+            }
+
+        } else if (count % 2 === 0) {
+            let divLuggage = document.getElementById("divLuggage");
+
+            divLuggage.remove();
+        }
+
+    }
+
 }
