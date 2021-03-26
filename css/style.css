@@ -7,11 +7,6 @@
     margin: 1em;
 }
 
-/* .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1.5em;
-} */
 .section-header {
     font-family: "Metal Mania";
     font-weight: normal;
@@ -96,7 +91,7 @@
     background-color: #CC4C4C;
 }
 
-.cart-quantity-input {
+/* .cart-quantity-input {
     height: 34px;
     width: 50px;
     border-radius: 5px;
@@ -107,7 +102,7 @@
     text-align: center;
     font-size: 1.2em;
     margin-right: 25px;
-}
+} */
 
 .cart-row:last-child {
     border-bottom: 1px solid black;

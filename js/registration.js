@@ -5,7 +5,9 @@ let index = 0;
 let count = 0;
 let click = 1;
 let optionVal = 0;
-
+let numberOfPassengers = 1;
+let letPriceInteger = 0;
+let priceTotal = 0;
 
 window.addEventListener("load", () => {
 
@@ -16,7 +18,8 @@ window.addEventListener("load", () => {
     let departurePlace = params.get("departurePlace");
     let arrivalPlace = params.get("arrivalPlace");
     const departureDate = params.get("departureDate");
-    const arrivalDate = params.get("arrivalDate")
+    const arrivalDate = params.get("arrivalDate");
+    numberOfPassengers = params.get("passengers");
 
     document.getElementById("departurePlace").innerHTML = departurePlace;
     document.getElementById("arrivalPlace").innerHTML = arrivalPlace;
@@ -286,28 +289,25 @@ function createClasses() {
     image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142788&t=1600695071504');
     divCard.appendChild(image);
 
-    let divCardBlock = document.createElement("div");
-    divCardBlock.className = "card-block";
-    divCard.appendChild(divCardBlock);
+    let divCardBlock1 = document.createElement("div");
+    divCardBlock1.className = "card-block";
+    divCard.appendChild(divCardBlock1);
 
     let cardTitle = document.createElement("h4");
     cardTitle.className = "card-title";
     cardTitle.innerHTML = 'ECONOMY';
-    divCardBlock.appendChild(cardTitle);
+    divCardBlock1.appendChild(cardTitle);
 
     let pPrice = document.createElement("p");
     pPrice.className = "card-text";
     pPrice.innerHTML = 'Cena: PLN ' + price;
-    divCardBlock.appendChild(pPrice);
+    divCardBlock1.appendChild(pPrice);
 
     let a = document.createElement('a');
-    // a.href = '#';
-    // a.setAttribute("data-name", "Economy");
-    // a.setAttribute("data-price", "price");
     a.id = 'economyButton';
     a.className = "btn btn-primary";
     a.innerHTML = "Wybierz bagaz";
-    divCardBlock.appendChild(a);
+    divCardBlock1.appendChild(a);
 
     // PREMIUM
 
@@ -325,30 +325,27 @@ function createClasses() {
     image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142802&t=1600695077795');
     divCard.appendChild(image);
 
-    divCardBlock = document.createElement("div");
-    divCardBlock.className = "card-block";
-    divCard.appendChild(divCardBlock);
+    let divCardBlock2 = document.createElement("div");
+    divCardBlock2.className = "card-block";
+    divCard.appendChild(divCardBlock2);
 
     cardTitle = document.createElement("h4");
     cardTitle.className = "card-title";
     cardTitle.innerHTML = 'PREMIUM';
-    divCardBlock.appendChild(cardTitle);
+    divCardBlock2.appendChild(cardTitle);
 
     let pricePremium = price + 1000;
 
     pPrice = document.createElement("p");
     pPrice.className = "card-text";
     pPrice.innerHTML = 'Cena: PLN ' + pricePremium;
-    divCardBlock.appendChild(pPrice);
+    divCardBlock2.appendChild(pPrice);
 
     a = document.createElement('a');
-    // a.href = '#';
-    // a.setAttribute("data-name", "Premium");
-    // a.setAttribute("data-price", "pricePremium");
     a.id = 'premiumButton';
     a.className = "btn btn-primary";
     a.innerHTML = "Wybierz bagaz";
-    divCardBlock.appendChild(a);
+    divCardBlock2.appendChild(a);
 
     // BUSINESS
 
@@ -368,28 +365,25 @@ function createClasses() {
     image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142820&t=1600695081474');
     divCard.appendChild(image);
 
-    divCardBlock = document.createElement("div");
-    divCardBlock.className = "card-block";
-    divCard.appendChild(divCardBlock);
+    let divCardBlock3 = document.createElement("div");
+    divCardBlock3.className = "card-block";
+    divCard.appendChild(divCardBlock3);
 
     cardTitle = document.createElement("h4");
     cardTitle.className = "card-title";
     cardTitle.innerHTML = 'BUSINESS';
-    divCardBlock.appendChild(cardTitle);
+    divCardBlock3.appendChild(cardTitle);
 
     pPrice = document.createElement("p");
     pPrice.className = "card-text";
     pPrice.innerHTML = 'Cena: PLN ' + priceBusiness;
-    divCardBlock.appendChild(pPrice);
+    divCardBlock3.appendChild(pPrice);
 
     a = document.createElement('a');
-    // a.href = '#';
-    // a.setAttribute("data-name", "Business");
-    // a.setAttribute("data-price", "priceBusiness");
     a.className = "btn btn-primary";
     a.id = 'businessButton';
     a.innerHTML = "Wybierz bagaz";
-    divCardBlock.appendChild(a);
+    divCardBlock3.appendChild(a);
 
     // insert after
 
@@ -433,11 +427,6 @@ function createClasses() {
 
         if (count % 2 != 0) {
 
-            divCardBlock = document.createElement("div");
-            divCardBlock.className = "card-block";
-            divCardBlock.id = "divLuggage"
-            divCard.appendChild(divCardBlock);
-
             let select = document.createElement("select");
             select.name = "luggage";
             select.id = "luggageOption";
@@ -459,17 +448,17 @@ function createClasses() {
             }
 
             let label = document.createElement("label");
-            label.htmlFor = "luggage";
+            label.id = "label";
 
-            divCardBlock.appendChild(label).appendChild(select);
+            divCardBlock1.appendChild(label).appendChild(select);
 
             a = document.createElement('a');
             a.className = "add-to-cart btn btn-primary";
             a.setAttribute("data-name", "Economy");
             a.setAttribute("data-price", "price");
-            a.id = 'luggageEconomyButton';
+            a.id = 'luggageButton';
             a.innerHTML = "Cena z bagażem: " + price + " PLN";
-            divCardBlock.appendChild(a);
+            divCardBlock1.appendChild(a);
 
             let optionValue = document.getElementById("luggageOption");
 
@@ -481,14 +470,26 @@ function createClasses() {
                     optionVal = this.value;
                     let optionValInteger = parseInt(optionVal, 10);
                     let sum = price + optionValInteger;
-                    document.getElementById("luggageEconomyButton").innerHTML = "Cena z bagażem: " + sum + " PLN";
+                    document.getElementById("luggageButton").innerHTML = "Cena z bagażem: " + sum + " PLN";
                 }
+            }
+            let addToCartButtons = document.getElementsByClassName("add-to-cart");
+            for (let i = 0; i < addToCartButtons.length; i++) {
+                let button = addToCartButtons[i];
+                button.addEventListener("click", addToCartClicked)
             }
 
         } else if (count % 2 === 0) {
-            let divLuggage = document.getElementById("divLuggage");
 
-            divLuggage.remove();
+            let divLuggage = document.getElementById("luggageButton");
+            let label = document.getElementById("label");
+
+            if (document.contains(divLuggage || document.contains(economyLabel))) {
+
+                divLuggage.remove();
+                label.remove();
+
+            }
         }
 
     }
@@ -509,11 +510,6 @@ function createClasses() {
 
         if (count % 2 != 0) {
 
-            divCardBlock = document.createElement("div");
-            divCardBlock.className = "card-block";
-            divCardBlock.id = "divLuggage"
-            divCard.appendChild(divCardBlock);
-
             let select = document.createElement("select");
             select.name = "luggage";
             select.id = "luggageOption";
@@ -535,17 +531,17 @@ function createClasses() {
             }
 
             let label = document.createElement("label");
-            label.htmlFor = "luggage";
+            label.id = "label";
 
-            divCardBlock.appendChild(label).appendChild(select);
+            divCardBlock2.appendChild(label).appendChild(select);
 
             a = document.createElement('a');
             a.className = "add-to-cart btn btn-primary";
             a.setAttribute("data-name", "Premium");
             a.setAttribute("data-price", "pricePremium");
-            a.id = 'luggagePremiumButton';
+            a.id = 'luggageButton';
             a.innerHTML = "Cena z bagażem: " + pricePremium + " PLN";
-            divCardBlock.appendChild(a);
+            divCardBlock2.appendChild(a);
 
             let optionValue = document.getElementById("luggageOption");
 
@@ -557,14 +553,24 @@ function createClasses() {
                     optionVal = this.value;
                     let optionValInteger = parseInt(optionVal, 10);
                     let sum = pricePremium + optionValInteger;
-                    document.getElementById("luggagePremiumButton").innerHTML = "Cena łączna: " + sum + " PLN";
+                    document.getElementById("luggageButton").innerHTML = "Cena łączna: " + sum + " PLN";
                 }
+            }
+            let addToCartButtons = document.getElementsByClassName("add-to-cart");
+            for (let i = 0; i < addToCartButtons.length; i++) {
+                let button = addToCartButtons[i];
+                button.addEventListener("click", addToCartClicked)
             }
 
         } else if (count % 2 === 0) {
-            let divLuggage = document.getElementById("divLuggage");
+            let divLuggage = document.getElementById("luggageButton");
+            let label = document.getElementById("label");
 
-            divLuggage.remove();
+            if (document.contains(divLuggage || document.contains(premiumLabel))) {
+                divLuggage.remove();
+                label.remove();
+
+            }
         }
 
     }
@@ -584,11 +590,6 @@ function createClasses() {
 
         if (count % 2 != 0) {
 
-            divCardBlock = document.createElement("div");
-            divCardBlock.className = "card-block";
-            divCardBlock.id = "divLuggage"
-            divCard.appendChild(divCardBlock);
-
             let select = document.createElement("select");
             select.name = "luggage";
             select.id = "luggageOption";
@@ -609,18 +610,11 @@ function createClasses() {
 
             }
 
+
             let label = document.createElement("label");
-            label.htmlFor = "luggage";
+            label.id = "label";
 
-            divCardBlock.appendChild(label).appendChild(select);
-
-            a = document.createElement('a');
-            a.className = "add-to-cart btn btn-primary";
-            a.setAttribute("data-name", "Business");
-            a.setAttribute("data-price", "priceBusiness");
-            a.id = 'luggageBusinessButton';
-            a.innerHTML = "Cena łączna: " + priceBusiness + " PLN";
-            divCardBlock.appendChild(a);
+            divCardBlock3.appendChild(label).appendChild(select);
 
             let optionValue = document.getElementById("luggageOption");
 
@@ -631,17 +625,69 @@ function createClasses() {
                 {
                     optionVal = this.value;
                     let optionValInteger = parseInt(optionVal, 10);
-                    let sum = priceBusiness + optionValInteger;
-                    document.getElementById("luggageBusinessButton").innerHTML = "Cena łączna: " + sum + " PLN";
+                    sum = priceBusiness + optionValInteger;
+                    document.getElementById("luggageButton").innerHTML = "Cena łączna: " + sum + " PLN";
                 }
             }
 
-        } else if (count % 2 === 0) {
-            let divLuggage = document.getElementById("divLuggage");
+            a = document.createElement('button');
+            a.className = "btn btn-primary add-to-cart ";
+            a.type = "button";
+            a.innerHTML = "Cena łączna: " + priceBusiness + " PLN";
+            a.setAttribute("data-name", "Business");
+            a.setAttribute("data-price", priceBusiness);
+            a.id = 'luggageButton';
+            divCardBlock3.appendChild(a);
 
-            divLuggage.remove();
+
+            let addToCartButtons = document.getElementsByClassName("add-to-cart");
+            for (let i = 0; i < addToCartButtons.length; i++) {
+                let button = addToCartButtons[i];
+                button.addEventListener("click", addToCartClicked)
+            }
+
+            function addToCartClicked(event) {
+
+                let button = event.target;
+                let shopItem = button.parentNode;
+                let price = shopItem.getElementsByClassName("btn")[1].innerHTML;
+                letPriceInteger = parseFloat(price.replace(/[^\d\.]*/g, ''));
+                let passengersNumber = parseInt(numberOfPassengers);
+                console.log(letPriceInteger)
+                console.log(passengersNumber)
+                console.log(departureDate.innerHTML)
+                console.log(departurePlace.innerHTML)
+                console.log(arrivalPlace.innerHTML)
+                let showPrice = document.getElementById("endPrice");
+
+                let showPriceTotal = document.getElementById("cart-total-price")
+
+                priceTotal += letPriceInteger;
+
+                showPrice.innerHTML = "Cena końcowa: " + priceTotal + " PLN";
+
+                showPriceTotal.innerHTML = "PLN " + priceTotal;
+
+                let showDepartureDate = document.getElementById("cartDepartureDate");
+                showDepartureDate.innerHTML = departureDate.innerHTML;
+                let showDeparturePlace = document.getElementById("cartDeparturePlace");
+                showDeparturePlace.innerHTML = departurePlace.innerHTML;
+                let showArrivalPlace = document.getElementById("cartArrivalPlace");
+                showArrivalPlace.innerHTML = arrivalPlace.innerHTML;
+
+            }
+
+        } else if (count % 2 === 0) {
+            let divLuggage = document.getElementById("luggageButton");
+            let label = document.getElementById("label");
+            if (document.contains(divLuggage || document.contains(label))) {
+                divLuggage.remove();
+                label.remove();
+
+            }
+
+
         }
 
     }
-
 }

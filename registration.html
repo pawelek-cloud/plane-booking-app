@@ -38,23 +38,28 @@
 
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
-                        <h4 class="display-5">Cena końcowa: 0,00 PLN</h4>
+                        <h4 class="display-5" id="endPrice">Cena końcowa: 0,00 PLN </h4>
                     </div>
                 </div>
             </article>
             <aside>
-                <section class="container content-section">
-                    <h2 class="section-header">CART</h2>
+                <section class="content-section sticky-top">
+                    <h2 class="section-header"></h2>
                     <div class="cart-row">
-                        <span class="cart-item cart-header cart-column">ITEM</span>
-                        <span class="cart-price cart-header cart-column">PRICE</span>
-                        <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+                        <p id="cartDepartureDate" class="cart-item cart-header cart-column"></p>
+                        <p id="cartDeparturePlace" class="cart-price cart-header cart-column"></p>
+                        <p id="cartArrivalPlace" class="cart-quantity cart-header cart-column"></p>
+                    </div>
+                    <div class="cart-row">
+                        <p id="cartDepartureReturnDate" class="cart-item cart-header cart-column"></p>
+                        <p class="cart-price cart-header cart-column">PRICE</p>
+                        <p class="cart-quantity cart-header cart-column">QUANTITY</p>
                     </div>
                     <div class="cart-items">
                     </div>
                     <div class="cart-total">
-                        <strong class="cart-total-title">Total</strong>
-                        <span class="cart-total-price">$0</span>
+                        <strong class="cart-total-title">Do zapłaty</strong>
+                        <p id="cart-total-price" class="cart-total-price">PLN 0</p>
                     </div>
                     <button class="btn btn-primary btn-sm btn-purchase" type="button">Kontynuuj</button>
                 </section>
@@ -67,7 +72,7 @@
         <footer></footer>
 
     </div>
-    <script src="./js/registration.js"></script>
+    <script src="./js/registration.js" async></script>
 
 </body>
 
