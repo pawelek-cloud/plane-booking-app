@@ -2,7 +2,7 @@ let price = 0;
 let price1 = 0;
 let price2 = 0;
 let index = 0;
-let count = 0;
+let count1 = 1;
 let click = 1;
 let optionVal = 0;
 let numberOfPassengers = 1;
@@ -88,7 +88,7 @@ window.addEventListener("load", () => {
                     } else {
 
                         for (let i = 0; i < data.Carriers.length; i++) {
-                            document.getElementById("routes").innerHTML += "Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + data.Dates.OutboundDates[0].PartialDate + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" + "<button class='button' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
+                            document.getElementById("routes").innerHTML += "Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: <span id=routesId>" + data.Dates.OutboundDates[0].PartialDate + "</span>; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" + "<button class='button' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
 
 
                         }
@@ -187,8 +187,10 @@ window.addEventListener("load", () => {
                 } else {
 
                     for (let i = 0; i < data.Carriers.length; i++) {
-                        document.getElementById("return").innerHTML += "Cena minimalna biletu z: " + data.Places[0].Name + " do: " + data.Places[1].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + data.Dates.OutboundDates[0].PartialDate + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" +
+                        document.getElementById("return").innerHTML += "Cena minimalna biletu z: " + data.Places[0].Name + " do: " + data.Places[1].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + "<span id=returnId>" + data.Dates.OutboundDates[0].PartialDate + "</span>" + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" +
                             "<button class='button' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
+
+
 
                         const showClasses = document.getElementsByClassName("button");
 
@@ -423,73 +425,65 @@ function createClasses() {
 
     function createEconomyLuggage() {
 
-        count = click++;
+        let divLuggage = document.getElementById("luggageButton");
+        let label = document.getElementById("label");
 
-        if (count % 2 != 0) {
+        if ((document.contains(divLuggage) && document.contains(label))) {
+            divLuggage.remove();
+            label.remove();
 
-            let select = document.createElement("select");
-            select.name = "luggage";
-            select.id = "luggageOption";
-            select.style.width = "20rem";
-            select.style.fontSize = "17px";
+        }
 
-            let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
+        let select = document.createElement("select");
+        select.name = "luggage";
+        select.id = "luggageOption";
+        select.style.width = "20rem";
+        select.style.fontSize = "17px";
+
+        let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
 
 
-            for (let i = 0; i < names.length; i++) {
-                let values = [0, 90, 200];
+        for (let i = 0; i < names.length; i++) {
+            let values = [0, 90, 200];
 
-                let option = document.createElement("option");
+            let option = document.createElement("option");
 
-                option.text = names[i];
-                option.value = values[i];
-                select.appendChild(option);
+            option.text = names[i];
+            option.value = values[i];
+            select.appendChild(option);
 
+        }
+
+        label = document.createElement("label");
+        label.id = "label";
+
+        divCardBlock1.appendChild(label).appendChild(select);
+
+        a = document.createElement('a');
+        a.className = "add-to-cart btn btn-primary";
+        a.setAttribute("data-name", "Economy");
+        a.setAttribute("data-price", "price");
+        a.id = 'luggageButton';
+        a.innerHTML = "Cena z bagażem: " + price + " PLN";
+        divCardBlock1.appendChild(a);
+
+        let optionValue = document.getElementById("luggageOption");
+
+        optionValue.addEventListener("change", luggageOpt1)
+
+
+        function luggageOpt1(optionVal) {
+            {
+                optionVal = this.value;
+                let optionValInteger = parseInt(optionVal, 10);
+                let sum = price + optionValInteger;
+                document.getElementById("luggageButton").innerHTML = "Cena z bagażem: " + sum + " PLN";
             }
-
-            let label = document.createElement("label");
-            label.id = "label";
-
-            divCardBlock1.appendChild(label).appendChild(select);
-
-            a = document.createElement('a');
-            a.className = "add-to-cart btn btn-primary";
-            a.setAttribute("data-name", "Economy");
-            a.setAttribute("data-price", "price");
-            a.id = 'luggageButton';
-            a.innerHTML = "Cena z bagażem: " + price + " PLN";
-            divCardBlock1.appendChild(a);
-
-            let optionValue = document.getElementById("luggageOption");
-
-            optionValue.addEventListener("change", luggageOpt1)
-
-
-            function luggageOpt1(optionVal) {
-                {
-                    optionVal = this.value;
-                    let optionValInteger = parseInt(optionVal, 10);
-                    let sum = price + optionValInteger;
-                    document.getElementById("luggageButton").innerHTML = "Cena z bagażem: " + sum + " PLN";
-                }
-            }
-            let addToCartButtons = document.getElementsByClassName("add-to-cart");
-            for (let i = 0; i < addToCartButtons.length; i++) {
-                let button = addToCartButtons[i];
-                button.addEventListener("click", addToCartClicked)
-            }
-
-        } else if (count % 2 === 0) {
-
-            let divLuggage = document.getElementById("luggageButton");
-            let label = document.getElementById("label");
-
-            if (document.contains(divLuggage || document.contains(economyLabel))) {
-
-                divLuggage.remove();
-                label.remove();
-
-            }
+        }
+        let addToCartButtons = document.getElementsByClassName("add-to-cart");
+        for (let i = 0; i < addToCartButtons.length; i++) {
+            let button = addToCartButtons[i];
+            button.addEventListener("click", addToCartClicked)
         }
 
     }
@@ -506,71 +500,65 @@ function createClasses() {
 
     function createPremiumLuggage() {
 
-        count = click++;
+        let divLuggage = document.getElementById("luggageButton");
+        let label = document.getElementById("label");
 
-        if (count % 2 != 0) {
+        if ((document.contains(divLuggage) && document.contains(label))) {
+            divLuggage.remove();
+            label.remove();
 
-            let select = document.createElement("select");
-            select.name = "luggage";
-            select.id = "luggageOption";
-            select.style.width = "20rem";
-            select.style.fontSize = "17px";
+        }
 
-            let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
+        let select = document.createElement("select");
+        select.name = "luggage";
+        select.id = "luggageOption";
+        select.style.width = "20rem";
+        select.style.fontSize = "17px";
+
+        let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
 
 
-            for (let i = 0; i < names.length; i++) {
-                let values = [0, 90, 200];
+        for (let i = 0; i < names.length; i++) {
+            let values = [0, 90, 200];
 
-                let option = document.createElement("option");
+            let option = document.createElement("option");
 
-                option.text = names[i];
-                option.value = values[i];
-                select.appendChild(option);
+            option.text = names[i];
+            option.value = values[i];
+            select.appendChild(option);
 
+        }
+
+        label = document.createElement("label");
+        label.id = "label";
+
+        divCardBlock2.appendChild(label).appendChild(select);
+
+        a = document.createElement('a');
+        a.className = "add-to-cart btn btn-primary";
+        a.setAttribute("data-name", "Premium");
+        a.setAttribute("data-price", "pricePremium");
+        a.id = 'luggageButton';
+        a.innerHTML = "Cena z bagażem: " + pricePremium + " PLN";
+        divCardBlock2.appendChild(a);
+
+        let optionValue = document.getElementById("luggageOption");
+
+        optionValue.addEventListener("change", luggageOpt1)
+
+
+        function luggageOpt1(optionVal) {
+            {
+                optionVal = this.value;
+                let optionValInteger = parseInt(optionVal, 10);
+                let sum = pricePremium + optionValInteger;
+                document.getElementById("luggageButton").innerHTML = "Cena łączna: " + sum + " PLN";
             }
-
-            let label = document.createElement("label");
-            label.id = "label";
-
-            divCardBlock2.appendChild(label).appendChild(select);
-
-            a = document.createElement('a');
-            a.className = "add-to-cart btn btn-primary";
-            a.setAttribute("data-name", "Premium");
-            a.setAttribute("data-price", "pricePremium");
-            a.id = 'luggageButton';
-            a.innerHTML = "Cena z bagażem: " + pricePremium + " PLN";
-            divCardBlock2.appendChild(a);
-
-            let optionValue = document.getElementById("luggageOption");
-
-            optionValue.addEventListener("change", luggageOpt1)
-
-
-            function luggageOpt1(optionVal) {
-                {
-                    optionVal = this.value;
-                    let optionValInteger = parseInt(optionVal, 10);
-                    let sum = pricePremium + optionValInteger;
-                    document.getElementById("luggageButton").innerHTML = "Cena łączna: " + sum + " PLN";
-                }
-            }
-            let addToCartButtons = document.getElementsByClassName("add-to-cart");
-            for (let i = 0; i < addToCartButtons.length; i++) {
-                let button = addToCartButtons[i];
-                button.addEventListener("click", addToCartClicked)
-            }
-
-        } else if (count % 2 === 0) {
-            let divLuggage = document.getElementById("luggageButton");
-            let label = document.getElementById("label");
-
-            if (document.contains(divLuggage || document.contains(premiumLabel))) {
-                divLuggage.remove();
-                label.remove();
-
-            }
+        }
+        let addToCartButtons = document.getElementsByClassName("add-to-cart");
+        for (let i = 0; i < addToCartButtons.length; i++) {
+            let button = addToCartButtons[i];
+            button.addEventListener("click", addToCartClicked)
         }
 
     }
@@ -586,108 +574,153 @@ function createClasses() {
 
     function createBusinessLuggage() {
 
-        count = click++;
-
-        if (count % 2 != 0) {
-
-            let select = document.createElement("select");
-            select.name = "luggage";
-            select.id = "luggageOption";
-            select.style.width = "20rem";
-            select.style.fontSize = "17px";
-
-            let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
-
-
-            for (let i = 0; i < names.length; i++) {
-                let values = [0, 90, 200];
-
-                let option = document.createElement("option");
-
-                option.text = names[i];
-                option.value = values[i];
-                select.appendChild(option);
-
-            }
-
-
-            let label = document.createElement("label");
-            label.id = "label";
-
-            divCardBlock3.appendChild(label).appendChild(select);
-
-            let optionValue = document.getElementById("luggageOption");
-
-            optionValue.addEventListener("change", luggageOpt1)
-
-
-            function luggageOpt1(optionVal) {
-                {
-                    optionVal = this.value;
-                    let optionValInteger = parseInt(optionVal, 10);
-                    sum = priceBusiness + optionValInteger;
-                    document.getElementById("luggageButton").innerHTML = "Cena łączna: " + sum + " PLN";
-                }
-            }
-
-            a = document.createElement('button');
-            a.className = "btn btn-primary add-to-cart ";
-            a.type = "button";
-            a.innerHTML = "Cena łączna: " + priceBusiness + " PLN";
-            a.setAttribute("data-name", "Business");
-            a.setAttribute("data-price", priceBusiness);
-            a.id = 'luggageButton';
-            divCardBlock3.appendChild(a);
-
-
-            let addToCartButtons = document.getElementsByClassName("add-to-cart");
-            for (let i = 0; i < addToCartButtons.length; i++) {
-                let button = addToCartButtons[i];
-                button.addEventListener("click", addToCartClicked)
-            }
-
-            function addToCartClicked(event) {
-
-                let button = event.target;
-                let shopItem = button.parentNode;
-                let price = shopItem.getElementsByClassName("btn")[1].innerHTML;
-                letPriceInteger = parseFloat(price.replace(/[^\d\.]*/g, ''));
-                let passengersNumber = parseInt(numberOfPassengers);
-                console.log(letPriceInteger)
-                console.log(passengersNumber)
-                console.log(departureDate.innerHTML)
-                console.log(departurePlace.innerHTML)
-                console.log(arrivalPlace.innerHTML)
-                let showPrice = document.getElementById("endPrice");
-
-                let showPriceTotal = document.getElementById("cart-total-price")
-
-                priceTotal += letPriceInteger;
-
-                showPrice.innerHTML = "Cena końcowa: " + priceTotal + " PLN";
-
-                showPriceTotal.innerHTML = "PLN " + priceTotal;
-
-                let showDepartureDate = document.getElementById("cartDepartureDate");
-                showDepartureDate.innerHTML = departureDate.innerHTML;
-                let showDeparturePlace = document.getElementById("cartDeparturePlace");
-                showDeparturePlace.innerHTML = departurePlace.innerHTML;
-                let showArrivalPlace = document.getElementById("cartArrivalPlace");
-                showArrivalPlace.innerHTML = arrivalPlace.innerHTML;
-
-            }
-
-        } else if (count % 2 === 0) {
-            let divLuggage = document.getElementById("luggageButton");
-            let label = document.getElementById("label");
-            if (document.contains(divLuggage || document.contains(label))) {
-                divLuggage.remove();
-                label.remove();
-
-            }
-
+        let divLuggage = document.getElementById("luggageButton");
+        let label = document.getElementById("label");
+        if ((document.contains(divLuggage) && document.contains(label))) {
+            divLuggage.remove();
+            label.remove();
 
         }
 
+        let select = document.createElement("select");
+        select.name = "luggage";
+        select.id = "luggageOption";
+        select.style.width = "20rem";
+        select.style.fontSize = "17px";
+
+        let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
+
+
+        for (let i = 0; i < names.length; i++) {
+            let values = [0, 90, 200];
+
+            let option = document.createElement("option");
+
+            option.text = names[i];
+            option.value = values[i];
+            select.appendChild(option);
+
+        }
+
+        label = document.createElement("label");
+        label.id = "label";
+
+        divCardBlock3.appendChild(label).appendChild(select);
+
+        let optionValue = document.getElementById("luggageOption");
+
+        optionValue.addEventListener("change", luggageOpt1)
+
+
+        function luggageOpt1(optionVal) {
+            {
+                optionVal = this.value;
+                let optionValInteger = parseInt(optionVal, 10);
+                sum = priceBusiness + optionValInteger;
+                document.getElementById("luggageButton").innerHTML = "Cena łączna: " + sum + " PLN";
+            }
+        }
+
+        a = document.createElement('button');
+        a.className = "btn btn-primary add-to-cart ";
+        a.type = "button";
+        a.innerHTML = "Cena łączna: " + priceBusiness + " PLN";
+        a.setAttribute("data-name", "Business");
+        a.setAttribute("data-price", priceBusiness);
+        a.id = 'luggageButton';
+        divCardBlock3.appendChild(a);
+
+        let addToCartButtons = document.getElementsByClassName("add-to-cart");
+        for (let i = 0; i < addToCartButtons.length; i++) {
+            let button = addToCartButtons[i];
+            button.addEventListener("click", addToCartClicked)
+        }
+
+    }
+
+
+    function addToCartClicked(event) {
+
+        count1;
+
+        console.log(count1)
+
+        let button = event.target;
+        let shopItem = button.parentNode;
+        let price = shopItem.getElementsByClassName("btn")[1].innerHTML;
+        letPriceInteger = parseFloat(price.replace(/[^\d\.]*/g, ''));
+        let passengersNumber = parseInt(numberOfPassengers);
+
+        const routes = document.getElementById("routesId");
+
+        const retur = document.getElementById("returnId");
+
+        const buttonParent = button.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+
+        let showPrice = document.getElementById("endPrice");
+
+        let showPriceTotal = document.getElementById("cart-total-price")
+
+        if (count1 <= 1 && buttonParent.contains(retur)) {
+            alert("Wybierz lot docelowy");
+            return;
+        }
+
+        if (count1 <= 1) {
+
+            let showDepartureDate = document.getElementById("cartDepartureDate");
+
+            showDepartureDate.innerHTML = departureDate.innerHTML;
+
+            let showDeparturePlace = document.getElementById("cartDeparturePlace");
+            showDeparturePlace.innerHTML = departurePlace.innerHTML;
+
+            let showArrivalPlace = document.getElementById("cartArrivalPlace");
+            showArrivalPlace.innerHTML = arrivalPlace.innerHTML;
+
+            priceTotal += letPriceInteger;
+
+            showPrice.innerHTML = "Cena końcowa: " + priceTotal*passengersNumber + " PLN";
+
+            showPriceTotal.innerHTML = "PLN " + priceTotal*passengersNumber;
+            count1 = ++click;
+            console.log(count1)
+            return count1;
+        }
+
+
+        console.log(count1)
+        if (count1!=1&&count1<3) {
+
+            if (buttonParent.contains(routes)) {
+                alert("Wybierz lot powrotny")
+                return;
+            } else {
+
+                let showDepartureReturnDate = document.getElementById("cartDepartureReturnDate");
+                showDepartureReturnDate.innerHTML = arrivalDate.innerHTML;
+
+                let showDeparturePlace = document.getElementById("cartDepartureReturnPlace");
+
+                showDeparturePlace.innerHTML = arrivalPlace.innerHTML;
+
+                let showArrivalReturnPlace = document.getElementById("cartArrivalReturnPlace");
+                showArrivalReturnPlace.innerHTML = departurePlace.innerHTML;
+
+                priceTotal += letPriceInteger;
+
+                showPrice.innerHTML = "Cena końcowa: " + priceTotal*passengersNumber + " PLN";
+
+                showPriceTotal.innerHTML = "PLN " + priceTotal*passengersNumber;
+                
+                count1 = ++click;
+                console.log(count1)
+                return count1;
+            }
+        }
+        if (count1 > 2) {
+            alert("Wybierz przycisk kontynuuj lub powróć do menu głównego")
+            return;
+        }
     }
 }
