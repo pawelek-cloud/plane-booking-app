@@ -21,10 +21,12 @@
             <article>
 
                 <h2>Dostępne loty dla</h2>
-                <h3>miejsca odlotu: <span id="departurePlace"></span></h3>
-                <h3>miejsca przylotu: <span id="arrivalPlace"></span></h3>
-                <h3>daty odlotu: <span id="departureDate"></span></h3>
-                <h3 id="arrivalDate1">daty przylotu: <span id="arrivalDate"></span></h3>
+                <h3 >miejsca odlotu: <span id="departurePlace"></span></h3>
+                <h3 >miejsca przylotu: <span id="arrivalPlace"></span></h3>
+                <h3 >daty odlotu: <span id="departureDate"></span></h3>
+                <h3 ><span id="arrivalDate">daty przylotu: </span></h3>
+                <h3 > <span id="passengers1"></span></h3>
+
 
                 <h2 id="directFlights">Loty docelowe:</h2>
 
@@ -55,13 +57,14 @@
                         <p id="cartDepartureReturnPlace" class="cart-item cart-header cart-column"></p>
                         <p id="cartArrivalReturnPlace" class="cart-item cart-header cart-column"></p>
                     </div>
+                    <div><p id="numberOfPassengers" class="cart-item cart-header cart-column"></p></div>
                     <div class="cart-items">
                     </div>
                     <div class="cart-total">
                         <strong class="cart-total-title">Do zapłaty</strong>
                         <p id="cart-total-price" class="cart-total-price">PLN 0</p>
                     </div>
-                    <button class="btn btn-primary btn-sm btn-purchase" type="button">Kontynuuj</button>
+                    <button id="continueButton" class="btn btn-primary btn-sm btn-purchase" type="button">Kontynuuj</button>
                 </section>
 
 

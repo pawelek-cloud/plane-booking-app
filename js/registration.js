@@ -5,9 +5,11 @@ let index = 0;
 let count1 = 1;
 let click = 1;
 let optionVal = 0;
-let numberOfPassengers = 1;
 let letPriceInteger = 0;
 let priceTotal = 0;
+let numberOfPassengers = 1;
+let showDepartureDate;
+let showDepartureReturnPlace;
 
 window.addEventListener("load", () => {
 
@@ -26,7 +28,7 @@ window.addEventListener("load", () => {
     document.getElementById("departureDate").innerHTML = departureDate;
 
     if (arrivalDate === null) {
-        document.getElementById("arrivalDate1").innerHTML = "";
+        document.getElementById("arrivalDate").innerHTML = "";
 
     } else {
         document.getElementById("arrivalDate").innerHTML = arrivalDate;
@@ -464,7 +466,7 @@ function createClasses() {
         a.setAttribute("data-name", "Economy");
         a.setAttribute("data-price", "price");
         a.id = 'luggageButton';
-        a.innerHTML = "Cena z bagażem: " + price + " PLN";
+        a.innerHTML = "Cena z bagażem: " + price + " PLN. <br> Zatwierdź wybór.";
         divCardBlock1.appendChild(a);
 
         let optionValue = document.getElementById("luggageOption");
@@ -477,7 +479,7 @@ function createClasses() {
                 optionVal = this.value;
                 let optionValInteger = parseInt(optionVal, 10);
                 let sum = price + optionValInteger;
-                document.getElementById("luggageButton").innerHTML = "Cena z bagażem: " + sum + " PLN";
+                document.getElementById("luggageButton").innerHTML = "Cena z bagażem: " + sum + " PLN. <br> Zatwierdź wybór.";
             }
         }
         let addToCartButtons = document.getElementsByClassName("add-to-cart");
@@ -539,7 +541,7 @@ function createClasses() {
         a.setAttribute("data-name", "Premium");
         a.setAttribute("data-price", "pricePremium");
         a.id = 'luggageButton';
-        a.innerHTML = "Cena z bagażem: " + pricePremium + " PLN";
+        a.innerHTML = "Cena z bagażem: " + pricePremium + " PLN. <br> Zatwierdź wybór.";
         divCardBlock2.appendChild(a);
 
         let optionValue = document.getElementById("luggageOption");
@@ -552,7 +554,7 @@ function createClasses() {
                 optionVal = this.value;
                 let optionValInteger = parseInt(optionVal, 10);
                 let sum = pricePremium + optionValInteger;
-                document.getElementById("luggageButton").innerHTML = "Cena łączna: " + sum + " PLN";
+                document.getElementById("luggageButton").innerHTML = "Cena z bagażem: " + sum + " PLN. <br> Zatwierdź wybór.";
             }
         }
         let addToCartButtons = document.getElementsByClassName("add-to-cart");
@@ -617,14 +619,14 @@ function createClasses() {
                 optionVal = this.value;
                 let optionValInteger = parseInt(optionVal, 10);
                 sum = priceBusiness + optionValInteger;
-                document.getElementById("luggageButton").innerHTML = "Cena łączna: " + sum + " PLN";
+                document.getElementById("luggageButton").innerHTML = "Cena z bagażem: " + sum + " PLN. <br> Zatwierdź wybór.";
             }
         }
 
         a = document.createElement('button');
         a.className = "btn btn-primary add-to-cart ";
         a.type = "button";
-        a.innerHTML = "Cena łączna: " + priceBusiness + " PLN";
+        a.innerHTML = "Cena z bagażem: " + priceBusiness + " PLN. <br> Zatwierdź wybór.";
         a.setAttribute("data-name", "Business");
         a.setAttribute("data-price", priceBusiness);
         a.id = 'luggageButton';
@@ -649,7 +651,7 @@ function createClasses() {
         let shopItem = button.parentNode;
         let price = shopItem.getElementsByClassName("btn")[1].innerHTML;
         letPriceInteger = parseFloat(price.replace(/[^\d\.]*/g, ''));
-        let passengersNumber = parseInt(numberOfPassengers);
+        let passengersNumber = parseFloat(numberOfPassengers.replace(/[^\d\.]*/g, ''));
 
         const routes = document.getElementById("routesId");
 
@@ -661,6 +663,8 @@ function createClasses() {
 
         let showPriceTotal = document.getElementById("cart-total-price")
 
+        let showNumberOfPassangers = document.getElementById("numberOfPassengers")
+
         if (count1 <= 1 && buttonParent.contains(retur)) {
             alert("Wybierz lot docelowy");
             return;
@@ -668,59 +672,110 @@ function createClasses() {
 
         if (count1 <= 1) {
 
-            let showDepartureDate = document.getElementById("cartDepartureDate");
+            if (confirm("Po zatwierdzeniu zmiana wyboru klasy i bagażu nie będzie możliwa. Czy jestes pewien swojego wyboru?")) {
+                showDepartureDate = document.getElementById("cartDepartureDate");
 
-            showDepartureDate.innerHTML = departureDate.innerHTML;
+                showDepartureDate.innerHTML = departureDate.innerHTML;
 
-            let showDeparturePlace = document.getElementById("cartDeparturePlace");
-            showDeparturePlace.innerHTML = departurePlace.innerHTML;
+                let showDeparturePlace = document.getElementById("cartDeparturePlace");
+                showDeparturePlace.innerHTML = departurePlace.innerHTML;
 
-            let showArrivalPlace = document.getElementById("cartArrivalPlace");
-            showArrivalPlace.innerHTML = arrivalPlace.innerHTML;
+                let showArrivalPlace = document.getElementById("cartArrivalPlace");
+                showArrivalPlace.innerHTML = arrivalPlace.innerHTML;
 
-            priceTotal += letPriceInteger;
+                priceTotal += letPriceInteger;
 
-            showPrice.innerHTML = "Cena końcowa: " + priceTotal*passengersNumber + " PLN";
+                showPrice.innerHTML = "Cena końcowa: " + priceTotal * passengersNumber + " PLN";
 
-            showPriceTotal.innerHTML = "PLN " + priceTotal*passengersNumber;
-            count1 = ++click;
-            console.log(count1)
-            return count1;
+                showNumberOfPassangers.innerHTML = numberOfPassengers;
+
+                showPriceTotal.innerHTML = "PLN " + priceTotal * passengersNumber;
+                count1 = ++click;
+                console.log(count1)
+                return count1;
+            } else {
+                return;
+            }
+
+
         }
 
-
         console.log(count1)
-        if (count1!=1&&count1<3) {
+        if (count1 != 1 && count1 < 3) {
+            if (arrivalDate.innerHTML.length === 0) {
+
+                alert("Wybierz przycisk kontynuuj lub powróć do menu głównego")
+                return;
+            }
 
             if (buttonParent.contains(routes)) {
                 alert("Wybierz lot powrotny")
                 return;
             } else {
 
-                let showDepartureReturnDate = document.getElementById("cartDepartureReturnDate");
-                showDepartureReturnDate.innerHTML = arrivalDate.innerHTML;
+                if (confirm("Po zatwierdzeniu zmiana wyboru klasy i bagażu nie będzie możliwa. Czy jestes pewien swojego wyboru?")) {
 
-                let showDeparturePlace = document.getElementById("cartDepartureReturnPlace");
+                    let showDepartureReturnDate = document.getElementById("cartDepartureReturnDate");
+                    showDepartureReturnDate.innerHTML = arrivalDate.innerHTML;
 
-                showDeparturePlace.innerHTML = arrivalPlace.innerHTML;
+                    showDepartureReturnPlace = document.getElementById("cartDepartureReturnPlace");
 
-                let showArrivalReturnPlace = document.getElementById("cartArrivalReturnPlace");
-                showArrivalReturnPlace.innerHTML = departurePlace.innerHTML;
+                    showDepartureReturnPlace.innerHTML = arrivalPlace.innerHTML;
 
-                priceTotal += letPriceInteger;
+                    let showArrivalReturnPlace = document.getElementById("cartArrivalReturnPlace");
+                    showArrivalReturnPlace.innerHTML = departurePlace.innerHTML;
 
-                showPrice.innerHTML = "Cena końcowa: " + priceTotal*passengersNumber + " PLN";
+                    priceTotal += letPriceInteger;
 
-                showPriceTotal.innerHTML = "PLN " + priceTotal*passengersNumber;
-                
-                count1 = ++click;
-                console.log(count1)
-                return count1;
+                    showPrice.innerHTML = "Cena końcowa: " + priceTotal * passengersNumber + " PLN";
+
+                    showPriceTotal.innerHTML = "PLN " + priceTotal * passengersNumber;
+
+
+
+                    showNumberOfPassangers.innerHTML = numberOfPassengers;
+
+                    count1 = ++click;
+                    console.log(count1)
+                    return count1;
+                } else {
+                    return;
+                }
             }
         }
         if (count1 > 2) {
             alert("Wybierz przycisk kontynuuj lub powróć do menu głównego")
             return;
         }
+    }
+}
+let invalid = "";
+const continueButton = document.getElementById("continueButton");
+
+continueButton.addEventListener('click', function () {
+
+    if (validate() === !invalid) {
+
+        continueButton.setAttribute("type", "submit")
+
+        window.location.replace("boeing737-800.html");
+
+    }
+
+
+})
+
+function validate() {
+
+    let invalid = showDepartureDate === undefined;
+    if (invalid) {
+        return alert("Wybierz lot docelowy");
+    }
+     let invalid1 = showDepartureReturnPlace === undefined&& arrivalDate.innerHTML.length != 0;;
+    
+    if (invalid1) {
+        return alert("Wybierz lot powrotny");
+    } else {
+        return !invalid
     }
 }
