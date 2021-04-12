@@ -758,7 +758,7 @@ continueButton.addEventListener('click', function () {
 
         continueButton.setAttribute("type", "submit")
 
-        window.location.replace("boeing737-800.html");
+        window.location.replace("index.ejs");
 
     }
 
