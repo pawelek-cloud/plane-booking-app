@@ -758,7 +758,7 @@ continueButton.addEventListener('click', function () {
 
         continueButton.setAttribute("type", "submit")
 
-        window.location.replace("index.ejs");
+        window.location.replace("/login");
 
     }
 

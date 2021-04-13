@@ -47,7 +47,7 @@ validateInputFields.addEventListener('click', function () {
 
         validateInputFields.setAttribute("type","submit")
 
-           window.location.replace("registration.html");
+           window.location.replace("/registration");
          
     }
     

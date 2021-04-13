@@ -26,7 +26,7 @@
 		.login-form input[type="submit"] {
 			width: 100%;
 			padding: 15px;
-			background-color: #535b63;
+			background-color:red;
 			border: 0;
 			box-sizing: border-box;
 			cursor: pointer;
@@ -49,22 +49,17 @@
 </head>
 	<body>
 	<nav class="navbar navbar-light bg-light">
-	<a class="navbar-brand">
+	<a class="navbar-brand" href="/login">
 	<%= title %>
 	</a>
 	<ul class="list-unstyled list-inline pull-right">
-			<a href="/register">Zarejestruj się</a>
+	
 	</nav>
 		<div class="login-form">
-			<h1>Zaloguj się</h1>
-			<%- include('./partials/messages') %>
-			<form action="" method="POST">
-				<input type="text" name="email" placeholder="email" required>
-				<input type="password" name="password" placeholder="hasło" required>
-				<input type="submit" value="Logowanie">
-			
+			<h1>Przejdź do logowania</h1>
+			<center>	<a href="/login"><button type="button" class="btn btn-success">Logowanie</button></a></center>
 			</form>
-
+	
 		</div>
 	</body>
 </html>

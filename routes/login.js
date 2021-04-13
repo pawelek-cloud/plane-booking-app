@@ -29,20 +29,31 @@ router.use(session({
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+	res.render('index');
+});
+
+/* GET home page. */
+router.get('/registration', function (req, res, next) {
+	res.render('registration');
+});
+
+
+/* GET home page. */
+router.get('/login', function (req, res, next) {
 	req.session.destroy(); //destroy session
-	res.render('index', {
+	res.render('login', {
 		title: 'Logowanie'
 	});
 });
 
-router.post('/', function (req, res, next) {
+router.post('/login', function (req, res, next) {
 	const {
 		email,
 		password
 	} = req.body;
 	let errors = [];
 	if (errors.length > 0) {
-		res.render("index", {
+		res.render("login", {
 			title: 'Logowanie',
 			errors,
 			email,
@@ -56,7 +67,7 @@ router.post('/', function (req, res, next) {
 			errors.push({
 				msg: "Niepoprawny adres email"
 			});
-			res.render("index", {
+			res.render("login", {
 				title: 'Logowanie',
 				errors,
 				email,
@@ -72,7 +83,7 @@ router.post('/', function (req, res, next) {
 			errors.push({
 				msg: "Niepoprawne hasło"
 			});
-			res.render("index", {
+			res.render("login", {
 				title: 'Logowanie',
 				errors,
 				email,
@@ -91,10 +102,6 @@ router.post('/', function (req, res, next) {
 		}
 	}).catch(err => console.log(err))
 })
-
-router.get('/login', (req, res) => res.render('login', {
-	title: 'Zaloguj się'
-}));
 
 router.get('/register', (req, res) => res.render('register', {
 	title: 'Zaloguj się'
@@ -147,7 +154,7 @@ router.post('/register', (req, res) => {
 				password: hash
 			});
 			user1.save().then(result => {
-				res.redirect('/');
+				res.redirect('/login');
 			}).catch(err => console.log(err))
 		})
 	})
@@ -160,10 +167,10 @@ router.get('/home', function (req, res, next) {
 			email: req.session.email
 		});
 	} else {
-		res.render('login', {
+		res.render('logout', {
 			title: 'Zaloguj się'
 		});
-		//res.redirect('/');
+		//res.redirect('/login');
 	}
 });
 
