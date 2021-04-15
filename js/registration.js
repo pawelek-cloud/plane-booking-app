@@ -23,7 +23,10 @@ window.addEventListener("load", () => {
     const arrivalDate = params.get("arrivalDate");
     numberOfPassengers = params.get("passengers");
 
-    document.getElementById("departurePlace").innerHTML = departurePlace;
+    sessionStorage.setItem('PASSENGERS',numberOfPassengers);
+    sessionStorage.setItem('ARRIVALPLACE',arrivalPlace);
+
+    document.getElementById("departurePlace").innerHTML =departurePlace;
     document.getElementById("arrivalPlace").innerHTML = arrivalPlace;
     document.getElementById("departureDate").innerHTML = departureDate;
 
@@ -31,7 +34,7 @@ window.addEventListener("load", () => {
         document.getElementById("arrivalDate").innerHTML = "";
 
     } else {
-        document.getElementById("arrivalDate").innerHTML = arrivalDate;
+        document.getElementById("arrivalDate").innerHTML += arrivalDate;
     }
 
     // submit button 

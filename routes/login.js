@@ -18,6 +18,7 @@ mongoose.connect(connectionString, {
 const user = require('../models/user');
 const bcrypt = require('bcryptjs');
 const saltRound = 10;
+let arrivalPlace;
 
 // session
 
@@ -26,19 +27,21 @@ router.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-
+let ssn;
 /* GET home page. */
 router.get('/', function (req, res, next) {
+	req.session.destroy(); //destroy session
 	res.render('index');
 });
 
+
 /* GET home page. */
 router.get('/registration', function (req, res, next) {
+	arrivalPlace = req.query.arrivalPlace;
 	res.render('registration');
 });
 
-
-/* GET home page. */
+/* GET login page. */
 router.get('/login', function (req, res, next) {
 	req.session.destroy(); //destroy session
 	res.render('login', {
@@ -103,9 +106,12 @@ router.post('/login', function (req, res, next) {
 	}).catch(err => console.log(err))
 })
 
-router.get('/register', (req, res) => res.render('register', {
-	title: 'Zaloguj się'
-}));
+router.get('/register', function (req, res) {
+	req.session.destroy(); //destroy session
+	res.render('register', {
+		title: 'Zaloguj się'
+	})
+});
 
 router.post('/register', (req, res) => {
 	const {
@@ -161,16 +167,23 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/home', function (req, res, next) {
-	if (req.session.cust_log == "true") {
-		res.render('home', {
-			title: 'Wybierz miejsce',
-			email: req.session.email
+	if (req.session.cust_log == "true" && arrivalPlace === "London") {
+		res.render('shortDistancePlane', {
+			title: 'Wybierz miejsce'
 		});
-	} else {
-		res.render('logout', {
-			title: 'Zaloguj się'
+	}
+	if (req.session.cust_log == "true" && arrivalPlace === "Dubai") {
+		res.render('middleDistancePlane', {
+			title: 'Wybierz miejsce'
 		});
-		//res.redirect('/login');
+	}
+	if (req.session.cust_log == "true" && arrivalPlace === "Rio de Janeiro") {
+		res.render('longDistancePlane', {
+			title: 'Wybierz miejsce'
+		});
+	}
+	if (req.session.cust_log != "true") {
+		res.render('index');
 	}
 });
 
