@@ -167,12 +167,12 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/home', function (req, res, next) {
-	if (req.session.cust_log == "true" && arrivalPlace === "London") {
+	if (req.session.cust_log == "true" && arrivalPlace === "Londyn") {
 		res.render('shortDistancePlane', {
 			title: 'Wybierz miejsce'
 		});
 	}
-	if (req.session.cust_log == "true" && arrivalPlace === "Dubai") {
+	if (req.session.cust_log == "true" && arrivalPlace === "Dubaj") {
 		res.render('middleDistancePlane', {
 			title: 'Wybierz miejsce'
 		});
@@ -183,7 +183,7 @@ router.get('/home', function (req, res, next) {
 		});
 	}
 	if (req.session.cust_log != "true") {
-		res.render('index');
+		res.render('shortDistancePlane',{title:"Próbka"});
 	}
 });
 

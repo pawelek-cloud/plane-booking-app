@@ -20,11 +20,14 @@ window.addEventListener("load", () => {
     let departurePlace = params.get("departurePlace");
     let arrivalPlace = params.get("arrivalPlace");
     const departureDate = params.get("departureDate");
-    const arrivalDate = params.get("arrivalDate");
+    let arrivalDate = params.get("arrivalDate");
     numberOfPassengers = params.get("passengers");
 
     sessionStorage.setItem('PASSENGERS',numberOfPassengers);
+    sessionStorage.setItem('DEPARTUREPLACE',departurePlace);
     sessionStorage.setItem('ARRIVALPLACE',arrivalPlace);
+    sessionStorage.setItem('DEPARTUREDATE',departureDate);
+    sessionStorage.setItem('ARRIVALDATE',arrivalDate);
 
     document.getElementById("departurePlace").innerHTML =departurePlace;
     document.getElementById("arrivalPlace").innerHTML = arrivalPlace;
@@ -34,7 +37,10 @@ window.addEventListener("load", () => {
         document.getElementById("arrivalDate").innerHTML = "";
 
     } else {
-        document.getElementById("arrivalDate").innerHTML += arrivalDate;
+        document.getElementById("arrivalDate").innerHTML =arrivalDate;
+    }
+    if (arrivalDate === null) {
+        document.getElementById("arrivalDate1").innerHTML = "";
     }
 
     // submit button 
@@ -45,13 +51,13 @@ window.addEventListener("load", () => {
 
         function changeCityNameToAirportName(city) {
             switch (city) {
-                case 'London':
+                case 'Londyn':
                     return 'LHR';
                     break;
                 case 'Rio de Janeiro':
                     return 'GIG';
                     break;
-                case 'Dubai':
+                case 'Dubaj':
                     return 'DXB';
                     break;
                 case 'Warszawa':
@@ -141,13 +147,13 @@ window.addEventListener("load", () => {
 
         function changeCityNameToAirportName(city) {
             switch (city) {
-                case 'London':
+                case 'Londyn':
                     return 'LHR';
                     break;
                 case 'Rio de Janeiro':
                     return 'GIG';
                     break;
-                case 'Dubai':
+                case 'Dubaj':
                     return 'DXB';
                     break;
                 case 'Warszawa':
@@ -688,7 +694,10 @@ function createClasses() {
 
                 priceTotal += letPriceInteger;
 
-                showPrice.innerHTML = "Cena końcowa: " + priceTotal * passengersNumber + " PLN";
+                let priceTotal2=priceTotal*passengersNumber;
+                sessionStorage.setItem("PRICETOTAL1",priceTotal2)
+
+                showPrice.innerHTML = "Cena końcowa: " + priceTotal2 + " PLN";
 
                 showNumberOfPassangers.innerHTML = numberOfPassengers;
 
@@ -730,7 +739,11 @@ function createClasses() {
 
                     priceTotal += letPriceInteger;
 
-                    showPrice.innerHTML = "Cena końcowa: " + priceTotal * passengersNumber + " PLN";
+                    let priceTotal1=priceTotal*passengersNumber;
+
+                    sessionStorage.setItem('PRICETOTAL',priceTotal1)
+
+                    showPrice.innerHTML = "Cena końcowa: "+priceTotal1+ " PLN";
 
                     showPriceTotal.innerHTML = "PLN " + priceTotal * passengersNumber;
 
@@ -774,7 +787,7 @@ function validate() {
     if (invalid) {
         return alert("Wybierz lot docelowy");
     }
-     let invalid1 = showDepartureReturnPlace === undefined&& arrivalDate.innerHTML.length != 0;;
+     let invalid1 = showDepartureReturnPlace === undefined&& arrivalDate.innerHTML.length != 0;
     
     if (invalid1) {
         return alert("Wybierz lot powrotny");

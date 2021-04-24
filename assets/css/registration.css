@@ -1,8 +1,13 @@
 /* body {
   padding-top: 80px;
 } */
+:after,
+:before {
+  box-sizing: border-box;
+}
+
 /* Container */
-.container { 
+.container {
   max-width: 1700px;
   margin: 20px auto;
   border: 2px solid darkgray;
@@ -15,17 +20,17 @@ main {
   justify-content: space-between;
 }
 
-/* Aritcle */
+/* Article */
 
 article {
-  max-width: 70%;
+  width: 80%;
   padding: 30px;
   font-weight: bold;
 }
 
 /* Aside */
 aside {
-  max-width: 30%;
+  width: 20%;
   padding: 20px;
   /* background-color: lightgrey; */
   border-left: 3px solid darkgrey;
@@ -44,3 +49,4 @@ aside {
   height: 200px;
   align-self: center;
 }
+

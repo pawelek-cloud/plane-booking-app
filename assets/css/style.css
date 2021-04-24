@@ -21,6 +21,7 @@
     /* padding: .67em .67em; */
     cursor: pointer;
 }
+
 .btn-primary {
     color: white;
     /* background-color: #56CCF2; */
@@ -134,4 +135,11 @@
     display: block;
     margin: 40px auto 80px auto;
     font-size: 1.75em;
+}
+
+
+/* color seat */
+
+.highlight{
+    fill: red;
 }
