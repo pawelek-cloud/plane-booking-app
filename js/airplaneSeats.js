@@ -33,8 +33,43 @@ if (arrivalDate.length == 4) {
 }
 document.getElementById("numberOfPassengers").innerHTML = passenger;
 
+// painting seat
 // first class
-let rect1 = document.querySelectorAll("rect#Rectangle-1-Copy-2");
+let rect1 = document.getElementsByClassName("Rectangle-1-Copy-2");
+
+for (let i = 0; i < rect1.length; i++) {
+
+    rect1[i].addEventListener("click", function (event) {
+        console.log(i)
+        let target = event.target;
+        console.log(target)
+        if (target.style.fill != "red") {
+            // Style the trigger based on adding/removing the pre-existing class
+            target.classList.toggle("highlight")
+
+            fetch('/home', {
+                    method: 'PUT',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        class: target.classList[1],
+                        id:target.id
+                    }),
+                })
+                .then(function (response) {
+                    if (response.ok) {
+                        console.log('Click was recorded');
+                        return;
+                    }
+                    throw new Error('Request failed.');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    })
+}
 
 // premium class 
 let rect2 = document.querySelectorAll("rect#bg");
@@ -42,7 +77,7 @@ let rect2 = document.querySelectorAll("rect#bg");
 // economy class
 let rect3 = document.querySelectorAll("rect#bg-copy");
 
-let array = [rect1, rect2, rect3];
+array = [rect2, rect3];
 
 for (let i = 0; i < array.length; i++) {
 
@@ -52,8 +87,27 @@ for (let i = 0; i < array.length; i++) {
         if (target.style.fill != "red") {
             // Style the trigger based on adding/removing the pre-existing class
             target.classList.toggle("highlight")
-        }
 
+            fetch('/home', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        target: target
+                    }),
+                })
+                .then(function (response) {
+                    if (response.ok) {
+                        console.log('Click was recorded');
+                        return;
+                    }
+                    throw new Error('Request failed.');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }))
 }
 

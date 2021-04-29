@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoClient = require('mongodb').MongoClient;
 
-// connection to mongodb
+// connection to mongodb-registration
 
 const connectionString = 'mongodb+srv://pawelnowak:Pasibrzuch123@cluster0.g6ebl.mongodb.net/nodeauth?retryWrites=true&w=majority';
 
@@ -15,10 +16,29 @@ mongoose.connect(connectionString, {
 	console.log("Connected to database")
 }).catch(error => console.error(error))
 
+
+// MongoClient.connect(connectionString, {
+// 		useUnifiedTopology: true,
+// 		useNewUrlParser: true,
+// 		// useCreateIndex: true
+// 	})
+// 	.then(client => {
+// 		console.log('Connected to Database')
+// 		let db = client.db('nodeauth');
+// 		db.collection('seatschemas').find().toArray(function (err, result) {
+// 			if (err) throw err;
+// 			console.log(result);
+// 			client.close();
+// 		});
+// 	})
+// 	.catch(error => console.error(error))
+
 const user = require('../models/user');
+const seat = require('../models/seats')
 const bcrypt = require('bcryptjs');
 const saltRound = 10;
 let arrivalPlace;
+let oneOrTwoWay;
 
 // session
 
@@ -27,7 +47,7 @@ router.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-let ssn;
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
 	req.session.destroy(); //destroy session
@@ -38,6 +58,7 @@ router.get('/', function (req, res, next) {
 /* GET home page. */
 router.get('/registration', function (req, res, next) {
 	arrivalPlace = req.query.arrivalPlace;
+	oneOrTwoWay = req.query.twoOrOne;
 	res.render('registration');
 });
 
@@ -167,7 +188,8 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/home', function (req, res, next) {
-	if (req.session.cust_log == "true" && arrivalPlace === "Londyn") {
+
+	if (req.session.cust_log == "true" && arrivalPlace === "Londyn" && oneOrTwoWay != "oneWay") {
 		res.render('shortDistancePlane', {
 			title: 'Wybierz miejsce'
 		});
@@ -182,8 +204,55 @@ router.get('/home', function (req, res, next) {
 			title: 'Wybierz miejsce'
 		});
 	}
+	if (req.session.cust_log == "true" && arrivalPlace === "Londyn" && oneOrTwoWay === "oneWay") {
+		res.render('shortDistancePlaneOneWay', {
+			title: 'Wybierz miejsce'
+		});
+	}
 	if (req.session.cust_log != "true") {
-		res.render('shortDistancePlane',{title:"Próbka"});
+		res.render('shortDistancePlane', {
+			title: "Próbka"
+		});
+	}
+});
+
+// add a document to the DB collection recording the click event
+router.put('/home', (req, res) => {
+	// const seatId = req.body.id;
+	// console.log(seatId)
+	// const seatHighLighted = req.body.class;
+	// console.log(seatHighLighted)
+	// console.log(req.body)
+	// console.log(req.session.id)
+	if (req.body.class == "highlight") {
+		seat.findByIdAndUpdate({
+				_id: req.body.id
+			}, {
+				available: false
+			})
+			.then(() => {
+				seat.findOne({
+						_id: req.body.id
+					})
+					.then(room => {
+						res.send(room);
+					});
+			});
+	}
+	if (req.body.class != "highlight") {
+		seat.findByIdAndUpdate({
+				_id: req.body.id
+			}, {
+				available: true
+			})
+			.then(() => {
+				seat.findOne({
+						_id: req.body.id
+					})
+					.then(room => {
+						res.send(room);
+					});
+			});
 	}
 });
 
