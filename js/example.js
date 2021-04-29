@@ -1,6 +1,6 @@
 // use nodeauth; 
 
-// let  seatschemas = []; 
+// let  seatschemareturnshortdistances = []; 
 
 // let chars = ["A","C","D","F"]; 
 
@@ -8,9 +8,9 @@
 
 //   for(var j = 0 ;j < 4 ;j++){ 
 
-//     seatschemas.push({_id:(i+chars[j]),available:true}); 
+//     seatschemareturnshortdistances .push({_id:(i+chars[j]),available:true}); 
 //    }
 // } 
-// db.seatschemas.insert(seatschemas) 
+// db.seatschemareturnshortdistances .insert(seatschemareturnshortdistances) 
 
 // mongo "mongodb+srv://cluster0.g6ebl.mongodb.net/nodeauth" --username pawelnowak

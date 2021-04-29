@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const session = require('express-session');
-const MongoClient = require('mongodb').MongoClient;
 
 // connection to mongodb-registration
 
@@ -16,25 +15,9 @@ mongoose.connect(connectionString, {
 	console.log("Connected to database")
 }).catch(error => console.error(error))
 
-
-// MongoClient.connect(connectionString, {
-// 		useUnifiedTopology: true,
-// 		useNewUrlParser: true,
-// 		// useCreateIndex: true
-// 	})
-// 	.then(client => {
-// 		console.log('Connected to Database')
-// 		let db = client.db('nodeauth');
-// 		db.collection('seatschemas').find().toArray(function (err, result) {
-// 			if (err) throw err;
-// 			console.log(result);
-// 			client.close();
-// 		});
-// 	})
-// 	.catch(error => console.error(error))
-
 const user = require('../models/user');
-const seat = require('../models/seats')
+const seatShortDistance = require('../models/seatSchemaShortDistance')
+const seatReturnShortDistance = require("../models/seatSchemaReturnShortDistance")
 const bcrypt = require('bcryptjs');
 const saltRound = 10;
 let arrivalPlace;
@@ -218,20 +201,17 @@ router.get('/home', function (req, res, next) {
 
 // add a document to the DB collection recording the click event
 router.put('/home', (req, res) => {
-	// const seatId = req.body.id;
-	// console.log(seatId)
-	// const seatHighLighted = req.body.class;
-	// console.log(seatHighLighted)
-	// console.log(req.body)
-	// console.log(req.session.id)
-	if (req.body.class == "highlight") {
-		seat.findByIdAndUpdate({
+	
+	console.log(req.body)
+
+	if (req.body.class[1] == "highlight" && req.body.class[0] == "Rectangle-1-Copy-2" || req.body.class[0] == "bg" || req.body.class == "bg-copy") {
+		seatShortDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
 				available: false
 			})
 			.then(() => {
-				seat.findOne({
+				seatShortDistance.findOne({
 						_id: req.body.id
 					})
 					.then(room => {
@@ -239,14 +219,46 @@ router.put('/home', (req, res) => {
 					});
 			});
 	}
-	if (req.body.class != "highlight") {
-		seat.findByIdAndUpdate({
+	if (req.body.class[1] != "highlight" && req.body.class[0] == "Rectangle-1-Copy-2" || req.body.class[0] == "bg" || req.body.class == "bg-copy") {
+		seatShortDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
 				available: true
 			})
 			.then(() => {
-				seat.findOne({
+				seatShortDistance.findOne({
+						_id: req.body.id
+					})
+					.then(room => {
+						res.send(room);
+					});
+			});
+	}
+	// return flights
+
+	if (req.body.class[1] == "highlight" && req.body.class[0] == "Rectangle-1-Copy-2-return" || req.body.class[0] == "bg-return" || req.body.class == "bg-copy-return") {
+		seatReturnShortDistance.findByIdAndUpdate({
+				_id: req.body.id
+			}, {
+				available: false
+			})
+			.then(() => {
+				seatReturnShortDistance.findOne({
+						_id: req.body.id
+					})
+					.then(room => {
+						res.send(room);
+					});
+			});
+	}
+	if (req.body.class[1] != "highlight" && req.body.class[0] == "Rectangle-1-Copy-2-return" || req.body.class[0] == "bg-return" || req.body.class == "bg-copy-return") {
+		seatReturnShortDistance.findByIdAndUpdate({
+				_id: req.body.id
+			}, {
+				available: true
+			})
+			.then(() => {
+				seatReturnShortDistance.findOne({
 						_id: req.body.id
 					})
 					.then(room => {

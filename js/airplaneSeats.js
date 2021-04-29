@@ -53,8 +53,8 @@ for (let i = 0; i < rect1.length; i++) {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        class: target.classList[1],
-                        id:target.id
+                        class: target.classList,
+                        id: target.id
                     }),
                 })
                 .then(function (response) {
@@ -71,30 +71,28 @@ for (let i = 0; i < rect1.length; i++) {
     })
 }
 
-// premium class 
-let rect2 = document.querySelectorAll("rect#bg");
+// premium class
+let rect2 = document.getElementsByClassName("bg");
 
-// economy class
-let rect3 = document.querySelectorAll("rect#bg-copy");
 
-array = [rect2, rect3];
+for (let i = 0; i < rect2.length; i++) {
 
-for (let i = 0; i < array.length; i++) {
-
-    array[i].forEach(element => element.addEventListener("click", function (event) {
+    rect2[i].addEventListener("click", function (event) {
+        console.log(i)
         let target = event.target;
-
+        console.log(target)
         if (target.style.fill != "red") {
             // Style the trigger based on adding/removing the pre-existing class
             target.classList.toggle("highlight")
 
             fetch('/home', {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        target: target
+                        class: target.classList,
+                        id: target.id
                     }),
                 })
                 .then(function (response) {
@@ -108,8 +106,165 @@ for (let i = 0; i < array.length; i++) {
                     console.log(error);
                 });
         }
-    }))
+    })
 }
+// premium class
+let rect3 = document.getElementsByClassName("bg-copy");
+
+
+for (let i = 0; i < rect3.length; i++) {
+
+    rect3[i].addEventListener("click", function (event) {
+        console.log(i)
+        let target = event.target;
+        console.log(target)
+        if (target.style.fill != "red") {
+            // Style the trigger based on adding/removing the pre-existing class
+            target.classList.toggle("highlight")
+
+            fetch('/home', {
+                    method: 'PUT',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        class: target.classList,
+                        id: target.id
+                    }),
+                })
+                .then(function (response) {
+                    if (response.ok) {
+                        console.log('Click was recorded');
+                        return;
+                    }
+                    throw new Error('Request failed.');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    })
+}
+
+// return flight
+
+// first class
+rect1 = document.getElementsByClassName("Rectangle-1-Copy-2-return");
+
+for (let i = 0; i < rect1.length; i++) {
+
+    rect1[i].addEventListener("click", function (event) {
+        console.log(i)
+        let target = event.target;
+        console.log(target)
+        if (target.style.fill != "red") {
+            // Style the trigger based on adding/removing the pre-existing class
+            target.classList.toggle("highlight")
+
+            fetch('/home', {
+                    method: 'PUT',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        class: target.classList,
+                        id: target.id
+                    }),
+                })
+                .then(function (response) {
+                    if (response.ok) {
+                        console.log('Click was recorded');
+                        return;
+                    }
+                    throw new Error('Request failed.');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    })
+}
+
+// premium class
+rect2 = document.getElementsByClassName("bg-return");
+
+
+for (let i = 0; i < rect2.length; i++) {
+
+    rect2[i].addEventListener("click", function (event) {
+        console.log(i)
+        let target = event.target;
+        console.log(target)
+        if (target.style.fill != "red") {
+            // Style the trigger based on adding/removing the pre-existing class
+            target.classList.toggle("highlight")
+
+            fetch('/home', {
+                    method: 'PUT',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        class: target.classList,
+                        id: target.id
+                    }),
+                })
+                .then(function (response) {
+                    if (response.ok) {
+                        console.log('Click was recorded');
+                        return;
+                    }
+                    throw new Error('Request failed.');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    })
+}
+// premium class
+rect3 = document.getElementsByClassName("bg-copy-return");
+
+
+for (let i = 0; i < rect3.length; i++) {
+
+    rect3[i].addEventListener("click", function (event) {
+        console.log(i)
+        let target = event.target;
+        console.log(target)
+        
+        if (target.style.fill != "red") {
+            // Style the trigger based on adding/removing the pre-existing class
+            target.classList.toggle("highlight")
+            
+
+            fetch('/home', {
+                    method: 'PUT',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        class: target.classList,
+                        id: target.id
+                        
+                    }),
+                })
+                .then(function (response) {
+                    if (response.ok) {
+                        console.log('Click was recorded');
+                        return;
+                    }
+                    throw new Error('Request failed.');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    })
+}
+
+
+
 
 
 
