@@ -108,7 +108,7 @@ for (let i = 0; i < rect2.length; i++) {
         }
     })
 }
-// premium class
+// economy class
 let rect3 = document.getElementsByClassName("bg-copy");
 
 
@@ -222,7 +222,7 @@ for (let i = 0; i < rect2.length; i++) {
         }
     })
 }
-// premium class
+// economy class
 rect3 = document.getElementsByClassName("bg-copy-return");
 
 

@@ -1,16 +1,16 @@
 // use nodeauth; 
 
-// let  seatschemareturnshortdistances = []; 
+// let  seatschemashortdistances = []; 
 
-// let chars = ["A","C","D","F"]; 
+// let chars = ["A","B","C"]; 
 
-// for(var i = 1 ;i < 4 ;i++){ 
+// for(var i = 30 ;i < 31 ;i++){ 
 
-//   for(var j = 0 ;j < 4 ;j++){ 
+//   for(var j = 0 ;j < 3 ;j++){ 
 
-//     seatschemareturnshortdistances .push({_id:(i+chars[j]),available:true}); 
+//     seatschemashortdistances .push({_id:(i+chars[j]),available:true}); 
 //    }
 // } 
-// db.seatschemareturnshortdistances .insert(seatschemareturnshortdistances) 
+// db.seatschemashortdistances .insert(seatschemashortdistances) 
 
 // mongo "mongodb+srv://cluster0.g6ebl.mongodb.net/nodeauth" --username pawelnowak
