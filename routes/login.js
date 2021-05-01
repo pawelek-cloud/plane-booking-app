@@ -236,7 +236,7 @@ router.put('/home', (req, res) => {
 	}
 	// return flights
 
-	if (req.body.class[1] == "highlight" && (req.body.class[0] == "Rectangle-1-Copy-2-return" || req.body.class[0] == "bg-return" || req.body.class[0] == "bg-copy-return")) {
+	if (req.body.class[1] == "highlight1" && (req.body.class[0] == "Rectangle-1-Copy-2-return" || req.body.class[0] == "bg-return" || req.body.class[0] == "bg-copy-return")) {
 		seatReturnShortDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
@@ -251,7 +251,7 @@ router.put('/home', (req, res) => {
 					});
 			});
 	}
-	if (req.body.class[1] != "highlight" && (req.body.class[0] == "Rectangle-1-Copy-2-return" || req.body.class[0] == "bg-return" || req.body.class[0] == "bg-copy-return")) {
+	if (req.body.class[1] != "highlight1" && (req.body.class[0] == "Rectangle-1-Copy-2-return" || req.body.class[0] == "bg-return" || req.body.class[0] == "bg-copy-return")) {
 		seatReturnShortDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {

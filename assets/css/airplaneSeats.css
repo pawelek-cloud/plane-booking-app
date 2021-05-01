@@ -57,8 +57,6 @@ aside {
 .highlight {
     fill: red;
 }
-
-/* displaying second plane */
-/* .show{
-    display: none;
-} */
+.highlight1 {
+    fill: red;
+}

@@ -1,7 +1,5 @@
 let passenger = sessionStorage.getItem('PASSENGERS');
-console.log(passenger)
-passenger=parseFloat(passenger.replace(/[^\d\.]*/g, ''));
-console.log(typeof(passenger))
+passenger = parseFloat(passenger.replace(/[^\d\.]*/g, ''));
 const departurePlace = sessionStorage.getItem('DEPARTUREPLACE');
 const arrivalPlace = sessionStorage.getItem('ARRIVALPLACE');
 const departureDate = sessionStorage.getItem('DEPARTUREDATE');
@@ -45,7 +43,7 @@ document.getElementById("numberOfPassengers").innerHTML = passenger;
 // painting seat
 // first class
 let rect1 = document.getElementsByClassName("Rectangle-1-Copy-2");
-if (businessClassPrice==="true") {
+if (businessClassPrice === "true") {
 
     for (let i = 0; i < rect1.length; i++) {
 
@@ -53,38 +51,45 @@ if (businessClassPrice==="true") {
             console.log(i)
             let target = event.target;
             console.log(target)
-            if (target.style.fill != "red") {
-                // Style the trigger based on adding/removing the pre-existing class
-                target.classList.toggle("highlight")
+            let length = (document.getElementsByClassName("highlight").length) + 1;
+            if (target.classList[1] === "highlight") {
+                length = length - 1;
+            }
+            if (length <= passenger) {
+                if (target.style.fill != "red") {
 
-                fetch('/home', {
-                        method: 'PUT',
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            class: target.classList,
-                            id: target.id
-                        }),
-                    })
-                    .then(function (response) {
-                        if (response.ok) {
-                            console.log('Click was recorded');
-                            return;
-                        }
-                        throw new Error('Request failed.');
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                    target.classList.toggle("highlight")
+
+                    fetch('/home', {
+                            method: 'PUT',
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                class: target.classList,
+                                id: target.id
+                            }),
+                        })
+                        .then(function (response) {
+                            if (response.ok) {
+                                console.log('Click was recorded');
+                                return;
+                            }
+                            throw new Error('Request failed.');
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
             }
         })
     }
 }
-if (premiumClassPrice==="true") {
-    // premium class
-    let rect2 = document.getElementsByClassName("bg");
+// premium class
 
+let rect2 = document.getElementsByClassName("bg");
+
+if (premiumClassPrice === "true") {
 
     for (let i = 0; i < rect2.length; i++) {
 
@@ -92,8 +97,13 @@ if (premiumClassPrice==="true") {
             console.log(i)
             let target = event.target;
             console.log(target)
-            if (target.style.fill != "red") {
-                // Style the trigger based on adding/removing the pre-existing class
+
+            let length = (document.getElementsByClassName("highlight").length) + 1;
+            if (target.classList[1] === "highlight") {
+                length = length - 1;
+            }
+            if (length <= passenger) {
+
                 target.classList.toggle("highlight")
 
                 fetch('/home', {
@@ -117,11 +127,13 @@ if (premiumClassPrice==="true") {
                         console.log(error);
                     });
             }
+
+            // }
         })
     }
 }
 let rect3 = document.getElementsByClassName("bg-copy");
-if (economyClassPrice==="true") {
+if (economyClassPrice === "true") {
     // economy class
 
     for (let i = 0; i < rect3.length; i++) {
@@ -130,37 +142,44 @@ if (economyClassPrice==="true") {
             console.log(i)
             let target = event.target;
             console.log(target)
-            if (target.style.fill != "red") {
-                // Style the trigger based on adding/removing the pre-existing class
-                target.classList.toggle("highlight")
+            let length = (document.getElementsByClassName("highlight").length) + 1;
+            if (target.classList[1] === "highlight") {
+                length = length - 1;
+            }
+            if (length <= passenger) {
+                if (target.style.fill != "red") {
+                    // Style the trigger based on adding/removing the pre-existing class
+                    target.classList.toggle("highlight")
 
-                fetch('/home', {
-                        method: 'PUT',
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            class: target.classList,
-                            id: target.id
-                        }),
-                    })
-                    .then(function (response) {
-                        if (response.ok) {
-                            console.log('Click was recorded');
-                            return;
-                        }
-                        throw new Error('Request failed.');
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                    fetch('/home', {
+                            method: 'PUT',
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                class: target.classList,
+                                id: target.id
+                            }),
+                        })
+                        .then(function (response) {
+                            if (response.ok) {
+                                console.log('Click was recorded');
+                                return;
+                            }
+                            throw new Error('Request failed.');
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
             }
         })
+
     }
 }
 // return flight
 
-if (businessClassPriceReturn==="true") {
+if (businessClassPriceReturn === "true") {
     // first class
     rect1 = document.getElementsByClassName("Rectangle-1-Copy-2-return");
 
@@ -170,35 +189,41 @@ if (businessClassPriceReturn==="true") {
             console.log(i)
             let target = event.target;
             console.log(target)
-            if (target.style.fill != "red") {
-                // Style the trigger based on adding/removing the pre-existing class
-                target.classList.toggle("highlight")
+            let length = (document.getElementsByClassName("highlight1").length) + 1;
+            if (target.classList[1] === "highlight1") {
+                length = length - 1;
+            }
+            if (length <= passenger) {
+                if (target.style.fill != "red") {
+                    // Style the trigger based on adding/removing the pre-existing class
+                    target.classList.toggle("highlight1")
 
-                fetch('/home', {
-                        method: 'PUT',
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            class: target.classList,
-                            id: target.id
-                        }),
-                    })
-                    .then(function (response) {
-                        if (response.ok) {
-                            console.log('Click was recorded');
-                            return;
-                        }
-                        throw new Error('Request failed.');
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                    fetch('/home', {
+                            method: 'PUT',
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                class: target.classList,
+                                id: target.id
+                            }),
+                        })
+                        .then(function (response) {
+                            if (response.ok) {
+                                console.log('Click was recorded');
+                                return;
+                            }
+                            throw new Error('Request failed.');
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
             }
         })
     }
 }
-if (premiumClassPriceReturn==="true") {
+if (premiumClassPriceReturn === "true") {
     // premium class
     rect2 = document.getElementsByClassName("bg-return");
 
@@ -209,35 +234,41 @@ if (premiumClassPriceReturn==="true") {
             console.log(i)
             let target = event.target;
             console.log(target)
-            if (target.style.fill != "red") {
-                // Style the trigger based on adding/removing the pre-existing class
-                target.classList.toggle("highlight")
+            let length = (document.getElementsByClassName("highlight1").length) + 1;
+            if (target.classList[1] === "highlight1") {
+                length = length - 1;
+            }
+            if (length <= passenger) {
+                if (target.style.fill != "red") {
+                    // Style the trigger based on adding/removing the pre-existing class
+                    target.classList.toggle("highlight1")
 
-                fetch('/home', {
-                        method: 'PUT',
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            class: target.classList,
-                            id: target.id
-                        }),
-                    })
-                    .then(function (response) {
-                        if (response.ok) {
-                            console.log('Click was recorded');
-                            return;
-                        }
-                        throw new Error('Request failed.');
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                    fetch('/home', {
+                            method: 'PUT',
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                class: target.classList,
+                                id: target.id
+                            }),
+                        })
+                        .then(function (response) {
+                            if (response.ok) {
+                                console.log('Click was recorded');
+                                return;
+                            }
+                            throw new Error('Request failed.');
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
             }
         })
     }
 }
-if (economyClassPriceReturn==="true") {
+if (economyClassPriceReturn === "true") {
     // economy class
     rect3 = document.getElementsByClassName("bg-copy-return");
 
@@ -248,33 +279,38 @@ if (economyClassPriceReturn==="true") {
             console.log(i)
             let target = event.target;
             console.log(target)
+            let length = (document.getElementsByClassName("highlight1").length) + 1;
+            if (target.classList[1] === "highlight1") {
+                length = length - 1;
+            }
+            if (length <= passenger) {
+                if (target.style.fill != "red") {
+                    // Style the trigger based on adding/removing the pre-existing class
+                    target.classList.toggle("highlight1")
 
-            if (target.style.fill != "red") {
-                // Style the trigger based on adding/removing the pre-existing class
-                target.classList.toggle("highlight")
 
+                    fetch('/home', {
+                            method: 'PUT',
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                class: target.classList,
+                                id: target.id
 
-                fetch('/home', {
-                        method: 'PUT',
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            class: target.classList,
-                            id: target.id
-
-                        }),
-                    })
-                    .then(function (response) {
-                        if (response.ok) {
-                            console.log('Click was recorded');
-                            return;
-                        }
-                        throw new Error('Request failed.');
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                            }),
+                        })
+                        .then(function (response) {
+                            if (response.ok) {
+                                console.log('Click was recorded');
+                                return;
+                            }
+                            throw new Error('Request failed.');
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
             }
         })
     }
