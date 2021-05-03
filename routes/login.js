@@ -204,14 +204,14 @@ router.put('/home', (req, res) => {
 
 	console.log(req.body)
 
-	if (req.body.class[1] == "highlight" && (req.body.class[0] == "Rectangle-1-Copy-2" || req.body.class[0] == "bg" || req.body.class[0] == "bg-copy")) {
+	if (req.body.class[1] == "highlight") {
 		seatShortDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
 				available: false
 			})
 			.then(() => {
-				seatShortDistance.findOne({
+				seatShortDistance.find({
 						_id: req.body.id
 					})
 					.then(room => {
@@ -219,46 +219,17 @@ router.put('/home', (req, res) => {
 					});
 			});
 	}
-	if (req.body.class[1] != "highlight" && (req.body.class[0] == "Rectangle-1-Copy-2" || req.body.class[0] == "bg" || req.body.class[0] == "bg-copy")) {
-		seatShortDistance.findByIdAndUpdate({
-				_id: req.body.id
-			}, {
-				available: true
-			})
-			.then(() => {
-				seatShortDistance.findOne({
-						_id: req.body.id
-					})
-					.then(room => {
-						res.send(room);
-					});
-			});
-	}
+
 	// return flights
 
-	if (req.body.class[1] == "highlight1" && (req.body.class[0] == "Rectangle-1-Copy-2-return" || req.body.class[0] == "bg-return" || req.body.class[0] == "bg-copy-return")) {
+	if (req.body.class[1] == "highlight1") {
 		seatReturnShortDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
 				available: false
 			})
 			.then(() => {
-				seatReturnShortDistance.findOne({
-						_id: req.body.id
-					})
-					.then(room => {
-						res.send(room);
-					});
-			});
-	}
-	if (req.body.class[1] != "highlight1" && (req.body.class[0] == "Rectangle-1-Copy-2-return" || req.body.class[0] == "bg-return" || req.body.class[0] == "bg-copy-return")) {
-		seatReturnShortDistance.findByIdAndUpdate({
-				_id: req.body.id
-			}, {
-				available: true
-			})
-			.then(() => {
-				seatReturnShortDistance.findOne({
+				seatReturnShortDistance.find({
 						_id: req.body.id
 					})
 					.then(room => {
@@ -267,6 +238,9 @@ router.put('/home', (req, res) => {
 			});
 	}
 });
+router.get('/payment', function (req, res, next) {
+	res.render("payment")
+})
 
 
 module.exports = router;

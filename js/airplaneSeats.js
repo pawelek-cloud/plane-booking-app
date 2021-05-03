@@ -57,29 +57,7 @@ if (businessClassPrice === "true") {
             }
             if (length <= passenger) {
                 if (target.style.fill != "red") {
-
                     target.classList.toggle("highlight")
-
-                    fetch('/home', {
-                            method: 'PUT',
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                class: target.classList,
-                                id: target.id
-                            }),
-                        })
-                        .then(function (response) {
-                            if (response.ok) {
-                                console.log('Click was recorded');
-                                return;
-                            }
-                            throw new Error('Request failed.');
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
                 }
             }
         })
@@ -103,8 +81,140 @@ if (premiumClassPrice === "true") {
                 length = length - 1;
             }
             if (length <= passenger) {
-
                 target.classList.toggle("highlight")
+            }
+        })
+    }
+}
+let rect3 = document.getElementsByClassName("bg-copy");
+if (economyClassPrice === "true") {
+    // economy class
+
+    for (let i = 0; i < rect3.length; i++) {
+
+        rect3[i].addEventListener("click", function (event) {
+            console.log(i)
+            let target = event.target;
+            console.log(target)
+            let length = (document.getElementsByClassName("highlight").length) + 1;
+            if (target.classList[1] === "highlight") {
+                length = length - 1;
+            }
+            if (length <= passenger) {
+                if (target.style.fill != "red") {
+                    target.classList.toggle("highlight")
+                }
+            }
+        })
+
+    }
+}
+// return flight
+// first class
+let rect4 = document.getElementsByClassName("Rectangle-1-Copy-2-return");
+
+if (businessClassPriceReturn === "true") {
+
+
+    for (let i = 0; i < rect4.length; i++) {
+
+        rect4[i].addEventListener("click", function (event) {
+            console.log(i)
+            let target = event.target;
+            console.log(target)
+            let length = (document.getElementsByClassName("highlight1").length) + 1;
+            if (target.classList[1] === "highlight1") {
+                length = length - 1;
+            }
+            if (length <= passenger) {
+                if (target.style.fill != "red") {
+                    target.classList.toggle("highlight1")
+                }
+            }
+        })
+    }
+}
+// premium class
+let rect5 = document.getElementsByClassName("bg-return");
+
+if (premiumClassPriceReturn === "true") {
+
+    for (let i = 0; i < rect5.length; i++) {
+
+        rect5[i].addEventListener("click", function (event) {
+            console.log(i)
+            let target = event.target;
+            console.log(target)
+            let length = (document.getElementsByClassName("highlight1").length) + 1;
+            if (target.classList[1] === "highlight1") {
+                length = length - 1;
+            }
+            if (length <= passenger) {
+                if (target.style.fill != "red") {
+                    target.classList.toggle("highlight1")
+                }
+            }
+        })
+    }
+}
+// economy class
+let rect6 = document.getElementsByClassName("bg-copy-return");
+
+if (economyClassPriceReturn === "true") {
+    for (let i = 0; i < rect6.length; i++) {
+
+        rect6[i].addEventListener("click", function (event) {
+            console.log(i)
+            let target = event.target;
+            console.log(target)
+            let length = (document.getElementsByClassName("highlight1").length) + 1;
+            if (target.classList[1] === "highlight1") {
+                length = length - 1;
+            }
+            if (length <= passenger) {
+                if (target.style.fill != "red") {
+                    target.classList.toggle("highlight1")
+                }
+            }
+        })
+    }
+}
+// submit button validation
+
+let invalid = "";
+
+const submitButton = document.getElementById("continueButton");
+
+continueButton.addEventListener('click', function () {
+
+    if (validate() === !invalid) {
+        
+
+        if (businessClassPrice === "true") {
+            iterate(rect1);
+        }
+        if (premiumClassPrice === "true") {
+            iterate(rect2);
+        }
+        if (economyClassPrice === "true") {
+            iterate(rect3);
+        }
+        if (businessClassPriceReturn === "true") {
+            iterate(rect4);
+        }
+        if (premiumClassPriceReturn === "true") {
+            iterate(rect5);
+        }
+        if (economyClassPriceReturn === "true") {
+            iterate(rect6);
+        }
+
+
+        function iterate(array) {
+            for (let i of array) {
+                let target = i;
+
+                console.log(target)
 
                 fetch('/home', {
                         method: 'PUT',
@@ -127,199 +237,28 @@ if (premiumClassPrice === "true") {
                         console.log(error);
                     });
             }
+        }
+    }
+})
 
-            // }
-        })
+
+
+function validate() {
+    let length = (document.getElementsByClassName("highlight").length);
+    let length1 = (document.getElementsByClassName("highlight1").length);
+
+    let invalid = length != passenger;
+    if (invalid) {
+        return alert("Wybierz miejsca na lot docelowy");
+    }
+    let invalid1 = length1 != passenger;
+
+    if (invalid1) {
+        return alert("Wybierz miejsca na lot powrotny");
+    } else {
+        return !invalid
     }
 }
-let rect3 = document.getElementsByClassName("bg-copy");
-if (economyClassPrice === "true") {
-    // economy class
-
-    for (let i = 0; i < rect3.length; i++) {
-
-        rect3[i].addEventListener("click", function (event) {
-            console.log(i)
-            let target = event.target;
-            console.log(target)
-            let length = (document.getElementsByClassName("highlight").length) + 1;
-            if (target.classList[1] === "highlight") {
-                length = length - 1;
-            }
-            if (length <= passenger) {
-                if (target.style.fill != "red") {
-                    // Style the trigger based on adding/removing the pre-existing class
-                    target.classList.toggle("highlight")
-
-                    fetch('/home', {
-                            method: 'PUT',
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                class: target.classList,
-                                id: target.id
-                            }),
-                        })
-                        .then(function (response) {
-                            if (response.ok) {
-                                console.log('Click was recorded');
-                                return;
-                            }
-                            throw new Error('Request failed.');
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                }
-            }
-        })
-
-    }
-}
-// return flight
-
-if (businessClassPriceReturn === "true") {
-    // first class
-    rect1 = document.getElementsByClassName("Rectangle-1-Copy-2-return");
-
-    for (let i = 0; i < rect1.length; i++) {
-
-        rect1[i].addEventListener("click", function (event) {
-            console.log(i)
-            let target = event.target;
-            console.log(target)
-            let length = (document.getElementsByClassName("highlight1").length) + 1;
-            if (target.classList[1] === "highlight1") {
-                length = length - 1;
-            }
-            if (length <= passenger) {
-                if (target.style.fill != "red") {
-                    // Style the trigger based on adding/removing the pre-existing class
-                    target.classList.toggle("highlight1")
-
-                    fetch('/home', {
-                            method: 'PUT',
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                class: target.classList,
-                                id: target.id
-                            }),
-                        })
-                        .then(function (response) {
-                            if (response.ok) {
-                                console.log('Click was recorded');
-                                return;
-                            }
-                            throw new Error('Request failed.');
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                }
-            }
-        })
-    }
-}
-if (premiumClassPriceReturn === "true") {
-    // premium class
-    rect2 = document.getElementsByClassName("bg-return");
-
-
-    for (let i = 0; i < rect2.length; i++) {
-
-        rect2[i].addEventListener("click", function (event) {
-            console.log(i)
-            let target = event.target;
-            console.log(target)
-            let length = (document.getElementsByClassName("highlight1").length) + 1;
-            if (target.classList[1] === "highlight1") {
-                length = length - 1;
-            }
-            if (length <= passenger) {
-                if (target.style.fill != "red") {
-                    // Style the trigger based on adding/removing the pre-existing class
-                    target.classList.toggle("highlight1")
-
-                    fetch('/home', {
-                            method: 'PUT',
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                class: target.classList,
-                                id: target.id
-                            }),
-                        })
-                        .then(function (response) {
-                            if (response.ok) {
-                                console.log('Click was recorded');
-                                return;
-                            }
-                            throw new Error('Request failed.');
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                }
-            }
-        })
-    }
-}
-if (economyClassPriceReturn === "true") {
-    // economy class
-    rect3 = document.getElementsByClassName("bg-copy-return");
-
-
-    for (let i = 0; i < rect3.length; i++) {
-
-        rect3[i].addEventListener("click", function (event) {
-            console.log(i)
-            let target = event.target;
-            console.log(target)
-            let length = (document.getElementsByClassName("highlight1").length) + 1;
-            if (target.classList[1] === "highlight1") {
-                length = length - 1;
-            }
-            if (length <= passenger) {
-                if (target.style.fill != "red") {
-                    // Style the trigger based on adding/removing the pre-existing class
-                    target.classList.toggle("highlight1")
-
-
-                    fetch('/home', {
-                            method: 'PUT',
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                class: target.classList,
-                                id: target.id
-
-                            }),
-                        })
-                        .then(function (response) {
-                            if (response.ok) {
-                                console.log('Click was recorded');
-                                return;
-                            }
-                            throw new Error('Request failed.');
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                }
-            }
-        })
-    }
-}
-
-
-
-
-
 
 
 
