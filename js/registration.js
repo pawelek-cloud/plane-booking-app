@@ -791,10 +791,7 @@ continueButton.addEventListener('click', function () {
         continueButton.setAttribute("type", "submit")
 
         window.location.replace("/login");
-
     }
-
-
 })
 
 function validate() {

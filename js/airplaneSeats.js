@@ -38,7 +38,10 @@ if (arrivalDate.length == 4) {
 } else {
     document.getElementById("cart-total-price").innerHTML = "PLN " + priceTotal;
 }
-document.getElementById("numberOfPassengers").innerHTML = passenger;
+document.getElementById("numberOfPassengers").innerHTML = 'Liczba pasazerów: ' + passenger;
+
+const seatDepartureChoice = document.getElementById('seatNumberDeparture');
+const seatArrivalChoice = document.getElementById('seatNumberArrival');
 
 // painting seat
 // first class
@@ -50,15 +53,16 @@ if (businessClassPrice === "true") {
         rect1[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
-            console.log(target)
             let length = (document.getElementsByClassName("highlight").length) + 1;
             if (target.classList[1] === "highlight") {
                 length = length - 1;
+                seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
             if (length <= passenger) {
-                if (target.style.fill != "red") {
-                    target.classList.toggle("highlight")
+                if (target.classList[1] != "highlight") {
+                    seatDepartureChoice.innerHTML += target.id + ' ';
                 }
+                target.classList.toggle("highlight")
             }
         })
     }
@@ -74,14 +78,18 @@ if (premiumClassPrice === "true") {
         rect2[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
-            console.log(target)
-
             let length = (document.getElementsByClassName("highlight").length) + 1;
             if (target.classList[1] === "highlight") {
                 length = length - 1;
+                seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
+
             if (length <= passenger) {
-                target.classList.toggle("highlight")
+
+                if (target.classList[1] != "highlight") {
+                    seatDepartureChoice.innerHTML +=target.id + ' ';
+                }
+                target.classList.toggle("highlight");
             }
         })
     }
@@ -95,15 +103,16 @@ if (economyClassPrice === "true") {
         rect3[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
-            console.log(target)
             let length = (document.getElementsByClassName("highlight").length) + 1;
             if (target.classList[1] === "highlight") {
                 length = length - 1;
+                seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
             if (length <= passenger) {
-                if (target.style.fill != "red") {
-                    target.classList.toggle("highlight")
+                if (target.classList[1] != "highlight") {
+                    seatDepartureChoice.innerHTML +=target.id + ' ';
                 }
+                target.classList.toggle("highlight")
             }
         })
 
@@ -121,15 +130,18 @@ if (businessClassPriceReturn === "true") {
         rect4[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
-            console.log(target)
             let length = (document.getElementsByClassName("highlight1").length) + 1;
             if (target.classList[1] === "highlight1") {
                 length = length - 1;
+                seatArrivalChoice.innerHTML = seatArrivalChoice.innerHTML.replace(target.id, '');
             }
             if (length <= passenger) {
-                if (target.style.fill != "red") {
-                    target.classList.toggle("highlight1")
+                if (target.classList[1] != "highlight1") {
+                    seatArrivalChoice.innerHTML +=target.id + ' ';
                 }
+
+                target.classList.toggle("highlight1")
+
             }
         })
     }
@@ -144,15 +156,17 @@ if (premiumClassPriceReturn === "true") {
         rect5[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
-            console.log(target)
             let length = (document.getElementsByClassName("highlight1").length) + 1;
             if (target.classList[1] === "highlight1") {
                 length = length - 1;
+                seatArrivalChoice.innerHTML = seatArrivalChoice.innerHTML.replace(target.id, '');
             }
             if (length <= passenger) {
-                if (target.style.fill != "red") {
-                    target.classList.toggle("highlight1")
+                if (target.classList[1] != "highlight1") {
+                    seatArrivalChoice.innerHTML +=target.id + ' ';
                 }
+                target.classList.toggle("highlight1")
+
             }
         })
     }
@@ -166,15 +180,17 @@ if (economyClassPriceReturn === "true") {
         rect6[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
-            console.log(target)
             let length = (document.getElementsByClassName("highlight1").length) + 1;
             if (target.classList[1] === "highlight1") {
                 length = length - 1;
+                seatArrivalChoice.innerHTML = seatArrivalChoice.innerHTML.replace(target.id, '');
             }
             if (length <= passenger) {
-                if (target.style.fill != "red") {
-                    target.classList.toggle("highlight1")
+                if (target.classList[1] != "highlight1") {
+                    seatArrivalChoice.innerHTML +=target.id + ' ';
                 }
+                target.classList.toggle("highlight1")
+
             }
         })
     }
@@ -188,7 +204,7 @@ const submitButton = document.getElementById("continueButton");
 continueButton.addEventListener('click', function () {
 
     if (validate() === !invalid) {
-        
+
 
         if (businessClassPrice === "true") {
             iterate(rect1);
@@ -209,33 +225,37 @@ continueButton.addEventListener('click', function () {
             iterate(rect6);
         }
 
+        window.location.replace("/payment");
 
         function iterate(array) {
             for (let i of array) {
                 let target = i;
 
-                console.log(target)
+                if (target.classList[1] != undefined) {
 
-                fetch('/home', {
-                        method: 'PUT',
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            class: target.classList,
-                            id: target.id
-                        }),
-                    })
-                    .then(function (response) {
-                        if (response.ok) {
-                            console.log('Click was recorded');
-                            return;
-                        }
-                        throw new Error('Request failed.');
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                    console.log(target)
+
+                    fetch('/home', {
+                            method: 'PUT',
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                class: target.classList,
+                                id: target.id
+                            }),
+                        })
+                        .then(function (response) {
+                            if (response.ok) {
+                                console.log('Click was recorded');
+                                return;
+                            }
+                            throw new Error('Request failed.');
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
             }
         }
     }
@@ -259,10 +279,3 @@ function validate() {
         return !invalid
     }
 }
-
-
-
-
-window.addEventListener("beforeunload", function (event) {
-    event.returnValue = "Are you sure?";
-});
