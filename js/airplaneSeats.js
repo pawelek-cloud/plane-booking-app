@@ -87,7 +87,7 @@ if (premiumClassPrice === "true") {
             if (length <= passenger) {
 
                 if (target.classList[1] != "highlight") {
-                    seatDepartureChoice.innerHTML +=target.id + ' ';
+                    seatDepartureChoice.innerHTML += target.id + ' ';
                 }
                 target.classList.toggle("highlight");
             }
@@ -110,7 +110,7 @@ if (economyClassPrice === "true") {
             }
             if (length <= passenger) {
                 if (target.classList[1] != "highlight") {
-                    seatDepartureChoice.innerHTML +=target.id + ' ';
+                    seatDepartureChoice.innerHTML += target.id + ' ';
                 }
                 target.classList.toggle("highlight")
             }
@@ -137,7 +137,7 @@ if (businessClassPriceReturn === "true") {
             }
             if (length <= passenger) {
                 if (target.classList[1] != "highlight1") {
-                    seatArrivalChoice.innerHTML +=target.id + ' ';
+                    seatArrivalChoice.innerHTML += target.id + ' ';
                 }
 
                 target.classList.toggle("highlight1")
@@ -163,7 +163,7 @@ if (premiumClassPriceReturn === "true") {
             }
             if (length <= passenger) {
                 if (target.classList[1] != "highlight1") {
-                    seatArrivalChoice.innerHTML +=target.id + ' ';
+                    seatArrivalChoice.innerHTML += target.id + ' ';
                 }
                 target.classList.toggle("highlight1")
 
@@ -187,7 +187,7 @@ if (economyClassPriceReturn === "true") {
             }
             if (length <= passenger) {
                 if (target.classList[1] != "highlight1") {
-                    seatArrivalChoice.innerHTML +=target.id + ' ';
+                    seatArrivalChoice.innerHTML += target.id + ' ';
                 }
                 target.classList.toggle("highlight1")
 
@@ -224,8 +224,10 @@ continueButton.addEventListener('click', function () {
         if (economyClassPriceReturn === "true") {
             iterate(rect6);
         }
+        // setInterval(function () {
+        //     window.location.replace("/payment")
+        // }, 7000)
 
-        window.location.replace("/payment");
 
         function iterate(array) {
             for (let i of array) {
@@ -271,11 +273,41 @@ function validate() {
     if (invalid) {
         return alert("Wybierz miejsca na lot docelowy");
     }
+
     let invalid1 = length1 != passenger;
 
-    if (invalid1) {
+    if (invalid1 && arrivalDate.length != 4) {
         return alert("Wybierz miejsca na lot powrotny");
     } else {
         return !invalid
     }
 }
+
+// exchange rates
+
+const change = document.getElementById('currencies');
+const insertCurrencyValue = document.getElementById('cart-total-price').innerHTML;
+const Pln = parseFloat(insertCurrencyValue.replace(/[^\d\.]*/g, ''));
+
+change.addEventListener("change", function loadWather() {
+
+    let currency = this.value;
+    if (currency === 'EUR' || currency === "USD") {
+
+        fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${currency}/`)
+            .then((resp) => resp.json())
+            .then(function (data) {
+                const insertCurrency = document.getElementById('cart-total-price');
+                const currencyValue = Pln / data.rates[0].mid;
+                insertCurrency.innerHTML = `${currency} ${currencyValue.toFixed(0)}`;
+            })
+    } else {
+        if (arrivalDate.length == 4) {
+
+            document.getElementById("cart-total-price").innerHTML = "PLN " + priceTotal1;
+        } else {
+            document.getElementById("cart-total-price").innerHTML = "PLN " + priceTotal;
+        }
+
+    }
+})
