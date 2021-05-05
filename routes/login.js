@@ -5,7 +5,7 @@ const session = require('express-session');
 
 // connection to mongodb-registration
 
-const connectionString = 'mongodb+srv://pawelnowak:Pasibrzuch123@cluster0.g6ebl.mongodb.net/nodeauth?retryWrites=true&w=majority';
+const connectionString = 'mongodb+srv://pawelnowak1:WCa0rdpJPQjqrzQJ@cluster0.g6ebl.mongodb.net/nodeauth?retryWrites=true&w=majority';
 
 mongoose.connect(connectionString, {
 	useUnifiedTopology: true,
