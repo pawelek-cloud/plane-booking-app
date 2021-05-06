@@ -11,7 +11,7 @@
     border: 2px solid darkgray;
     border-radius: 5px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-    height: 130vh
+    height: 150vh
 }
 
 main {
@@ -24,7 +24,7 @@ main {
 /* Article */
 
 article {
-    width: 70%;
+    width: 75%;
     padding: 30px;
     font-weight: bold;
 }
@@ -32,7 +32,7 @@ article {
 
 /* Aside */
 aside {
-    width: 30%;
+    width: 25%;
     padding: 20px;
     /* background-color: lightgrey; */
     border-left: 3px solid darkgrey;

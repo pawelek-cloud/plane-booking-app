@@ -54,8 +54,8 @@ window.addEventListener("load", () => {
                 case 'Londyn':
                     return 'LHR';
                     break;
-                case 'Rio de Janeiro':
-                    return 'GIG';
+                case 'Nowy Jork':
+                    return 'JFK';
                     break;
                 case 'Dubaj':
                     return 'DXB';
@@ -150,8 +150,8 @@ window.addEventListener("load", () => {
                 case 'Londyn':
                     return 'LHR';
                     break;
-                case 'Rio de Janeiro':
-                    return 'GIG';
+                case 'Nowy Jork':
+                    return 'JFK';
                     break;
                 case 'Dubaj':
                     return 'DXB';

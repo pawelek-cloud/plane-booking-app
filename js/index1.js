@@ -71,29 +71,28 @@ function changeDate() {
 
 // weather
 
-const select = document.getElementById("arrivalPlace"),
+
     showOption = document.getElementById("option-selected");
 
-select.addEventListener("change", function () {
+    window.addEventListener("load", function loadWather() {
 
-    const city = this.value;
-
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.value}&cnt=5&appid=ecd6ba7cde8d46460f0cdb7d0b261058`)
-        .then((resp) => resp.json())
-        .then(function (data) {
-            console.log(data)
-
-            let weatherIcon = data.weather[0].icon
-
-            showOption.innerHTML = `temperatura aktualna ${city} ${data.weather[0].main} ${(data.main.temp-273.15).toFixed(1)} &#x2103 temperatura odczuwalna ${(data.main.feels_like-273.15).toFixed(1)} &#x2103`;
-
-            let icons = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
-
-            document.getElementById("weatherIcon").setAttribute("src", icons)
-
-        })
-
-})
+        const city = "Warszawa";
+    
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&cnt=5&appid=ecd6ba7cde8d46460f0cdb7d0b261058`)
+            .then((resp) => resp.json())
+            .then(function (data) {
+                console.log(data)
+    
+                let weatherIcon = data.weather[0].icon
+    
+                showOption.innerHTML = `temperatura aktualna ${city} ${data.weather[0].main} ${(data.main.temp-273.15).toFixed(1)} &#x2103 temperatura odczuwalna ${(data.main.feels_like-273.15).toFixed(1)} &#x2103`;
+    
+                let icons = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+    
+                document.getElementById("weatherIcon").setAttribute("src", icons)
+    
+            })
+    })
 
 /* disable arrivalDate option if oneway chosen */
 
@@ -131,24 +130,3 @@ if (oneWaychecked) {
     arrival1.setAttribute("disabled", "");
 }
 
-// weather after reload
-
-window.addEventListener("load", function loadWather() {
-
-    const weatherAfterLoad = document.getElementById("arrivalPlace").value;
-
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${weatherAfterLoad}&cnt=5&appid=ecd6ba7cde8d46460f0cdb7d0b261058`)
-        .then((resp) => resp.json())
-        .then(function (data) {
-            console.log(data)
-
-            let weatherIcon = data.weather[0].icon
-
-            showOption.innerHTML = `temperatura aktualna ${weatherAfterLoad} ${data.weather[0].main} ${(data.main.temp-273.15).toFixed(1)} &#x2103 temperatura odczuwalna ${(data.main.feels_like-273.15).toFixed(1)} &#x2103`;
-
-            let icons = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
-
-            document.getElementById("weatherIcon").setAttribute("src", icons)
-
-        })
-})

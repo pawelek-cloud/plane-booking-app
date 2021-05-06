@@ -46,7 +46,7 @@ const seatArrivalChoice = document.getElementById('seatNumberArrival');
 // painting seat
 // first class
 let rect1 = document.getElementsByClassName("Rectangle-1-Copy-2");
-if (businessClassPrice === "true") {
+// if (businessClassPrice === "true") {
 
     for (let i = 0; i < rect1.length; i++) {
 
@@ -58,20 +58,20 @@ if (businessClassPrice === "true") {
                 length = length - 1;
                 seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
-            if (length <= passenger) {
+            // if (length <= passenger) {
                 if (target.classList[1] != "highlight") {
                     seatDepartureChoice.innerHTML += target.id + ' ';
                 }
                 target.classList.toggle("highlight")
-            }
+            // }
         })
     }
-}
+// }
 // premium class
 
 let rect2 = document.getElementsByClassName("bg");
 
-if (premiumClassPrice === "true") {
+// if (premiumClassPrice === "true") {
 
     for (let i = 0; i < rect2.length; i++) {
 
@@ -84,23 +84,23 @@ if (premiumClassPrice === "true") {
                 seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
 
-            if (length <= passenger) {
+            // if (length <= passenger) {
 
                 if (target.classList[1] != "highlight") {
                     seatDepartureChoice.innerHTML += target.id + ' ';
                 }
                 target.classList.toggle("highlight");
-            }
+            // }
         })
     }
-}
+// }
 let rect3 = document.getElementsByClassName("bg-copy");
-if (economyClassPrice === "true") {
+// if (economyClassPrice === "true") {
     // economy class
 
     for (let i = 0; i < rect3.length; i++) {
 
-        rect3[i].addEventListener("click", function (event) {
+        rect3[i].addEventListener("mouseover", function (event) {
             console.log(i)
             let target = event.target;
             let length = (document.getElementsByClassName("highlight").length) + 1;
@@ -108,16 +108,16 @@ if (economyClassPrice === "true") {
                 length = length - 1;
                 seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
-            if (length <= passenger) {
+            // if (length <= passenger) {
                 if (target.classList[1] != "highlight") {
                     seatDepartureChoice.innerHTML += target.id + ' ';
                 }
                 target.classList.toggle("highlight")
-            }
+            // }
         })
 
     }
-}
+// }
 // return flight
 // first class
 let rect4 = document.getElementsByClassName("Rectangle-1-Copy-2-return");
@@ -135,14 +135,14 @@ if (businessClassPriceReturn === "true") {
                 length = length - 1;
                 seatArrivalChoice.innerHTML = seatArrivalChoice.innerHTML.replace(target.id, '');
             }
-            if (length <= passenger) {
+            // if (length <= passenger) {
                 if (target.classList[1] != "highlight1") {
                     seatArrivalChoice.innerHTML += target.id + ' ';
                 }
 
                 target.classList.toggle("highlight1")
 
-            }
+            // }
         })
     }
 }
@@ -161,13 +161,13 @@ if (premiumClassPriceReturn === "true") {
                 length = length - 1;
                 seatArrivalChoice.innerHTML = seatArrivalChoice.innerHTML.replace(target.id, '');
             }
-            if (length <= passenger) {
+            // if (length <= passenger) {
                 if (target.classList[1] != "highlight1") {
                     seatArrivalChoice.innerHTML += target.id + ' ';
                 }
                 target.classList.toggle("highlight1")
 
-            }
+            // }
         })
     }
 }
@@ -289,7 +289,7 @@ const change = document.getElementById('currencies');
 const insertCurrencyValue = document.getElementById('cart-total-price').innerHTML;
 const Pln = parseFloat(insertCurrencyValue.replace(/[^\d\.]*/g, ''));
 
-change.addEventListener("change", function loadWather() {
+change.addEventListener("change", function loadCurrency() {
 
     let currency = this.value;
     if (currency === 'EUR' || currency === "USD") {
@@ -310,4 +310,43 @@ change.addEventListener("change", function loadWather() {
         }
 
     }
+})
+// weather api
+
+window.addEventListener("load", function loadWather() {
+    function changeCityNameToAirportName(city) {
+        switch (city) {
+            case 'Londyn':
+                return 'London';
+                break;
+            case 'Nowy Jork':
+                return 'Nowy Jork';
+                break;
+            case 'Dubaj':
+                return 'Dubaj';
+                break;
+            default:
+                console.log('Not correct value')
+
+        }
+    }
+
+    transformedCityName = changeCityNameToAirportName(arrivalPlace)
+
+    const weatherAfterLoad = transformedCityName;
+    showOption = document.getElementById("option-selected");
+
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${weatherAfterLoad}&cnt=5&appid=ecd6ba7cde8d46460f0cdb7d0b261058`)
+        .then((resp) => resp.json())
+        .then(function (data) {
+            console.log(data)
+            let weatherIcon = data.weather[0].icon
+
+            showOption.innerHTML = `temperatura aktualna ${weatherAfterLoad} ${data.weather[0].main} ${(data.main.temp-273.15).toFixed(1)} &#x2103 temperatura odczuwalna ${(data.main.feels_like-273.15).toFixed(1)} &#x2103`;
+
+            let icons = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+
+            document.getElementById("weatherIcon").setAttribute("src", icons)
+
+        })
 })

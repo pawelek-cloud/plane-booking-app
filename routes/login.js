@@ -177,12 +177,12 @@ router.get('/home', function (req, res, next) {
 			title: 'Wybierz miejsce'
 		});
 	}
-	if (req.session.cust_log == "true" && arrivalPlace === "Dubaj") {
+	if (req.session.cust_log == "true" && arrivalPlace === "Dubaj" && oneOrTwoWay != "oneWay") {
 		res.render('middleDistancePlane', {
 			title: 'Wybierz miejsce'
 		});
 	}
-	if (req.session.cust_log == "true" && arrivalPlace === "Rio de Janeiro") {
+	if (req.session.cust_log == "true" && arrivalPlace === "Nowy Jork" && oneOrTwoWay != "oneWay") {
 		res.render('longDistancePlane', {
 			title: 'Wybierz miejsce'
 		});
@@ -192,8 +192,18 @@ router.get('/home', function (req, res, next) {
 			title: 'Wybierz miejsce'
 		});
 	}
+	if (req.session.cust_log == "true" && arrivalPlace === "Dubaj" && oneOrTwoWay === "oneWay") {
+		res.render('middleDistancePlaneOneWay', {
+			title: 'Wybierz miejsce'
+		});
+	}
+	if (req.session.cust_log == "true" && arrivalPlace === "Nowy Jork" && oneOrTwoWay === "oneWay") {
+		res.render('longDistancePlaneOneWay', {
+			title: 'Wybierz miejsce'
+		});
+	}
 	if (req.session.cust_log != "true") {
-		res.render('shortDistancePlane', {
+		res.render('middleDistancePlane', {
 			title: "Próbka"
 		});
 	}
