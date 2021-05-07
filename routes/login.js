@@ -17,7 +17,12 @@ mongoose.connect(connectionString, {
 
 const user = require('../models/user');
 const seatShortDistance = require('../models/seatSchemaShortDistance')
-const seatReturnShortDistance = require("../models/seatSchemaReturnShortDistance")
+const seatReturnShortDistance = require("../models/seatSchemaReturnShortDistance");
+const seatMiddleDistance = require('../models/seatSchemaMiddleDistance')
+const seatReturnMiddleDistance = require("../models/seatSchemaReturnMiddleDistance");
+const seatLongDistance = require('../models/seatSchemaLongDistance')
+const seatReturnLongDistance = require("../models/seatSchemaReturnLongDistance");
+
 const bcrypt = require('bcryptjs');
 const saltRound = 10;
 let arrivalPlace;
@@ -203,7 +208,7 @@ router.get('/home', function (req, res, next) {
 		});
 	}
 	if (req.session.cust_log != "true") {
-		res.render('middleDistancePlane', {
+		res.render('longDistancePlane', {
 			title: "Próbka"
 		});
 	}
@@ -214,7 +219,9 @@ router.put('/home', (req, res) => {
 
 	console.log(req.body)
 
-	if (req.body.class[1] == "highlight") {
+	// shortDistance
+
+	if (req.body.class[1] == "highlight"&& arrivalPlace === "Londyn") {
 		seatShortDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
@@ -232,7 +239,7 @@ router.put('/home', (req, res) => {
 
 	// return flights
 
-	if (req.body.class[1] == "highlight1") {
+	if (req.body.class[1] == "highlight1"&& arrivalPlace === "Londyn") {
 		seatReturnShortDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
@@ -240,6 +247,74 @@ router.put('/home', (req, res) => {
 			})
 			.then(() => {
 				seatReturnShortDistance.find({
+						_id: req.body.id
+					})
+					.then(room => {
+						res.send(room);
+					});
+			});
+	}
+	// middle distance
+	if (req.body.class[1] == "highlight"&& arrivalPlace === "Dubaj") {
+		seatMiddleDistance.findByIdAndUpdate({
+				_id: req.body.id
+			}, {
+				available: false
+			})
+			.then(() => {
+				seatMiddleDistance.find({
+						_id: req.body.id
+					})
+					.then(room => {
+						res.send(room);
+					});
+			});
+	}
+
+	// return flights
+
+	if (req.body.class[1] == "highlight1"&& arrivalPlace === "Dubaj") {
+		seatReturnMiddleDistance.findByIdAndUpdate({
+				_id: req.body.id
+			}, {
+				available: false
+			})
+			.then(() => {
+				seatReturnMiddleDistance.find({
+						_id: req.body.id
+					})
+					.then(room => {
+						res.send(room);
+					});
+			});
+	}
+	// long distance
+	if (req.body.class[1] == "highlight"&& arrivalPlace === "Nowy Jork") {
+		seatLongDistance.findByIdAndUpdate({
+				_id: req.body.id
+			}, {
+				available: false
+			})
+			.then(() => {
+				seatLongDistance.find({
+						_id: req.body.id
+					})
+					.then(room => {
+						res.send(room);
+					});
+			});
+	}
+
+	// return flights
+
+	if (req.body.class[1] == "highlight1"&& arrivalPlace === "Nowy Jork") {
+		seatReturnLongDistance.findByIdAndUpdate({
+				_id: req.body.id
+			}, {
+				available: false
+			})
+			.then(() => {
+				seatReturnLongDistance.find({
 						_id: req.body.id
 					})
 					.then(room => {
