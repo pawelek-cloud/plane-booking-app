@@ -46,11 +46,11 @@ const seatArrivalChoice = document.getElementById('seatNumberArrival');
 // painting seat
 // first class
 let rect1 = document.getElementsByClassName("Rectangle-1-Copy-2");
-// if (businessClassPrice === "true") {
+if (businessClassPrice === "true") {
 
     for (let i = 0; i < rect1.length; i++) {
 
-        rect1[i].addEventListener("mouseover", function (event) {
+        rect1[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
             let length = (document.getElementsByClassName("highlight").length) + 1;
@@ -58,24 +58,24 @@ let rect1 = document.getElementsByClassName("Rectangle-1-Copy-2");
                 length = length - 1;
                 seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
-            // if (length <= passenger) {
+            if (length <= passenger) {
                 if (target.classList[1] != "highlight") {
                     seatDepartureChoice.innerHTML += target.id + ' ';
                 }
                 target.classList.toggle("highlight")
-            // }
+            }
         })
-    // }
+    }
 }
 // premium class
 
 let rect2 = document.getElementsByClassName("bg");
 
-// if (premiumClassPrice === "true") {
+if (premiumClassPrice === "true") {
 
     for (let i = 0; i < rect2.length; i++) {
 
-        rect2[i].addEventListener("mouseover", function (event) {
+        rect2[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
             let length = (document.getElementsByClassName("highlight").length) + 1;
@@ -84,23 +84,23 @@ let rect2 = document.getElementsByClassName("bg");
                 seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
 
-            // if (length <= passenger) {
+            if (length <= passenger) {
 
                 if (target.classList[1] != "highlight") {
                     seatDepartureChoice.innerHTML += target.id + ' ';
                 }
                 target.classList.toggle("highlight");
-            // }
+            }
         })
     }
-// }
+}
 let rect3 = document.getElementsByClassName("bg-copy");
-// if (economyClassPrice === "true") {
+if (economyClassPrice === "true") {
     // economy class
 
     for (let i = 0; i < rect3.length; i++) {
 
-        rect3[i].addEventListener("mouseover", function (event) {
+        rect3[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
             let length = (document.getElementsByClassName("highlight").length) + 1;
@@ -108,16 +108,16 @@ let rect3 = document.getElementsByClassName("bg-copy");
                 length = length - 1;
                 seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
-            // if (length <= passenger) {
+            if (length <= passenger) {
                 if (target.classList[1] != "highlight") {
                     seatDepartureChoice.innerHTML += target.id + ' ';
                 }
                 target.classList.toggle("highlight")
-            // }
+            }
         })
 
     }
-// }
+}
 // return flight
 // first class
 let rect4 = document.getElementsByClassName("Rectangle-1-Copy-2-return");

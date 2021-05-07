@@ -222,6 +222,7 @@ router.put('/home', (req, res) => {
 	// shortDistance
 
 	if (req.body.class[1] == "highlight"&& arrivalPlace === "Londyn") {
+		console.log('Londyn')
 		seatShortDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
@@ -240,6 +241,7 @@ router.put('/home', (req, res) => {
 	// return flights
 
 	if (req.body.class[1] == "highlight1"&& arrivalPlace === "Londyn") {
+		console.log('Londyn powrót')
 		seatReturnShortDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
@@ -256,6 +258,7 @@ router.put('/home', (req, res) => {
 	}
 	// middle distance
 	if (req.body.class[1] == "highlight"&& arrivalPlace === "Dubaj") {
+		console.log('Dubaj')
 		seatMiddleDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
@@ -274,6 +277,7 @@ router.put('/home', (req, res) => {
 	// return flights
 
 	if (req.body.class[1] == "highlight1"&& arrivalPlace === "Dubaj") {
+		console.log('Dubaj powrót')
 		seatReturnMiddleDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
@@ -290,6 +294,7 @@ router.put('/home', (req, res) => {
 	}
 	// long distance
 	if (req.body.class[1] == "highlight"&& arrivalPlace === "Nowy Jork") {
+		console.log('Nowy Jork')
 		seatLongDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {
@@ -308,6 +313,7 @@ router.put('/home', (req, res) => {
 	// return flights
 
 	if (req.body.class[1] == "highlight1"&& arrivalPlace === "Nowy Jork") {
+		console.log('Nowy Jork powrót')
 		seatReturnLongDistance.findByIdAndUpdate({
 				_id: req.body.id
 			}, {

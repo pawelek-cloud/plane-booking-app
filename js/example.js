@@ -1,17 +1,17 @@
 // use nodeauth; 
 
-// let  seatschemareturnmiddledistances = []; 
+// let  seatschemalongdistances = []; 
 
 // let chars = ["A","B","C","D","E","F"]; 
 
-// for(var i = 15 ;i < 29 ;i++){ 
+// for(var i = 6 ;i < 35 ;i++){ 
 
 //   for(var j = 0 ;j < 6 ;j++){ 
 
-//     seatschemareturnmiddledistances .push({_id:(i+chars[j]),available:true}); 
+//     seatschemalongdistances .push({_id:(i+chars[j]),available:true}); 
 //    }
 // } 
-// db.seatschemareturnmiddledistances .insert(seatschemareturnmiddledistances) 
+// db.seatschemalongdistances .insert(seatschemalongdistances) 
 
 // mongo "mongodb+srv://cluster0.g6ebl.mongodb.net/nodeauth" --username pawelnowak1
 
