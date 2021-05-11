@@ -208,9 +208,7 @@ router.get('/home', function (req, res, next) {
 		});
 	}
 	if (req.session.cust_log != "true") {
-		res.render('longDistancePlane', {
-			title: "Próbka"
-		});
+		res.render('index');
 	}
 });
 

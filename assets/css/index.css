@@ -1,65 +1,121 @@
-*,
-:after,
-:before {
-    box-sizing: border-box;
+body {
+    background-image: linear-gradient(rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.1)), url(./../img/background-index.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
 }
 
-body {
-    padding: 0;
-    margin: 0;
-}
+/* container */
 
 .container {
     display: grid;
     grid-template-rows: 12vh 76vh 12vh;
 }
 
-.header {
+/* header */
+
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.header ul {
+header ul {
     list-style-type: none;
     display: flex;
     justify-content: space-around;
     width: 50vw;
 }
 
-.logo img {
-    width: 30%;
-    height: auto;
+/* form */
+
+.booking-form-box {
+    max-width: 350px;
+    border: 1px solid #ced4da;
+    margin: 10% auto 0;
+
 }
 
-.footer {
+.radio-btn {
+    margin: 20px 50px;
+}
+
+.radio-btn .btn {
+    height: 15px;
+    width: 15px;
+    top: 2px;
+    left: -1px;
+    position: relative;
+}
+
+.radio-btn span {
+    color: #fff;
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.booking-form {
+    padding: 0 20px 20px;
+}
+
+.booking-form label {
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.input-grp {
+    width: 151px;
+    display: inline-block;
+}
+
+.form-control {
+    font-size: 12px !important;
+    border-radius: 0 !important;
+    color: #fff !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.select-date::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.custom-select {
+    color: #fff;
+    font-size: 12px;
+    border: 1px solid #ced4da !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: transparent !important; 
+} 
+.custom-select option{
+    color: #333;
+    
+} 
+.flight{
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 156px;
+    padding: 9px 0 !important;
+    font-size: 12px !important;
+    border: 1px solid #ced4da !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+} 
+.flight:hover{
+    background: #fff !important;
+    color: #000 !important;
+    transition: 0.5s;
+}   
+
+/* footer */
+footer {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-
-
-header {
-    background-color: lightcoral;
-}
-
-main {
-    background-color: lightblue;
-}
-
-footer {
-    background-color: lightgreen;
-}
-
-/* disable arrivalDate option if oneway chosen */
-
-.disable:disabled {
-    background: #dddddd;
-}
-
-
-/* display div inline */
-.displayInline {
-    display: inline-block;
 }

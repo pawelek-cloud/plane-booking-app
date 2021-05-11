@@ -224,9 +224,9 @@ continueButton.addEventListener('click', function () {
         if (economyClassPriceReturn === "true") {
             iterate(rect6);
         }
-        // setInterval(function () {
-        //     window.location.replace("/payment")
-        // }, 7000)
+        setInterval(function () {
+            window.location.replace("/payment")
+        }, 7000)
 
 
         function iterate(array) {

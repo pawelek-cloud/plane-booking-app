@@ -7,24 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wybór lotów</title>
 
-    <link rel="stylesheet" href="./../assets/css/index.css">
-    <link rel="stylesheet" href="./../assets/css/validation.css">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../assets/css/index.css">
 </head>
 
 <body>
-
     <div class="container">
         <header class="header">
-            <div class="logo">
-                <img src="./assets/img/17741272.jpg" alt="airline logo">
+            <!-- <div class="logo">
+            <img src="./assets/img/17741272.jpg" alt="airline logo">
 
-            </div>
+        </div>
 
-            <div class="logo">
-                <img src="./assets/img/pexels-pixabay-53594.jpg" alt="blue sky">
+        <div class="logo">
+            <img src="./assets/img/pexels-pixabay-53594.jpg" alt="blue sky">
 
-            </div>
+        </div> -->
+            <p id="option-selected"></p>
+            <img id="weatherIcon" src>
 
             <nav>
                 <ul>
@@ -34,91 +35,95 @@
                 </ul>
             </nav>
         </header>
+
         <main>
-            <form id="myForm" action="/registration" method="GET">
+            <form action="/registration" method="GET">
+                <div class="booking-form-box">
+                    <div class="radio-btn">
+                        <input type="radio" class="btn" id="twoWays" name="twoOrOne" value="twoWays" checked><span>Lot w
+                            dwie
+                            strony</span>
+                        <input type="radio" class="btn" id="oneWay" name="twoOrOne" value="oneWay"><span>Lot w jedną
+                            stronę</span>
+                    </div>
 
-                <div class="displayInline">
-                    <!-- departure place -->
-                    <select name="departurePlace" id="departurePlace">
-                        <option value="" disable selected>Wybierz miasto wylotu</option>
-                        <option value="Warszawa">Warszawa</option>
+                    <div class="booking-form">
+                        <!-- Miasto wylotu -->
+                        <label>Lot z</label>
+                        <select required name="departurePlace" id="departurePlace"
+                            class="form-control custom-select option">
+                            <option value="" disable selected>Wybierz miasto wylotu</option>
+                            <option value="Warszawa">Warszawa</option>
+                        </select>
+                        <!-- Miasto przylotu -->
+                        <label>Lot do</label>
+                        <select required name="arrivalPlace" id="arrivalPlace"
+                            class="form-control custom-select option">
+                            <option value="" disable selected>Wybierz miasto przylotu</option>
+                            <option value="Londyn">Londyn</option>
+                            <option value="Nowy Jork">Nowy Jork</option>
+                            <option value="Dubaj">Dubaj</option>
+                        </select>
 
-                    </select>
-                    <p id="errorMessage"></p>
+                        <!-- data odlotu -->
+
+                        <div class="input-grp"><label>Odlot</label>
+
+                            <input type="date" name="departureDate" id="departureDate" min
+                                class="form-control select-date">
+
+                        </div>
+
+                        <!-- data przylotu -->
+
+                        <div class="input-grp"><label>Przylot</label>
+
+                            <input type="date" name="arrivalDate" id="arrivalDate" min class="form-control select-date">
+
+                        </div>
+
+                        <!-- Liczba pasażerów -->
+
+                        <div class=" input-grp"><label>Liczba pasażerów</label>
+                            <select name="passengers" id="passengers" class="form-control custom-select option">
+                                <option value="1 pasażer">1 pasażer</option>
+                                <option value="2 pasażerów">2 pasażerów</option>
+                                <option value="3 pasażerów">3 pasażerów</option>
+                                <option value="4 pasażerów">4 pasażerów</option>
+                                <option value="5 pasażerów">5 pasażerów</option>
+                                <option value="6 pasażerów">6 pasażerów</option>
+                                <option value="7 pasażerów">7 pasażerów</option>
+                                <option value="8 pasażerów">8 pasażerów</option>
+                                <option value="9 pasażerów">9 pasażerów</option>
+                            </select></div>
+
+                        <!-- Klasa podróży     -->
+
+                        <div class="input-grp"><label>Klasa podróży</label>
+                            <select name="" id="" class="custom-select">
+                                <option value="1">Klasa ekonomiczna</option>
+                                <option value="2">Klasa premium</option>
+                                <option value="3">Klasa biznes</option>
+                            </select>
+                        </div>
+
+                        <!-- submit -->
+
+                        <div class="input-grp"><button type="submit" class="btn btn-primary flight">Wybierz lot</button>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- arrival place -->
-                <div class="displayInline">
-                    <select name="arrivalPlace" id="arrivalPlace">
-                        <option value="" disable selected>Wybierz miasto przylotu</option>
-                        <option value="Londyn">Londyn</option>
-                        <option value="Nowy Jork">Nowy Jork</option>
-                        <option value="Dubaj">Dubaj</option>
-
-                    </select>
-
-                    <p id="errorMessage1"></p>
-
-                </div>
-
-                <!-- arrival place -->
-                <div class="displayInline">
-                    <select name="passengers" id="passengers">
-                        <option value="1 pasażer">1 pasażer</option>
-                        <option value="2 pasażerów">2 pasażerów</option>
-                        <option value="3 pasażerów">3 pasażerów</option>
-                        <option value="4 pasażerów">4 pasażerów</option>
-                        <option value="5 pasażerów">5 pasażerów</option>
-                        <option value="6 pasażerów">6 pasażerów</option>
-                        <option value="7 pasażerów">7 pasażerów</option>
-                        <option value="8 pasażerów">8 pasażerów</option>
-                        <option value="9 pasażerów">9 pasażerów</option>
-                    </select>
-
-                </div>
-
-
-
-                <!-- radiobuttons -->
-                <br>
-                <div id="choice">
-                    <input type="radio" id="twoWays" name="twoOrOne" value="twoWays" checked>
-                    <label for="twoWays">Lot w dwie strony</label>
-                    <input type="radio" id="oneWay" name="twoOrOne" value="oneWay">
-                    <label for="oneWay">Lot w jedną stronę</label><br>
-                </div>
-
-                <!-- departureDate -->
-                <label for="departureDate">Wybierz datę wylotu
-                </label>
-                <input type="date" name="departureDate" id="departureDate" min>
-
-                <!-- arrivalDate -->
-                <label for="arrivalDate">Wybierz datę powrotu</label>
-                <input type="date" name="arrivalDate" id="arrivalDate" min>
-
-                <!-- submit button -->
-                <input id="submitButton" type="button" value="Wyszukaj lot">
-
-                
-
             </form>
 
-            <p id="option-selected"></p>
-            <img id="weatherIcon" src>
-
-
-
         </main>
-        <footer class="footer">
+        <footer>
             <div>Strona rezerwacyjna na potrzeby studiów podyplomowych</div>
             <div>&copy; Paweł Nowak</div>
         </footer>
+
     </div>
 
-
-    <script src="./../js/index1.js"></script>
-    <script src="./../js/validation.js"></script>
+    <script src="./../js/index.js"></script>
 </body>
 
 </html>
