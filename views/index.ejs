@@ -13,30 +13,40 @@
 </head>
 
 <body>
-    <div class="container">
-        <header class="header">
-            <!-- <div class="logo">
-            <img src="./assets/img/17741272.jpg" alt="airline logo">
+    <header>
+        <!-- navbar -->
 
+        <div class="navbar1">
+
+            <div class="container flex">
+                <img src="./../assets/img/logo.jpg"></img>
+                <nav>
+                    <ul>
+                        <li><a href="/">Strona główna</a></li>
+                        <li><a href="">Samochód</a></li>
+                        <li><a href="">Hotel</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
 
-        <div class="logo">
-            <img src="./assets/img/pexels-pixabay-53594.jpg" alt="blue sky">
+    </header>
 
-        </div> -->
-            <p id="option-selected"></p>
-            <img id="weatherIcon" src>
+    <main>
+        <section class="showcase grid">
+            <div class="box grid-horizontal">
+                <div class="location">
+                    <div class="city" id="city"></div>
+                    <div class="date" id="date"></div>
+                </div>
+                <div class="current">
+                    <div class="temp" id="temp"><span></span></div>
+                    <div class="icon" id="icon"></div>
+                    <div class="weather" id="weather"></div>
+                </div>
 
-            <nav>
-                <ul>
-                    <li>Informacje</li>
-                    <li>Zaloguj się</li>
-                    <li>Język</li>
-                </ul>
-            </nav>
-        </header>
+            </div>
 
-        <main>
             <form action="/registration" method="GET">
                 <div class="booking-form-box">
                     <div class="radio-btn">
@@ -109,21 +119,41 @@
 
                         <!-- submit -->
 
-                        <div class="input-grp"><button type="submit" class="btn btn-primary flight">Wybierz lot</button>
+                        <div class="input-grp"><button type="submit" class="btn btn-primary flight">Wybierz
+                                lot</button>
                         </div>
                     </div>
                 </div>
             </form>
+        </section>
 
-        </main>
-        <footer>
-            <div>Strona rezerwacyjna na potrzeby studiów podyplomowych</div>
-            <div>&copy; Paweł Nowak</div>
-        </footer>
+    </main>
+    <footer>
+        <div class="flex-column">
+            <div class="flex-column">
+                <p>Strona rezerwacyjna na potrzeby studiów podyplomowych 2021 </p>
+                <div>&copy; Paweł Nowak</div>
+            </div>
+            <div class="flex">
+                <p class="flex">Social media:</p>
+                <a href="https://www.instagram.com" target="_blank">
+                    <i class="fab fa-instagram fa-2x"></i>
+                </a>
+                <a href="https://www.youtube.com" target="_blank">
+                    <i class="fab fa-youtube-square fa-2x"></i>
+                </a>
+                <a href="https://www.amazon.com">
+                    <i class="fab fa-amazon fa-2x"></i>
+                </a>
+                <hr>
+                <strong>Telefon: 607831311</strong>
+            </div>
+        </div>
 
-    </div>
+    </footer>
 
     <script src="./../js/index.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
 </body>
 
 </html>

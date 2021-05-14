@@ -14,19 +14,33 @@ document.getElementById("departureDate").setAttribute("min", currentDateString)
 
 document.getElementById("departureDate").setAttribute("value", currentDateString)
 
+let days = ["niedziela", "poniedziałek", "wtorek", "sroda", "czwartek", "piątek", "sobota"];
+let month = ["stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca", "lipca", "sierpnia", "wrzesnia", "października", "listopada", "grudnia"];
+
+function displayMinutes() {
+  if (currentDate.getMinutes() < 10) {
+    return "0" + currentDate.getMinutes();
+  } else {
+    return currentDate.getMinutes()
+  }
+}
+let today = days[currentDate.getDay()] + " " + currentDate.getDate() + " " + month[currentDate.getMonth()] + " " + currentDate.getFullYear() + " " + currentDate.getHours() + ":" + displayMinutes();
+document.getElementById("date").innerHTML = today;
+
+
 // Next current date
 
 let date = new Date(),
-    d = date.getDate(),
-    m = date.getMonth(),
-    y = date.getFullYear();
+  d = date.getDate(),
+  m = date.getMonth(),
+  y = date.getFullYear();
 
 
 let nextDate = new Date(y, m, d + 1)
 
 d = nextDate.getDate(),
-    m = nextDate.getMonth() + 1,
-    y = nextDate.getFullYear();
+  m = nextDate.getMonth() + 1,
+  y = nextDate.getFullYear();
 
 d < 10 ? d = "0" + d : null;
 m < 10 ? m = "0" + m : null;
@@ -46,25 +60,25 @@ document.getElementById("departureDate").addEventListener("change", changeDate)
 
 function changeDate() {
 
-    function incDay(date, n) {
-        var fudate = new Date(new Date(date).setDate(new Date(date).getDate() + n));
+  function incDay(date, n) {
+    var fudate = new Date(new Date(date).setDate(new Date(date).getDate() + n));
 
-        let m = fudate.getMonth() + 1;
+    let m = fudate.getMonth() + 1;
 
-        m < 10 ? m = "0" + m : null;
+    m < 10 ? m = "0" + m : null;
 
-        fudate = fudate.getFullYear() + '-' + m + '-' + fudate.toDateString().substring(8, 10);
-        return fudate;
-    }
+    fudate = fudate.getFullYear() + '-' + m + '-' + fudate.toDateString().substring(8, 10);
+    return fudate;
+  }
 
-    let departureDate = new Date(document.getElementById('departureDate').value);
+  let departureDate = new Date(document.getElementById('departureDate').value);
 
-    var tomorrow = incDay(departureDate, 1);
+  var tomorrow = incDay(departureDate, 1);
 
-    document.getElementById("arrivalDate").value = tomorrow;
+  document.getElementById("arrivalDate").value = tomorrow;
 
 
-    document.getElementById("arrivalDate").setAttribute("min", tomorrow)
+  document.getElementById("arrivalDate").setAttribute("min", tomorrow)
 
 }
 
@@ -72,27 +86,36 @@ function changeDate() {
 // weather
 
 
-    showOption = document.getElementById("option-selected");
+showOption = document.getElementById("option-selected");
 
-    window.addEventListener("load", function loadWather() {
+window.addEventListener("load", function loadWather() {
 
-        const city = "Warszawa";
-    
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&cnt=5&appid=ecd6ba7cde8d46460f0cdb7d0b261058`)
-            .then((resp) => resp.json())
-            .then(function (data) {
-                console.log(data)
-    
-                let weatherIcon = data.weather[0].icon
-    
-                showOption.innerHTML = `temperatura aktualna ${city} ${data.weather[0].main} ${(data.main.temp-273.15).toFixed(1)} &#x2103 temperatura odczuwalna ${(data.main.feels_like-273.15).toFixed(1)} &#x2103`;
-    
-                let icons = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
-    
-                document.getElementById("weatherIcon").setAttribute("src", icons)
-    
-            })
-    })
+  const city = "Warszawa";
+
+  fetch(
+      `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ecd6ba7cde8d46460f0cdb7d0b261058&lang=en`
+    )
+    .then((resp) => resp.json())
+    .then((data) => {
+      console.log(data)
+      let image = document.createElement("img");
+      image.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+      document.getElementById("icon").appendChild(image);
+
+      document.getElementById('city').innerHTML = city;
+
+      document.getElementById(
+        `weather`
+      ).innerHTML = `${data.weather[0].description}`;
+
+      document.getElementById(
+        `temp`
+      ).innerHTML = `${(
+            data.main.temp - 273.15
+          ).toFixed(1)} &#x2103`;
+
+    });
+})
 
 /* disable arrivalDate option if oneway chosen */
 
@@ -104,15 +127,15 @@ let arrival1 = document.getElementById("arrivalDate")
 
 oneWay.addEventListener("change", function twoWaysDisabled() {
 
-    arrival1.setAttribute("disabled", "")
-    arrival1.setAttribute("checked", "")
+  arrival1.setAttribute("disabled", "")
+  arrival1.setAttribute("checked", "")
 
 })
 
 twoWays.addEventListener("change", function oneWay() {
 
-    arrival1.removeAttribute("disabled")
-    arrival1.removeAttribute("checked")
+  arrival1.removeAttribute("disabled")
+  arrival1.removeAttribute("checked")
 
 })
 
@@ -120,13 +143,12 @@ twoWays.addEventListener("change", function oneWay() {
 
 window.addEventListener("load", function disabledOnLoad() {
 
-    const oneWaycheckedLoad = document.getElementById("oneWay").checked;
-    if (oneWaycheckedLoad) {
-        arrival1.setAttribute("disabled", "");
-    }
+  const oneWaycheckedLoad = document.getElementById("oneWay").checked;
+  if (oneWaycheckedLoad) {
+    arrival1.setAttribute("disabled", "");
+  }
 })
 const oneWaychecked = document.getElementById("oneWay").checked;
 if (oneWaychecked) {
-    arrival1.setAttribute("disabled", "");
+  arrival1.setAttribute("disabled", "");
 }
-
