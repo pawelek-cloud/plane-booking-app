@@ -35,15 +35,17 @@ h2 {
     margin: 10px 0;
 }
 
-p {
-    margin: 10px 0;
+.navbar-light .navbar-nav .nav-link:hover {
+    color: lightblue;
 }
 
-/* header */
+*/
+/* utilities */
 
-.logo {
-    width: 20%;
-    height: 100%;
+.container {
+    max-width: 1000px;
+    padding: 0 40px;
+    height: 100px;
 }
 
 .navbar {
@@ -51,7 +53,15 @@ p {
     font-size: 0.9rem;
     letter-spacing: 0.1rem;
     font-weight: bold;
-    
+}
+
+.logo {
+    height: 7rem;
+    margin-left: 20%;
+}
+
+.navbar-nav li {
+    padding-right: 0.6rem;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -65,22 +75,19 @@ p {
 
 /* utilities */
 
-.container {
-    max-width: 1000px;
-    padding: 0 40px;
-    height: 100px;
-}
-.flex{
+.flex {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: auto;
 }
+
 /* weather app*/
 
 .box {
     font-family: 'montserrat', sans-serif;
     border: 2px solid rgba(255, 255, 255, 0.5);
+    margin-top: 10px;
 }
 
 .grid {
@@ -94,7 +101,7 @@ p {
 .grid-horizontal {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 200px;
+    gap: 100px;
     justify-content: center;
     align-items: center;
 }
@@ -147,7 +154,7 @@ p {
 .booking-form-box {
     max-width: 350px;
     border: 1px solid #ced4da;
-    margin: 10px auto;
+    margin: 5px auto;
 
 }
 
@@ -232,7 +239,7 @@ p {
 /* footer */
 footer {
     /* color:#333; */
-    margin: 3% auto;
+    margin: 10px auto;
     border-top: 3px solid #fff;
     text-align: center;
     padding: 25px 15px;
@@ -252,7 +259,65 @@ footer a {
 /* media query
 tablets and under */
 
-@media (max-width:768px) {}
+@media (max-width:870px) {
+    .grid-horizontal {
+        gap: 10px;
+    }
+
+    img {
+        height: 50px;
+    }
+
+    .location .city {
+        font-size: 0.8em;
+        font-weight: 300;
+        margin-bottom: 0.2em;
+    }
+
+    .location .date {
+        font-size: 0.8em;
+        margin-left: 1em;
+    }
+
+    .current .temp {
+        font-size: 1.2em;
+    }
+
+    .current .temp span {
+        font-weight: 200;
+    }
+
+    .current .weather {
+        font-size: 1em;
+        font-weight: 300;
+    }
+}
 
 /* mobile */
-@media (max-width:500px) {}
+@media (max-width:500px) {
+    .logo {
+        height: 5rem;
+    }
+
+    .grid-horizontal {
+        grid-template-columns: 1fr;
+    }
+
+    .current {
+        display: block;
+        text-align: center;
+    }
+
+    .grid {
+        grid-template-rows: 1fr;
+    }
+
+    body {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.0)), url(./../img/background-index.jpg);
+    }
+    .flight {
+        border: 1px solid #333 !important;
+        color: #333 !important;
+        font-weight: 800 !important;
+    }
+}
