@@ -8,25 +8,32 @@
     <title>Dostępne loty</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./../assets/css/registration.css">
-    <link rel="stylesheet" href="./../assets/css/style.css">
 </head>
 
 <body>
     <div class="container">
         <header>
-            <nav></nav>
-        </header>
+            <section class="brand">
+              <a href="#">
+                <img class="logo" src="./../assets/img/logo.jpg" alt="LOGO" />
+              </a>
+            </section>
+    
+            <nav>
+              <ul>
+                <li><a id="returnButton" href="#">Strona domowa</a></li>
+              </ul>
+            </nav>
+          </header>
         <main>
 
             <article>
 
                 <h2>Dostępne loty dla</h2>
-                <h3 >miejsce odlotu: <span id='departurePlace'></span></h3>
-                <h3 >miejsce przylotu: <span id="arrivalPlace"></span></h3>
-                <h3 >data odlotu: <span id="departureDate"></span></h3>
-                <h3 ><span id="arrivalDate1">data powrotu: </span><span id="arrivalDate"></span></h3>
-               
-
+                <h3 class="font-size">miejsce odlotu: <span id='departurePlace'></span></h3>
+                <h3 class="font-size">miejsce przylotu: <span id="arrivalPlace"></span></h3>
+                <h3 class="font-size">data odlotu: <span id="departureDate"></span></h3>
+                <h3 class="font-size"><span id="arrivalDate1">data powrotu: </span><span id="arrivalDate"></span></h3>
 
                 <h2 id="directFlights">Loty docelowe:</h2>
 
@@ -35,8 +42,6 @@
                 <h2 id="returnFlights">Loty powrotne:</h2>
 
                 <h3 id="return"></h3>
-
-                <input type="button" value="Powrót do menu głównego" id="returnButton">
 
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
@@ -57,20 +62,22 @@
                         <p id="cartDepartureReturnPlace" class="cart-item cart-header cart-column"></p>
                         <p id="cartArrivalReturnPlace" class="cart-item cart-header cart-column"></p>
                     </div>
-                    <div><p id="numberOfPassengers" class="cart-item cart-header cart-column"></p></div>
+                    <div>
+                        <p id="numberOfPassengers" class="cart-item cart-header cart-column"></p>
+                    </div>
                     <div class="cart-items">
                     </div>
                     <div class="cart-total">
                         <strong class="cart-total-title">Do zapłaty</strong>
                         <p id="cart-total-price" class="cart-total-price">PLN 0</p>
                     </div>
-                    <button id="continueButton" class="btn btn-primary btn-sm btn-purchase" type="button">Kontynuuj</button>
+                    <button id="continueButton" class="btn btn-primary btn-sm btn-purchase"
+                        type="button">Kontynuuj</button>
                 </section>
 
             </aside>
 
         </main>
-        <footer></footer>
 
     </div>
     <script src="./../js/registration.js"></script>

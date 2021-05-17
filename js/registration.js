@@ -29,7 +29,7 @@ window.addEventListener("load", () => {
     sessionStorage.setItem('DEPARTUREDATE', departureDate);
     sessionStorage.setItem('ARRIVALDATE', arrivalDate);
 
-    document.getElementById("departurePlace").innerHTML = departurePlace;
+    departurePlace=document.getElementById("departurePlace").innerHTML=departurePlace;
     document.getElementById("arrivalPlace").innerHTML = arrivalPlace;
     document.getElementById("departureDate").innerHTML = departureDate;
 
@@ -99,7 +99,7 @@ window.addEventListener("load", () => {
                     } else {
 
                         for (let i = 0; i < data.Carriers.length; i++) {
-                            document.getElementById("routes").innerHTML += "Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: <span id=routesId>" + data.Dates.OutboundDates[0].PartialDate + "</span>; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" + "<button class='button' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
+                            document.getElementById("routes").innerHTML += "<span class='font-size'> Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: <span id=routesId>" + data.Dates.OutboundDates[0].PartialDate + "</span>; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" + "<button class='button btn btn-primary' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/></span>";
 
 
                         }
@@ -198,8 +198,8 @@ window.addEventListener("load", () => {
                 } else {
 
                     for (let i = 0; i < data.Carriers.length; i++) {
-                        document.getElementById("return").innerHTML += "Cena minimalna biletu z: " + data.Places[0].Name + " do: " + data.Places[1].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + "<span id=returnId>" + data.Dates.OutboundDates[0].PartialDate + "</span>" + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" +
-                            "<button class='button' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/>";
+                        document.getElementById("return").innerHTML += "<span class='font-size'>Cena minimalna biletu z: " + data.Places[0].Name + " do: " + data.Places[1].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + "<span id=returnId>" + data.Dates.OutboundDates[0].PartialDate + "</span>" + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" +
+                            "<button class='button btn btn-primary' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/></span>";
 
 
 
@@ -259,12 +259,6 @@ window.addEventListener("load", () => {
     }
 })
 
-// after reload
-
-// window.addEventListener("beforeunload", function (event) {
-//     event.returnValue = "Are you sure?";
-// });
-
 // return button
 
 document.getElementById("returnButton").addEventListener("click", function goBack() {
@@ -281,38 +275,37 @@ function createClasses() {
     // ECONOMY
 
     let divContainer = document.createElement("div");
-    divContainer.className = "container";
     divContainer.id = "divContainer";
+    divContainer.classList.add("flex");
 
     let divRow = document.createElement("div");
     divRow.className = "row";
     divContainer.appendChild(divRow);
 
     let divCol = document.createElement("div");
-    divCol.className = "col";
+    // divCol.className = "col";
     divRow.appendChild(divCol);
 
     let divCard = document.createElement("div");
-    divCard.className = "card";
     divCard.style.width = "20rem";
     divCol.appendChild(divCard);
 
     let image = document.createElement("img");
-    image.className = "card-img-top";
+    image.className = "card-img-top img-classes";
     image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142788&t=1600695071504');
     divCard.appendChild(image);
 
     let divCardBlock1 = document.createElement("div");
-    divCardBlock1.className = "card-block";
+    // divCardBlock1.className = "card-block";
     divCard.appendChild(divCardBlock1);
 
     let cardTitle = document.createElement("h4");
-    cardTitle.className = "card-title";
+    // cardTitle.className = "card-title";
     cardTitle.innerHTML = 'ECONOMY';
     divCardBlock1.appendChild(cardTitle);
 
     let pPrice = document.createElement("p");
-    pPrice.className = "card-text";
+    // pPrice.className = "card-text";
     pPrice.id = "priceEconomy";
     pPrice.innerHTML = 'Cena: PLN ' + price;
     divCardBlock1.appendChild(pPrice);
@@ -330,28 +323,27 @@ function createClasses() {
     divRow.appendChild(divCol);
 
     divCard = document.createElement("div");
-    divCard.className = "card";
     divCard.style.width = "20rem";
     divCol.appendChild(divCard);
 
     image = document.createElement("img");
-    image.className = "card-img-top";
+    image.className = "card-img-top img-classes";
     image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142802&t=1600695077795');
     divCard.appendChild(image);
 
     let divCardBlock2 = document.createElement("div");
-    divCardBlock2.className = "card-block";
+    // divCardBlock2.className = "card-block";
     divCard.appendChild(divCardBlock2);
 
     cardTitle = document.createElement("h4");
-    cardTitle.className = "card-title";
+    // cardTitle.className = "card-title";
     cardTitle.innerHTML = 'PREMIUM';
     divCardBlock2.appendChild(cardTitle);
 
     let pricePremium = price + 1000;
 
     pPrice = document.createElement("p");
-    pPrice.className = "card-text";
+    // pPrice.className = "card-text";
     pPrice.id = "pricePremium";
     pPrice.innerHTML = 'Cena: PLN ' + pricePremium;
     divCardBlock2.appendChild(pPrice);
@@ -367,30 +359,30 @@ function createClasses() {
     let priceBusiness = pricePremium + 200;
 
     divCol = document.createElement("div");
-    divCol.className = "col";
+    // divCol.className = "col";
     divRow.appendChild(divCol);
 
     divCard = document.createElement("div");
-    divCard.className = "card";
+    // divCard.className = "card";
     divCard.style.width = "20rem";
     divCol.appendChild(divCard);
 
     image = document.createElement("img");
-    image.className = "card-img-top";
+    image.className = "card-img-top img-classes";
     image.setAttribute('src', 'https://book.lot.com/image/journal/article?img_id=142820&t=1600695081474');
     divCard.appendChild(image);
 
     let divCardBlock3 = document.createElement("div");
-    divCardBlock3.className = "card-block";
+    // divCardBlock3.className = "card-block";
     divCard.appendChild(divCardBlock3);
 
     cardTitle = document.createElement("h4");
-    cardTitle.className = "card-title";
+    // cardTitle.className = "card-title";
     cardTitle.innerHTML = 'BUSINESS';
     divCardBlock3.appendChild(cardTitle);
 
     pPrice = document.createElement("p");
-    pPrice.className = "card-text";
+    // pPrice.className = "card-text";
     pPrice.id = "priceBusiness";
     pPrice.innerHTML = 'Cena: PLN ' + priceBusiness;
     divCardBlock3.appendChild(pPrice);

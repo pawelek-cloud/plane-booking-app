@@ -16,7 +16,6 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     max-height: 100%;
-
 }
 
 ul {
@@ -290,6 +289,9 @@ tablets and under */
     .current .weather {
         font-size: 1em;
         font-weight: 300;
+    }
+    .logo{
+        margin: auto;
     }
 }
 
