@@ -21,7 +21,7 @@
     
             <nav>
               <ul>
-                <li><a id="returnButton" href="#">Strona domowa</a></li>
+                <li><a id="returnButton" href="#" class="border font-size">Strona domowa</a></li>
               </ul>
             </nav>
           </header>
@@ -29,23 +29,23 @@
 
             <article>
 
-                <h2>Dostępne loty dla</h2>
+                <h2 class="font-size1">Dostępne loty dla</h2>
                 <h3 class="font-size">miejsce odlotu: <span id='departurePlace'></span></h3>
                 <h3 class="font-size">miejsce przylotu: <span id="arrivalPlace"></span></h3>
                 <h3 class="font-size">data odlotu: <span id="departureDate"></span></h3>
                 <h3 class="font-size"><span id="arrivalDate1">data powrotu: </span><span id="arrivalDate"></span></h3>
 
-                <h2 id="directFlights">Loty docelowe:</h2>
+                <h2 id="directFlights" class="font-size1">Loty docelowe:</h2>
 
                 <h3 id="routes"></h3>
 
-                <h2 id="returnFlights">Loty powrotne:</h2>
+                <h2 id="returnFlights" class="font-size1">Loty powrotne:</h2>
 
                 <h3 id="return"></h3>
 
-                <div class="jumbotron jumbotron-fluid">
+                <div class="jumbotron jumbotron-fluid jumbotron-style img-classes">
                     <div class="container">
-                        <h4 class="display-5" id="endPrice">Cena końcowa: 0,00 PLN </h4>
+                        <h4 class="display-5 font-size1" id="endPrice">Cena końcowa: 0,00 PLN </h4>
                     </div>
                 </div>
             </article>
@@ -53,25 +53,25 @@
                 <section class="content-section sticky-top">
                     <h2 class="section-header"></h2>
                     <div class="cart-row">
-                        <p id="cartDepartureDate" class="cart-item cart-header cart-column"></p>
-                        <p id="cartDeparturePlace" class="cart-item cart-header cart-column"></p>
-                        <p id="cartArrivalPlace" class="cart-item cart-header cart-column"></p>
+                        <p id="cartDepartureDate" class="cart-item cart-header cart-column border color padding"></p>
+                        <p id="cartDeparturePlace" class="cart-item cart-header cart-column border color padding"></p>
+                        <p id="cartArrivalPlace" class="cart-item cart-header cart-column border color padding"></p>
                     </div>
                     <div class="cart-row">
-                        <p id="cartDepartureReturnDate" class="cart-item cart-header cart-column"></p>
-                        <p id="cartDepartureReturnPlace" class="cart-item cart-header cart-column"></p>
-                        <p id="cartArrivalReturnPlace" class="cart-item cart-header cart-column"></p>
+                        <p id="cartDepartureReturnDate" class="cart-item cart-header cart-column border color padding"></p>
+                        <p id="cartDepartureReturnPlace" class="cart-item cart-header cart-column border color padding"></p>
+                        <p id="cartArrivalReturnPlace" class="cart-item cart-header cart-column border color padding"></p>
                     </div>
                     <div>
-                        <p id="numberOfPassengers" class="cart-item cart-header cart-column"></p>
+                        <p id="numberOfPassengers" class="cart-item cart-header cart-column border color padding"></p>
                     </div>
                     <div class="cart-items">
                     </div>
                     <div class="cart-total">
-                        <strong class="cart-total-title">Do zapłaty</strong>
-                        <p id="cart-total-price" class="cart-total-price">PLN 0</p>
+                        <!-- <strong class="cart-total-title font-size color1">Do zapłaty</strong> -->
+                        <p id="cart-total-price" class="cart-total-price border color padding font-size">Do zapłaty: PLN 0</p>
                     </div>
-                    <button id="continueButton" class="btn btn-primary btn-sm btn-purchase"
+                    <button id="continueButton" class="btn btn-primary btn-sm btn-purchase border"
                         type="button">Kontynuuj</button>
                 </section>
 

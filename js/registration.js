@@ -99,7 +99,7 @@ window.addEventListener("load", () => {
                     } else {
 
                         for (let i = 0; i < data.Carriers.length; i++) {
-                            document.getElementById("routes").innerHTML += "<span class='font-size'> Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: <span id=routesId>" + data.Dates.OutboundDates[0].PartialDate + "</span>; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" + "<button class='button btn btn-primary' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/></span>";
+                            document.getElementById("routes").innerHTML += "<span class='font-size'> Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: <span id=routesId>" + data.Dates.OutboundDates[0].PartialDate + "</span>; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" + "<button class='button btn btn-primary border1' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/></span>";
 
 
                         }
@@ -199,7 +199,7 @@ window.addEventListener("load", () => {
 
                     for (let i = 0; i < data.Carriers.length; i++) {
                         document.getElementById("return").innerHTML += "<span class='font-size'>Cena minimalna biletu z: " + data.Places[0].Name + " do: " + data.Places[1].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + "<span id=returnId>" + data.Dates.OutboundDates[0].PartialDate + "</span>" + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" +
-                            "<button class='button btn btn-primary' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/></span>";
+                            "<button class='button btn btn-primary border1' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/></span>";
 
 
 
@@ -287,7 +287,8 @@ function createClasses() {
     divRow.appendChild(divCol);
 
     let divCard = document.createElement("div");
-    divCard.style.width = "20rem";
+    // divCard.style.width = "20rem";
+    divCard.classList.add("cartWidth");
     divCol.appendChild(divCard);
 
     let image = document.createElement("img");
@@ -301,7 +302,8 @@ function createClasses() {
 
     let cardTitle = document.createElement("h4");
     // cardTitle.className = "card-title";
-    cardTitle.innerHTML = 'ECONOMY';
+    cardTitle.innerHTML = 'KLASA EKONOMICZNA';
+    cardTitle.classList.add("font-size");
     divCardBlock1.appendChild(cardTitle);
 
     let pPrice = document.createElement("p");
@@ -314,6 +316,7 @@ function createClasses() {
     a.id = 'economyButton';
     a.className = "btn btn-primary";
     a.innerHTML = "Wybierz bagaz";
+    a.classList.add("border1");
     divCardBlock1.appendChild(a);
 
     // PREMIUM
@@ -323,7 +326,8 @@ function createClasses() {
     divRow.appendChild(divCol);
 
     divCard = document.createElement("div");
-    divCard.style.width = "20rem";
+    // divCard.style.width = "20rem";
+    divCard.classList.add("cartWidth");
     divCol.appendChild(divCard);
 
     image = document.createElement("img");
@@ -337,7 +341,8 @@ function createClasses() {
 
     cardTitle = document.createElement("h4");
     // cardTitle.className = "card-title";
-    cardTitle.innerHTML = 'PREMIUM';
+    cardTitle.innerHTML = 'KLASA PREMIUM';
+    cardTitle.classList.add("font-size")
     divCardBlock2.appendChild(cardTitle);
 
     let pricePremium = price + 1000;
@@ -352,6 +357,7 @@ function createClasses() {
     a.id = 'premiumButton';
     a.className = "btn btn-primary";
     a.innerHTML = "Wybierz bagaz";
+    a.classList.add("border1");
     divCardBlock2.appendChild(a);
 
     // BUSINESS
@@ -364,7 +370,8 @@ function createClasses() {
 
     divCard = document.createElement("div");
     // divCard.className = "card";
-    divCard.style.width = "20rem";
+    // divCard.style.width = "20rem";
+    divCard.classList.add("cartWidth");
     divCol.appendChild(divCard);
 
     image = document.createElement("img");
@@ -378,7 +385,8 @@ function createClasses() {
 
     cardTitle = document.createElement("h4");
     // cardTitle.className = "card-title";
-    cardTitle.innerHTML = 'BUSINESS';
+    cardTitle.innerHTML = 'KLASA BIZNES';
+    cardTitle.classList.add("font-size");
     divCardBlock3.appendChild(cardTitle);
 
     pPrice = document.createElement("p");
@@ -391,6 +399,7 @@ function createClasses() {
     a.className = "btn btn-primary";
     a.id = 'businessButton';
     a.innerHTML = "Wybierz bagaz";
+    a.classList.add("border1");
     divCardBlock3.appendChild(a);
 
     // insert after
@@ -469,6 +478,7 @@ function createClasses() {
         a.className = "add-to-cart btn btn-primary";
         a.id = 'luggageButton';
         a.innerHTML = "Cena z bagażem: " + price + " PLN. <br> Zatwierdź wybór.";
+        a.classList.add("border1");
         divCardBlock1.appendChild(a);
 
         let optionValue = document.getElementById("luggageOption");
@@ -542,6 +552,7 @@ function createClasses() {
         a.className = "add-to-cart btn btn-primary";
         a.id = 'luggageButton';
         a.innerHTML = "Cena z bagażem: " + pricePremium + " PLN. <br> Zatwierdź wybór.";
+        a.classList.add("border1");
         divCardBlock2.appendChild(a);
 
         let optionValue = document.getElementById("luggageOption");
@@ -627,6 +638,7 @@ function createClasses() {
         a.className = "btn btn-primary add-to-cart ";
         a.type = "button";
         a.innerHTML = "Cena z bagażem: " + priceBusiness + " PLN. <br> Zatwierdź wybór.";
+        a.classList.add("border1");
         a.id = 'luggageButton';
         divCardBlock3.appendChild(a);
 
