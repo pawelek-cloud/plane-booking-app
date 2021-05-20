@@ -119,39 +119,6 @@ aside {
 .content-section {
     margin: 1em;
 }
-
-.section-header {
-    font-family: "Metal Mania";
-    font-weight: normal;
-    color: #333;
-    text-align: center;
-    font-size: 2.5em;
-}
-
-.btn {
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-}
-
-.btn-primary {
-    color: white;
-    border: none;
-    border-radius: .3em;
-    font-weight: bold;
-}
-
-.btn-primary:hover {
-    background-color: #2D9CDB;
-}
-
-
-.cart-header {
-    font-weight: bold;
-    font-size: 1.25em;
-    color: #333;
-}
-
 .cart-column {
     display: flex;
     align-items: center;
@@ -168,65 +135,7 @@ aside {
     width: 45%;
 }
 
-.cart-price {
-    width: 20%;
-    font-size: 1.2em;
-    color: #333;
-}
-
-.cart-quantity {
-    width: 35%;
-}
-
-.cart-item-title {
-    color: #333;
-    margin-left: .5em;
-    font-size: 1.2em;
-}
-
-.cart-item-image {
-    width: 75px;
-    height: auto;
-    border-radius: 10px;
-}
-
-.btn-danger {
-    color: white;
-    background-color: #EB5757;
-    border: none;
-    border-radius: .3em;
-    font-weight: bold;
-}
-
-.btn-danger:hover {
-    background-color: #CC4C4C;
-}
-
-.cart-row:last-child {
-    border-bottom: 1px solid black;
-}
-
-.cart-row:last-child .cart-column {
-    border: none;
-}
-
-.cart-total {
-    text-align: end;
-    margin-top: 10px;
-    margin-right: 10px;
-}
-
-.cart-total-title {
-    font-weight: bold;
-    font-size: 1.5em;
-    color: #fff;
-    margin-right: 20px;
-}
-
-.cart-total-price {
-    color: #fff;
-    font-size: 1.1em;
-}
+/* button continue */
 
 .btn-purchase {
     display: block;
@@ -234,60 +143,172 @@ aside {
     font-size: 1.75em;
 }
 
+/* general styles */
 .color {
     color: #fff;
 }
-.font-weight{
+
+.font-weight {
     font-weight: 600 !important;
 }
 
-.border1{
+.border1 {
     border: 1px solid #fff !important;
 }
 
-.btn{
+.btn {
     background-color: transparent !important;
 }
+
 /* media query */
 
-@media (min-width:1500px) {
-    .cartWidth {
-       width: 20rem;
-    }
+@media (min-width:1420px) {
     .font-size {
         font-size: 20px;
         font-weight: 600;
     }
+
     .font-size1 {
         font-size: 30px;
         font-weight: 600;
     }
-    .border{
+
+    .border {
         border: 4px solid #fff !important;
     }
-    .padding{
+
+    .padding {
         padding: 5% !important;
     }
+}
 
+@media (max-width:1420px) {
+    .font-size {
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    .font-size1 {
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    .border {
+        border: 3px solid #fff !important;
+    }
+
+    .padding {
+        padding: 3% !important;
+    }
+
+}
+
+@media (max-width:1250px) {
+    .font-size {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .font-size1 {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .border {
+        border: 3px solid #fff !important;
+    }
+
+    .padding {
+        padding: 2% !important;
+    }
+}
+@media (max-width:940px) {
+    .font-size1 {
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    .border {
+        border: 2px solid #fff !important;
+    }
+
+    .padding {
+        padding: 1% !important;
+    }
+}
+@media (max-width:874px) {
+    .font-size1 {
+        font-size: 15px;
+        font-weight: 600;
+    }
+    .padding {
+        padding: 5px !important;
+    }
+    article {
+        width: 75%;
+        padding: 10px;
+        
+    }
+    aside {
+        width: 25%;
+        padding: 0;
+    }
+    .cart-column {
+        margin-right: 5px;
+        padding-bottom: 5px;
+        margin-top: 5px;
+    }
+    
+}
+
+/* cart and select width */
+
+@media (min-width:1500px) {
+    .cartWidth {
+        width: 20rem;
+    }
+
+    select {
+        width: 20rem;
+    }
 }
 
 @media (max-width:1500px) {
     .cartWidth {
-       width: 17rem;
+        width: 17rem;
+    }
+
+    select {
+        width: 17rem;
     }
 }
+
 @media (max-width:1300px) {
     .cartWidth {
-       width: 15rem;
+        width: 15rem;
+    }
+
+    select {
+        width: 15rem;
     }
 }
+
 @media (max-width:1153px) {
     .cartWidth {
-       width: 13rem;
+        width: 13rem;
+    }
+
+    select {
+        width: 13rem;
     }
 }
+
 @media (max-width:1013px) {
     .cartWidth {
-       width: 11rem;
+        width: 11rem;
+    }
+
+    select {
+        width: 11rem;
     }
 }

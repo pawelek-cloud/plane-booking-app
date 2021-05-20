@@ -452,8 +452,6 @@ function createClasses() {
         let select = document.createElement("select");
         select.name = "luggage";
         select.id = "luggageOption";
-        select.style.width = "20rem";
-        select.style.fontSize = "17px";
 
         let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
 
@@ -526,8 +524,6 @@ function createClasses() {
         let select = document.createElement("select");
         select.name = "luggage";
         select.id = "luggageOption";
-        select.style.width = "20rem";
-        select.style.fontSize = "17px";
 
         let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
 
@@ -598,8 +594,6 @@ function createClasses() {
         let select = document.createElement("select");
         select.name = "luggage";
         select.id = "luggageOption";
-        select.style.width = "20rem";
-        select.style.fontSize = "17px";
 
         let names = ["Bagaż podręczny (1x8 kg)-0 PLN", "Bagaż rejestrowany (1x23 kg) - 90 PLN", "Bagaż (2x23 kg) - 200 PLN"];
 
@@ -714,7 +708,7 @@ function createClasses() {
 
                 showNumberOfPassangers.innerHTML = numberOfPassengers;
 
-                showPriceTotal.innerHTML = "PLN " + priceTotal * passengersNumber;
+                showPriceTotal.innerHTML = "Do zapłaty: PLN " + priceTotal * passengersNumber;
                 count1 = ++click;
                 console.log(count1)
                 return count1;
