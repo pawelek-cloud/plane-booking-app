@@ -44,21 +44,34 @@ const seatDepartureChoice = document.getElementById('seatNumberDeparture');
 const seatArrivalChoice = document.getElementById('seatNumberArrival');
 
 // painting seat
+
+
+let seat = JSON.parse(seats)
+
+console.log(seat)
+
 // first class
 let rect1 = document.getElementsByClassName("Rectangle-1-Copy-2");
 if (businessClassPrice === "true") {
 
     for (let i = 0; i < rect1.length; i++) {
+        for (let j = 0; j < seat.length; j++) {
 
+            let target = rect1[i];
+            if (target.id === seat[j]) {
+                target.classList.add('reserve');
+            }
+        }
         rect1[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
             let length = (document.getElementsByClassName("highlight").length) + 1;
+            console.log(length)
             if (target.classList[1] === "highlight") {
                 length = length - 1;
                 seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
-            if (length <= passenger) {
+            if (length <= passenger&&target.classList[1] != "reserve") {
                 if (target.classList[1] != "highlight") {
                     seatDepartureChoice.innerHTML += target.id + ' ';
                 }
@@ -224,16 +237,16 @@ continueButton.addEventListener('click', function () {
         if (economyClassPriceReturn === "true") {
             iterate(rect6);
         }
-        setInterval(function () {
-            window.location.replace("/payment")
-        }, 7000)
+        // setInterval(function () {
+        //     window.location.replace("/payment")
+        // }, 7000)
 
 
         function iterate(array) {
             for (let i of array) {
                 let target = i;
 
-                if (target.classList[1] != undefined) {
+                if (target.classList[1] != undefined&&target.classList[1] != "reserve") {
 
                     console.log(target)
 
