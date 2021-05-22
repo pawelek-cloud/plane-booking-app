@@ -47,8 +47,8 @@ const seatArrivalChoice = document.getElementById('seatNumberArrival');
 
 
 let seat = JSON.parse(seats)
-
 console.log(seat)
+
 
 // first class
 let rect1 = document.getElementsByClassName("Rectangle-1-Copy-2");
@@ -71,7 +71,7 @@ if (businessClassPrice === "true") {
                 length = length - 1;
                 seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
-            if (length <= passenger&&target.classList[1] != "reserve") {
+            if (length <= passenger && target.classList[1] != "reserve") {
                 if (target.classList[1] != "highlight") {
                     seatDepartureChoice.innerHTML += target.id + ' ';
                 }
@@ -87,7 +87,13 @@ let rect2 = document.getElementsByClassName("bg");
 if (premiumClassPrice === "true") {
 
     for (let i = 0; i < rect2.length; i++) {
+        for (let j = 0; j < seat.length; j++) {
 
+            let target = rect2[i];
+            if (target.id === seat[j]) {
+                target.classList.add('reserve');
+            }
+        }
         rect2[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
@@ -97,7 +103,7 @@ if (premiumClassPrice === "true") {
                 seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
 
-            if (length <= passenger) {
+            if (length <= passenger && target.classList[1] != "reserve") {
 
                 if (target.classList[1] != "highlight") {
                     seatDepartureChoice.innerHTML += target.id + ' ';
@@ -112,7 +118,13 @@ if (economyClassPrice === "true") {
     // economy class
 
     for (let i = 0; i < rect3.length; i++) {
+        for (let j = 0; j < seat.length; j++) {
 
+            let target = rect3[i];
+            if (target.id === seat[j]) {
+                target.classList.add('reserve');
+            }
+        }
         rect3[i].addEventListener("click", function (event) {
             console.log(i)
             let target = event.target;
@@ -121,7 +133,7 @@ if (economyClassPrice === "true") {
                 length = length - 1;
                 seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
             }
-            if (length <= passenger) {
+            if (length <= passenger && target.classList[1] != "reserve") {
                 if (target.classList[1] != "highlight") {
                     seatDepartureChoice.innerHTML += target.id + ' ';
                 }
@@ -132,80 +144,103 @@ if (economyClassPrice === "true") {
     }
 }
 // return flight
-// first class
-let rect4 = document.getElementsByClassName("Rectangle-1-Copy-2-return");
+if (arrivalDate.length != 4) {
+    let seatsReturn = JSON.parse(seatReturn)
+    console.log(seatsReturn)
 
-if (businessClassPriceReturn === "true") {
+    // first class
+    let rect4 = document.getElementsByClassName("Rectangle-1-Copy-2-return");
 
+    if (businessClassPriceReturn === "true") {
 
-    for (let i = 0; i < rect4.length; i++) {
-
-        rect4[i].addEventListener("click", function (event) {
-            console.log(i)
-            let target = event.target;
-            let length = (document.getElementsByClassName("highlight1").length) + 1;
-            if (target.classList[1] === "highlight1") {
-                length = length - 1;
-                seatArrivalChoice.innerHTML = seatArrivalChoice.innerHTML.replace(target.id, '');
-            }
-            if (length <= passenger) {
-                if (target.classList[1] != "highlight1") {
-                    seatArrivalChoice.innerHTML += target.id + ' ';
+        for (let i = 0; i < rect4.length; i++) {
+            for (let j = 0; j < seatsReturn.length; j++) {
+                let target = rect4[i];
+                if (target.id === seatsReturn[j]) {
+                    target.classList.add('reserve');
                 }
-
-                target.classList.toggle("highlight1")
-
             }
-        })
+
+            rect4[i].addEventListener("click", function (event) {
+                console.log(i)
+                let target = event.target;
+                let length = (document.getElementsByClassName("highlight1").length) + 1;
+                if (target.classList[1] === "highlight1") {
+                    length = length - 1;
+                    seatArrivalChoice.innerHTML = seatArrivalChoice.innerHTML.replace(target.id, '');
+                }
+                if (length <= passenger && target.classList[1] != "reserve") {
+                    if (target.classList[1] != "highlight1") {
+                        seatArrivalChoice.innerHTML += target.id + ' ';
+                    }
+                    target.classList.toggle("highlight1")
+                }
+            })
+        }
     }
-}
-// premium class
-let rect5 = document.getElementsByClassName("bg-return");
+    // premium class
+    let rect5 = document.getElementsByClassName("bg-return");
+    if (premiumClassPriceReturn === "true") {
 
-if (premiumClassPriceReturn === "true") {
+        for (let i = 0; i < rect5.length; i++) {
 
-    for (let i = 0; i < rect5.length; i++) {
-
-        rect5[i].addEventListener("click", function (event) {
-            console.log(i)
-            let target = event.target;
-            let length = (document.getElementsByClassName("highlight1").length) + 1;
-            if (target.classList[1] === "highlight1") {
-                length = length - 1;
-                seatArrivalChoice.innerHTML = seatArrivalChoice.innerHTML.replace(target.id, '');
-            }
-            if (length <= passenger) {
-                if (target.classList[1] != "highlight1") {
-                    seatArrivalChoice.innerHTML += target.id + ' ';
+            for (let j = 0; j < seatsReturn.length; j++) {
+                let target = rect5[i];
+                if (target.id === seatsReturn[j]) {
+                    target.classList.add('reserve');
                 }
-                target.classList.toggle("highlight1")
-
             }
-        })
+
+
+            rect5[i].addEventListener("click", function (event) {
+                console.log(i)
+                let target = event.target;
+                let length = (document.getElementsByClassName("highlight1").length) + 1;
+                if (target.classList[1] === "highlight1") {
+                    length = length - 1;
+                    seatArrivalChoice.innerHTML = seatArrivalChoice.innerHTML.replace(target.id, '');
+                }
+                if (length <= passenger && target.classList[1] != "reserve") {
+                    if (target.classList[1] != "highlight1") {
+                        seatArrivalChoice.innerHTML += target.id + ' ';
+                    }
+                    target.classList.toggle("highlight1")
+
+                }
+            })
+        }
     }
-}
-// economy class
-let rect6 = document.getElementsByClassName("bg-copy-return");
+    // economy class
+    let rect6 = document.getElementsByClassName("bg-copy-return");
 
-if (economyClassPriceReturn === "true") {
-    for (let i = 0; i < rect6.length; i++) {
+    if (economyClassPriceReturn === "true") {
+        for (let i = 0; i < rect6.length; i++) {
 
-        rect6[i].addEventListener("click", function (event) {
-            console.log(i)
-            let target = event.target;
-            let length = (document.getElementsByClassName("highlight1").length) + 1;
-            if (target.classList[1] === "highlight1") {
-                length = length - 1;
-                seatArrivalChoice.innerHTML = seatArrivalChoice.innerHTML.replace(target.id, '');
-            }
-            if (length <= passenger) {
-                if (target.classList[1] != "highlight1") {
-                    seatArrivalChoice.innerHTML += target.id + ' ';
+            for (let j = 0; j < seatsReturn.length; j++) {
+                let target = rect6[i];
+                if (target.id === seatsReturn[j]) {
+                    target.classList.add('reserve');
                 }
-                target.classList.toggle("highlight1")
-
             }
-        })
+
+
+            rect6[i].addEventListener("click", function (event) {
+                console.log(i)
+                let target = event.target;
+                let length = (document.getElementsByClassName("highlight1").length) + 1;
+                if (target.classList[1] === "highlight1") {
+                    length = length - 1;
+                    seatArrivalChoice.innerHTML = seatArrivalChoice.innerHTML.replace(target.id, '');
+                }
+                if (length <= passenger && target.classList[1] != "reserve") {
+                    if (target.classList[1] != "highlight1") {
+                        seatArrivalChoice.innerHTML += target.id + ' ';
+                    }
+                    target.classList.toggle("highlight1")
+
+                }
+            })
+        }
     }
 }
 // submit button validation
@@ -237,16 +272,16 @@ continueButton.addEventListener('click', function () {
         if (economyClassPriceReturn === "true") {
             iterate(rect6);
         }
-        // setInterval(function () {
-        //     window.location.replace("/payment")
-        // }, 7000)
+        setInterval(function () {
+            window.location.replace("/payment")
+        }, 7000)
 
 
         function iterate(array) {
             for (let i of array) {
                 let target = i;
 
-                if (target.classList[1] != undefined&&target.classList[1] != "reserve") {
+                if (target.classList[1] != undefined && target.classList[1] != "reserve") {
 
                     console.log(target)
 
@@ -363,3 +398,13 @@ window.addEventListener("load", function loadWather() {
 
         })
 })
+
+// prevent back
+
+function disableBack() {
+    window.history.forward();
+}
+setTimeout("disableBack()", 0);
+window.onunload = function () {
+    null
+};

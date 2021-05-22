@@ -52,7 +52,7 @@ router.get('/registration', function (req, res, next) {
 
 /* GET login page. */
 router.get('/login', function (req, res, next) {
-	req.session.destroy(); //destroy session
+	// req.session.destroy(); 
 	res.render('login', {
 		title: 'Logowanie'
 	});
@@ -183,40 +183,95 @@ router.get('/home', function (req, res, next) {
 		}).exec().then(result => {
 			const seats = result.map((seat) => seat.id);
 			console.log(seats)
-
-			res.render('shortDistancePlane', {
+			seatReturnShortDistance.find({
+				available: false
+			}).exec().then(result => {
+				const seatReturn = result.map((seat) => seat.id)
+				console.log(seatReturn);
+				res.render('shortDistancePlane', {
+					title: 'Wybierz miejsce',
+					seats: seats,
+					seatReturn: seatReturn
+				});
+			})
+		}).catch(err => console.log(err))
+	}
+	if (req.session.cust_log == "true" && arrivalPlace === "Dubaj" && oneOrTwoWay != "oneWay") {
+		seatMiddleDistance.find({
+			available: false
+		}).exec().then(result => {
+			const seats = result.map((seat) => seat.id);
+			console.log(seats)
+			seatReturnMiddleDistance.find({
+				available: false
+			}).exec().then(result => {
+				const seatReturn = result.map((seat) => seat.id)
+				console.log(seatReturn);
+				res.render('middleDistancePlane', {
+					title: 'Wybierz miejsce',
+					seats: seats,
+					seatReturn: seatReturn
+				});
+			})
+		}).catch(err => console.log(err))
+	}
+	if (req.session.cust_log == "true" && arrivalPlace === "Nowy Jork" && oneOrTwoWay != "oneWay") {
+		seatLongDistance.find({
+			available: false
+		}).exec().then(result => {
+			const seats = result.map((seat) => seat.id);
+			console.log(seats)
+			seatReturnLongDistance.find({
+				available: false
+			}).exec().then(result => {
+				const seatReturn = result.map((seat) => seat.id)
+				console.log(seatReturn);
+				res.render('longDistancePlane', {
+					title: 'Wybierz miejsce',
+					seats: seats,
+					seatReturn: seatReturn
+				});
+			})
+		}).catch(err => console.log(err))
+	}
+	if (req.session.cust_log == "true" && arrivalPlace === "Londyn" && oneOrTwoWay === "oneWay") {
+		seatShortDistance.find({
+			available: false
+		}).exec().then(result => {
+			const seats = result.map((seat) => seat.id);
+			console.log(seats)
+			res.render('shortDistancePlaneOneWay', {
 				title: 'Wybierz miejsce',
-				seats: seats,
-				seatReturn: seatReturn
+				seats: seats
 			});
 
 		}).catch(err => console.log(err))
-
-	}
-	if (req.session.cust_log == "true" && arrivalPlace === "Dubaj" && oneOrTwoWay != "oneWay") {
-		res.render('middleDistancePlane', {
-			title: 'Wybierz miejsce'
-		});
-	}
-	if (req.session.cust_log == "true" && arrivalPlace === "Nowy Jork" && oneOrTwoWay != "oneWay") {
-		res.render('longDistancePlane', {
-			title: 'Wybierz miejsce'
-		});
-	}
-	if (req.session.cust_log == "true" && arrivalPlace === "Londyn" && oneOrTwoWay === "oneWay") {
-		res.render('shortDistancePlaneOneWay', {
-			title: 'Wybierz miejsce'
-		});
 	}
 	if (req.session.cust_log == "true" && arrivalPlace === "Dubaj" && oneOrTwoWay === "oneWay") {
-		res.render('middleDistancePlaneOneWay', {
-			title: 'Wybierz miejsce'
-		});
+		seatMiddleDistance.find({
+			available: false
+		}).exec().then(result => {
+			const seats = result.map((seat) => seat.id);
+			console.log(seats)
+			res.render('middleDistancePlaneOneWay', {
+				title: 'Wybierz miejsce',
+				seats: seats
+			});
+
+		}).catch(err => console.log(err))
 	}
 	if (req.session.cust_log == "true" && arrivalPlace === "Nowy Jork" && oneOrTwoWay === "oneWay") {
-		res.render('longDistancePlaneOneWay', {
-			title: 'Wybierz miejsce'
-		});
+		seatLongDistance.find({
+			available: false
+		}).exec().then(result => {
+			const seats = result.map((seat) => seat.id);
+			console.log(seats)
+			res.render('longDistancePlaneOneWay', {
+				title: 'Wybierz miejsce',
+				seats: seats
+			});
+
+		}).catch(err => console.log(err))
 	}
 	if (req.session.cust_log != "true") {
 
@@ -225,16 +280,19 @@ router.get('/home', function (req, res, next) {
 		}).exec().then(result => {
 			const seats = result.map((seat) => seat.id);
 			console.log(seats)
-			res.render('shortDistancePlane', {
-				title: 'Wybierz miejsce',
-				seats: seats
-			});
-
+			seatReturnShortDistance.find({
+				available: false
+			}).exec().then(result => {
+				const seatReturn = result.map((seat) => seat.id)
+				console.log(seatReturn);
+				res.render('shortDistancePlane', {
+					title: 'Wybierz miejsce',
+					seats: seats,
+					seatReturn: seatReturn
+				});
+			})
 		}).catch(err => console.log(err))
-
-
 	}
-
 });
 
 // add a document to the DB collection recording the click event
