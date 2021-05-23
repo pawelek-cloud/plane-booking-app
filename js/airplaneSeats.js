@@ -49,7 +49,6 @@ const seatArrivalChoice = document.getElementById('seatNumberArrival');
 let seat = JSON.parse(seats)
 console.log(seat)
 
-
 // first class
 let rect1 = document.getElementsByClassName("Rectangle-1-Copy-2");
 if (businessClassPrice === "true") {
@@ -144,16 +143,12 @@ if (economyClassPrice === "true") {
     }
 }
 // return flight
-if (arrivalDate.length != 4) {
-    let seatsReturn = JSON.parse(seatReturn)
-    console.log(seatsReturn)
+// first class
+let rect4 = document.getElementsByClassName("Rectangle-1-Copy-2-return");
 
-    // first class
-    let rect4 = document.getElementsByClassName("Rectangle-1-Copy-2-return");
-
-    if (businessClassPriceReturn === "true") {
-
+if (businessClassPriceReturn === "true"&&arrivalDate.length != 4) {
         for (let i = 0; i < rect4.length; i++) {
+            let seatsReturn = JSON.parse(seatReturn)
             for (let j = 0; j < seatsReturn.length; j++) {
                 let target = rect4[i];
                 if (target.id === seatsReturn[j]) {
@@ -177,20 +172,18 @@ if (arrivalDate.length != 4) {
                 }
             })
         }
-    }
-    // premium class
-    let rect5 = document.getElementsByClassName("bg-return");
-    if (premiumClassPriceReturn === "true") {
-
+}
+// premium class
+let rect5 = document.getElementsByClassName("bg-return");
+if (premiumClassPriceReturn === "true"&&arrivalDate.length != 4) {
         for (let i = 0; i < rect5.length; i++) {
-
+            let seatsReturn = JSON.parse(seatReturn);
             for (let j = 0; j < seatsReturn.length; j++) {
                 let target = rect5[i];
                 if (target.id === seatsReturn[j]) {
                     target.classList.add('reserve');
                 }
             }
-
 
             rect5[i].addEventListener("click", function (event) {
                 console.log(i)
@@ -209,20 +202,19 @@ if (arrivalDate.length != 4) {
                 }
             })
         }
-    }
-    // economy class
-    let rect6 = document.getElementsByClassName("bg-copy-return");
+}
+// economy class
+let rect6 = document.getElementsByClassName("bg-copy-return");
 
-    if (economyClassPriceReturn === "true") {
+if (economyClassPriceReturn === "true"&&arrivalDate.length != 4) {
         for (let i = 0; i < rect6.length; i++) {
-
+            let seatsReturn = JSON.parse(seatReturn);
             for (let j = 0; j < seatsReturn.length; j++) {
                 let target = rect6[i];
                 if (target.id === seatsReturn[j]) {
                     target.classList.add('reserve');
                 }
             }
-
 
             rect6[i].addEventListener("click", function (event) {
                 console.log(i)
@@ -241,8 +233,8 @@ if (arrivalDate.length != 4) {
                 }
             })
         }
-    }
 }
+
 // submit button validation
 
 let invalid = "";

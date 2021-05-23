@@ -99,7 +99,8 @@ window.addEventListener("load", () => {
                     } else {
 
                         for (let i = 0; i < data.Carriers.length; i++) {
-                            document.getElementById("routes").innerHTML += "<span class='font-size'> Cena minimalna biletu z: " + data.Places[1].Name + " do: " + data.Places[0].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: <span id=routesId>" + data.Dates.OutboundDates[0].PartialDate + "</span>; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" + "<button class='button btn btn-primary border1' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/></span>";
+                            document.getElementById("routes").innerHTML += "<span class='font-size'>Cena minimalna biletu z: " + data.Places[0].Name + " do: " + data.Places[1].Name + " to: " + data.Quotes[i].MinPrice + "" + " " + data.Currencies[0].Code + "; przewoźnik: " + data.Carriers[i].Name + "; data wylotu: " + "<span id=routesId>" + data.Dates.OutboundDates[0].PartialDate + "</span>" + "; lot bezposredni: " + bolleanIntoPolish(i) + "<br/>" +
+                            "<button class='button btn btn-primary border1' name='btn'>Wybierz klasę podróży</button>" + "<br/><br/></span>";
 
 
                         }
@@ -661,8 +662,8 @@ function createClasses() {
 
         const retur = document.getElementById("returnId");
 
-        const buttonParent = button.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-
+        const buttonParent = button.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
+        const buttonParent2=button.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
         let showPrice = document.getElementById("endPrice");
 
         let showPriceTotal = document.getElementById("cart-total-price")
@@ -674,23 +675,23 @@ function createClasses() {
         const businessPrice = document.getElementById("priceBusiness");
         const buttonParent1 = button.parentNode;
 
-        if (count1 <= 1 && buttonParent.contains(retur)) {
+        if ((count1>0&&count1<2) && (buttonParent.contains(retur)||buttonParent2.contains(retur))) {
             alert("Wybierz lot docelowy");
+            console.log(count1)
             return;
         }
 
-        if (count1 <= 1) {
+        if (count1>0&&count1<2) {
 
-            const economyClassPrice = buttonParent.contains(routes) && buttonParent1.contains(economyPrice);
+            const economyClassPrice = (buttonParent.contains(routes)||buttonParent2.contains(routes)) && buttonParent1.contains(economyPrice);
             sessionStorage.setItem("ECONOMYCLASS", economyClassPrice);
-            const premiumClassPrice = buttonParent.contains(routes) && buttonParent1.contains(premiumPrice);
+            const premiumClassPrice = (buttonParent.contains(routes)||buttonParent2.contains(routes)) && buttonParent1.contains(premiumPrice);
             sessionStorage.setItem("PREMIUMCLASS", premiumClassPrice);
-            const businessClassPrice = buttonParent.contains(routes) && buttonParent1.contains(businessPrice);
+            const businessClassPrice = (buttonParent.contains(routes)||buttonParent2.contains(routes))&& buttonParent1.contains(businessPrice);
             sessionStorage.setItem("BUSINESSCLASS", businessClassPrice);
 
             if (confirm("Po zatwierdzeniu zmiana wyboru klasy i bagażu nie będzie możliwa. Czy jestes pewien swojego wyboru?")) {
                 showDepartureDate = document.getElementById("cartDepartureDate");
-
                 showDepartureDate.innerHTML = departureDate.innerHTML;
 
                 let showDeparturePlace = document.getElementById("cartDeparturePlace");
@@ -715,28 +716,25 @@ function createClasses() {
             } else {
                 return;
             }
-
-
         }
 
         console.log(count1)
-        if (count1 != 1 && count1 < 3) {
+        if (count1>1&&count1<3) {
             if (arrivalDate.innerHTML.length === 0) {
 
                 alert("Wybierz przycisk kontynuuj lub powróć do menu głównego")
                 return;
             }
 
-            if (buttonParent.contains(routes)) {
+            if (buttonParent.contains(routes)||buttonParent2.contains(routes)) {
                 alert("Wybierz lot powrotny")
                 return;
             } else {
-
-                const economyClassPrice = buttonParent.contains(retur) && buttonParent1.contains(economyPrice);
+                const economyClassPrice = (buttonParent.contains(retur)||buttonParent2.contains(retur)) && buttonParent1.contains(economyPrice);
                 sessionStorage.setItem("ECONOMYCLASSRETURN", economyClassPrice);
-                const premiumClassPrice = buttonParent.contains(retur) && buttonParent1.contains(premiumPrice);
+                const premiumClassPrice = (buttonParent.contains(retur)||buttonParent2.contains(retur)) && buttonParent1.contains(premiumPrice);
                 sessionStorage.setItem("PREMIUMCLASSRETURN", premiumClassPrice);
-                const businessClassPrice = buttonParent.contains(retur) && buttonParent1.contains(businessPrice);
+                const businessClassPrice = (buttonParent.contains(retur)||buttonParent2.contains(retur)) && buttonParent1.contains(businessPrice);
                 sessionStorage.setItem("BUSINESSCLASSRETURN", businessClassPrice);
 
                 if (confirm("Po zatwierdzeniu zmiana wyboru klasy i bagażu nie będzie możliwa. Czy jestes pewien swojego wyboru?")) {
@@ -760,8 +758,6 @@ function createClasses() {
                     showPrice.innerHTML = "Cena końcowa: " + priceTotal1 + " PLN";
 
                     showPriceTotal.innerHTML = "PLN " + priceTotal * passengersNumber;
-
-
 
                     showNumberOfPassangers.innerHTML = numberOfPassengers;
 

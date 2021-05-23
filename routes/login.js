@@ -52,7 +52,7 @@ router.get('/registration', function (req, res, next) {
 
 /* GET login page. */
 router.get('/login', function (req, res, next) {
-	// req.session.destroy(); 
+	req.session.destroy(); 
 	res.render('login', {
 		title: 'Logowanie'
 	});
@@ -275,17 +275,17 @@ router.get('/home', function (req, res, next) {
 	}
 	if (req.session.cust_log != "true") {
 
-		seatShortDistance.find({
+		seatLongDistance.find({
 			available: false
 		}).exec().then(result => {
 			const seats = result.map((seat) => seat.id);
 			console.log(seats)
-			seatReturnShortDistance.find({
+			seatReturnLongDistance.find({
 				available: false
 			}).exec().then(result => {
 				const seatReturn = result.map((seat) => seat.id)
 				console.log(seatReturn);
-				res.render('shortDistancePlane', {
+				res.render('longDistancePlane', {
 					title: 'Wybierz miejsce',
 					seats: seats,
 					seatReturn: seatReturn
@@ -411,6 +411,7 @@ router.put('/home', (req, res) => {
 	}
 });
 router.get('/payment', function (req, res, next) {
+	req.session.destroy(); 
 	res.render("payment")
 })
 
