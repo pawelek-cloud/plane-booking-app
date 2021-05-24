@@ -152,3 +152,25 @@ const oneWaychecked = document.getElementById("oneWay").checked;
 if (oneWaychecked) {
   arrival1.setAttribute("disabled", "");
 }
+
+// seatNext
+let seatNext = document.getElementById("flexCheckChecked");
+seatNext.addEventListener("click", function seatNext(event) {
+
+  let target = event.target;
+  let isChecked = document.getElementById("flexCheckChecked").checked;
+  if (isChecked) {
+    target.setAttribute("checked", "");
+  } else {
+    target.removeAttribute("checked")
+  }
+  sessionStorage.setItem("SEATNEXT", isChecked);
+})
+window.addEventListener("load", function seatNextOnLoad() {
+  let isChecked = document.getElementById("flexCheckChecked").checked;
+  if (isChecked) {
+    seatNext.removeAttribute('checked');
+  }
+  sessionStorage.setItem("SEATNEXT", isChecked);
+  
+})

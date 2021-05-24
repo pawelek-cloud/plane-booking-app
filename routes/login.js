@@ -275,22 +275,16 @@ router.get('/home', function (req, res, next) {
 	}
 	if (req.session.cust_log != "true") {
 
-		seatLongDistance.find({
+		seatShortDistance.find({
 			available: false
 		}).exec().then(result => {
 			const seats = result.map((seat) => seat.id);
 			console.log(seats)
-			seatReturnLongDistance.find({
-				available: false
-			}).exec().then(result => {
-				const seatReturn = result.map((seat) => seat.id)
-				console.log(seatReturn);
-				res.render('longDistancePlane', {
-					title: 'Wybierz miejsce',
-					seats: seats,
-					seatReturn: seatReturn
-				});
-			})
+			res.render('shortDistancePlaneOneWay', {
+				title: 'Wybierz miejsce',
+				seats: seats
+			});
+
 		}).catch(err => console.log(err))
 	}
 });
