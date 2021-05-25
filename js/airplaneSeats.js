@@ -46,8 +46,8 @@ const seatArrivalChoice = document.getElementById('seatNumberArrival');
 
 let nextSeat = [];
 let nextSeat1 = [];
-let previousIdArray = [];
-let nextIdArray = [];
+let nextId;
+let previousId;
 
 // painting seat
 
@@ -142,54 +142,49 @@ if (economyClassPrice === "true") {
 
                 }
                 target.classList.toggle("highlight")
-
-                if (seatNext === 'true' && target.classList[1] === "highlight") {
+                if (seatNext === 'true' && target.classList[1] === "highlight" && nextSeat.length > 0) {
                     let seats = rect3[i].id;
-                    // console.log(seats);
+
                     for (let y = 0; y < rect3.length; y++) {
                         let seats1 = rect3[y].id;
                         nextSeat1 = [...nextSeat1, seats1];
                     }
                     nextSeat1.sort();
-                    // console.log(nextSeat1)
-                    nextSeat = [...nextSeat, seats]
-                    console.log(nextSeat)
 
-                    // current id
-                    for (let z = 0; z < nextSeat1.length; z++) {
-                        if (seats === nextSeat1[z]) {
-                            let currentId = nextSeat1[z];
-                            // console.log(currentId)
-                        }
-                    }
                     // previous id
                     for (let z = 0; z < nextSeat1.length; z++) {
-                        if (seats === nextSeat1[z]) {
-                            let previousId = nextSeat1[z - 1];
-                            previousIdArray = [...previousIdArray, previousId]
-                            //     console.log(previousId)
-                            //     console.log(previousIdArray)
+                        if (nextSeat[0] === nextSeat1[z]) {
+                            previousId = nextSeat1[z +(-1)];
+                            break;
                         }
                     }
+
                     // next id
                     for (let z = 0; z < nextSeat1.length; z++) {
-                        if (seats === nextSeat1[z]) {
-                            let nextId = nextSeat1[z + 1];
-                            nextIdArray = [...nextIdArray, nextId]
-                            // console.log(nextId)
-                            // console.log(nextIdArray)
+                        if (nextSeat[nextSeat.length - 1] === nextSeat1[z]) {
+                            nextId = nextSeat1[z + 1];
                         }
                     }
+                    if (seats === previousId || seats === nextId) {
+                        nextSeat = [...nextSeat, seats]
+                    }
+                    nextSeat.sort();
+                    console.log(nextSeat)
                 }
+
+                if (seatNext === 'true' && target.classList[1] === "highlight" && nextSeat.length == 0) {
+                    let seats = rect3[i].id;
+                    nextSeat = [...nextSeat, seats]
+                    console.log(nextSeat)
+                }
+
+
                 if (seatNext === 'true' && target.classList[1] != "highlight") {
 
                     let seats = rect3[i].id;
-                    // console.log(seats)
                     for (let e of nextSeat) {
-                        // console.log(e)
                         if (e === seats) {
                             splice(nextSeat, e)
-
                         }
                     }
                     console.log(nextSeat)
@@ -205,9 +200,12 @@ if (economyClassPrice === "true") {
                 }
 
             }
+
+
         })
     }
 }
+
 
 // return flight
 // first class
