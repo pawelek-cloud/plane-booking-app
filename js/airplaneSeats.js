@@ -180,16 +180,12 @@ if (economyClassPrice === "true") {
                 if (length <= passenger && target.classList[1] != "reserve") {
                     if (target.classList[1] != "highlight") {
 
-                        console.log("Jestem tutaj2")
-
                         if (nextSeat.length > 0) {
                             let seats = rect3[i].id;
-                            console.log("Jestem tutaj1")
                             for (let y = 0; y < rect3.length; y++) {
                                 let seats1 = rect3[y].id;
                                 nextSeat1 = [...nextSeat1, seats1];
                                 target.classList.toggle("highlight")
-                                console.log("Jestem w toogle 1")
 
                             }
                             nextSeat1.sort();
@@ -211,22 +207,21 @@ if (economyClassPrice === "true") {
                             if (seats === previousId || seats === nextId) {
                                 nextSeat = [...nextSeat, seats]
                                 target.classList.toggle("highlight");
-                                console.log("Jestem w toogle 2")
                                 seatDepartureChoice.innerHTML += target.id + ' ';
                             }
                             nextSeat.sort();
-                            console.log(nextSeat)
                         }
                         if (nextSeat.length == 0) {
                             let seats = rect3[i].id;
                             nextSeat = [...nextSeat, seats]
-                            console.log("Jestem tutaj3")
-                            console.log(nextSeat)
                             seatDepartureChoice.innerHTML += target.id + ' ';
                         }
                     }
                     target.classList.toggle("highlight")
-                    console.log("Jestem w toogle 3")
+                    let length1 = (document.getElementsByClassName("highlight").length) + 1;
+                    if (length > length1) {
+                        target.classList.toggle("highlight")
+                    }
                 }
             })
         }
