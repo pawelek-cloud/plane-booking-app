@@ -128,59 +128,32 @@ if (economyClassPrice === "true") {
                 target.classList.add('reserve');
             }
         }
-        rect3[i].addEventListener("click", function (event) {
-            console.log(i)
-            let target = event.target;
-            let length = (document.getElementsByClassName("highlight").length) + 1;
-            if (target.classList[1] === "highlight") {
-                length = length - 1;
-                seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
-            }
-            if (length <= passenger && target.classList[1] != "reserve") {
-                if (target.classList[1] != "highlight") {
-                    seatDepartureChoice.innerHTML += target.id + ' ';
+        if (seatNext === 'false') {
+            rect3[i].addEventListener("click", function (event) {
+                console.log(i)
+                let target = event.target;
+                let length = (document.getElementsByClassName("highlight").length) + 1;
+                if (target.classList[1] === "highlight") {
+                    length = length - 1;
+                    seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
+                }
+                if (length <= passenger && target.classList[1] != "reserve") {
+                    if (target.classList[1] != "highlight") {
+                        seatDepartureChoice.innerHTML += target.id + ' ';
+                    }
+                    target.classList.toggle("highlight")
 
                 }
-                target.classList.toggle("highlight")
-                if (seatNext === 'true' && target.classList[1] === "highlight" && nextSeat.length > 0) {
-                    let seats = rect3[i].id;
-
-                    for (let y = 0; y < rect3.length; y++) {
-                        let seats1 = rect3[y].id;
-                        nextSeat1 = [...nextSeat1, seats1];
-                    }
-                    nextSeat1.sort();
-
-                    // previous id
-                    for (let z = 0; z < nextSeat1.length; z++) {
-                        if (nextSeat[0] === nextSeat1[z]) {
-                            previousId = nextSeat1[z +(-1)];
-                            break;
-                        }
-                    }
-
-                    // next id
-                    for (let z = 0; z < nextSeat1.length; z++) {
-                        if (nextSeat[nextSeat.length - 1] === nextSeat1[z]) {
-                            nextId = nextSeat1[z + 1];
-                        }
-                    }
-                    if (seats === previousId || seats === nextId) {
-                        nextSeat = [...nextSeat, seats]
-                    }
-                    nextSeat.sort();
-                    console.log(nextSeat)
-                }
-
-                if (seatNext === 'true' && target.classList[1] === "highlight" && nextSeat.length == 0) {
-                    let seats = rect3[i].id;
-                    nextSeat = [...nextSeat, seats]
-                    console.log(nextSeat)
-                }
-
-
-                if (seatNext === 'true' && target.classList[1] != "highlight") {
-
+            })
+        }
+        if (seatNext === 'true') {
+            rect3[i].addEventListener("click", function (event) {
+                console.log(i)
+                let target = event.target;
+                let length = (document.getElementsByClassName("highlight").length) + 1;
+                if (target.classList[1] === "highlight") {
+                    length = length - 1;
+                    seatDepartureChoice.innerHTML = seatDepartureChoice.innerHTML.replace(target.id, '');
                     let seats = rect3[i].id;
                     for (let e of nextSeat) {
                         if (e === seats) {
@@ -188,6 +161,7 @@ if (economyClassPrice === "true") {
                         }
                     }
                     console.log(nextSeat)
+                    console.log("Jestem tutaj4")
 
                     function splice(arr, val) {
                         for (var i = arr.length; i--;) {
@@ -198,11 +172,60 @@ if (economyClassPrice === "true") {
                     }
 
                 }
+                if (length <= passenger && target.classList[1] != "reserve") {
+                    if (target.classList[1] != "highlight") {
+                        // seatDepartureChoice.innerHTML += target.id + ' ';
 
-            }
+                        console.log("Jestem tutaj2")
 
+                        if (nextSeat.length > 0) {
+                            let seats = rect3[i].id;
+                            console.log("Jestem tutaj1")
+                            for (let y = 0; y < rect3.length; y++) {
+                                let seats1 = rect3[y].id;
+                                nextSeat1 = [...nextSeat1, seats1];
+                                target.classList.toggle("highlight")
 
-        })
+                            }
+                            nextSeat1.sort();
+
+                            // previous id
+                            for (let z = 0; z < nextSeat1.length; z++) {
+                                if (nextSeat[0] === nextSeat1[z]) {
+                                    previousId = nextSeat1[z + (-1)];
+                                    break;
+                                }
+                            }
+
+                            // next id
+                            for (let z = 0; z < nextSeat1.length; z++) {
+                                if (nextSeat[nextSeat.length - 1] === nextSeat1[z]) {
+                                    nextId = nextSeat1[z + 1];
+                                }
+                            }
+                            if (seats === previousId || seats === nextId) {
+                                nextSeat = [...nextSeat, seats]
+                                target.classList.toggle("highlight");
+                                seatDepartureChoice.innerHTML += target.id + ' ';
+
+                            }
+                            nextSeat.sort();
+                            console.log(nextSeat)
+
+                        }
+                        if (nextSeat.length == 0) {
+                            let seats = rect3[i].id;
+                            nextSeat = [...nextSeat, seats]
+                            console.log("Jestem tutaj3")
+                            console.log(nextSeat)
+                            seatDepartureChoice.innerHTML += target.id + ' ';
+
+                        }
+                    }
+                    target.classList.toggle("highlight")
+                }
+            })
+        }
     }
 }
 
