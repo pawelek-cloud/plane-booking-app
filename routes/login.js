@@ -275,23 +275,7 @@ router.get('/home', function (req, res, next) {
 	}
 	if (req.session.cust_log != "true") {
 
-		seatMiddleDistance.find({
-			available: false
-		}).exec().then(result => {
-			const seats = result.map((seat) => seat.id);
-			console.log(seats)
-			seatReturnMiddleDistance.find({
-				available: false
-			}).exec().then(result => {
-				const seatReturn = result.map((seat) => seat.id)
-				console.log(seatReturn);
-				res.render('middleDistancePlane', {
-					title: 'Wybierz miejsce',
-					seats: seats,
-					seatReturn: seatReturn
-				});
-			})
-		}).catch(err => console.log(err))
+		res.render('index');
 	}
 });
 
