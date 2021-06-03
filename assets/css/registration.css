@@ -119,6 +119,7 @@ aside {
 .content-section {
     margin: 1em;
 }
+
 .cart-column {
     display: flex;
     align-items: center;
@@ -222,6 +223,7 @@ aside {
         padding: 2% !important;
     }
 }
+
 @media (max-width:940px) {
     .font-size1 {
         font-size: 17px;
@@ -236,29 +238,49 @@ aside {
         padding: 1% !important;
     }
 }
+
 @media (max-width:874px) {
     .font-size1 {
         font-size: 15px;
         font-weight: 600;
     }
+
     .padding {
         padding: 5px !important;
     }
+
+    main {
+        display: block;
+    }
+
     article {
-        width: 75%;
-        padding: 10px;
-        
+        width: 100%;
     }
+
     aside {
-        width: 25%;
-        padding: 0;
+        width: 100%;
+        border-left: none;
     }
+
     .cart-column {
         margin-right: 5px;
         padding-bottom: 5px;
         margin-top: 5px;
     }
-    
+
+    h2,
+    h3 {
+        text-align: center;
+    }
+}
+
+@media (max-width:735px) {
+    .row {
+        display: block;
+        align-items: center;
+        text-align: center;
+    }
+    .col{padding: 0;}
 }
 
 /* cart and select width */
@@ -311,4 +333,21 @@ aside {
     select {
         width: 11rem;
     }
+}
+
+@media (max-width:874px) {
+    .cartWidth {
+        width: 13rem;
+    }
+
+    select {
+        width: 13rem;
+    }
+}
+@media (max-width:452px) {
+   
+   header{display: block;}
+   #returnButton{width: 100%;
+text-align: center;
+margin-top: 20px;}
 }
