@@ -274,8 +274,23 @@ router.get('/home', function (req, res, next) {
 		}).catch(err => console.log(err))
 	}
 	if (req.session.cust_log != "true") {
-
-		res.render('index');
+		seatShortDistance.find({
+			available: false
+		}).exec().then(result => {
+			const seats = result.map((seat) => seat.id);
+			console.log(seats)
+			seatReturnShortDistance.find({
+				available: false
+			}).exec().then(result => {
+				const seatReturn = result.map((seat) => seat.id)
+				console.log(seatReturn);
+				res.render('shortDistancePlane', {
+					title: 'Wybierz miejsce',
+					seats: seats,
+					seatReturn: seatReturn
+				});
+			})
+		}).catch(err => console.log(err))
 	}
 });
 

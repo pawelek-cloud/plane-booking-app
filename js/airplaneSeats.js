@@ -35,9 +35,9 @@ if (arrivalDate.length == 4) {
 
 if (arrivalDate.length == 4) {
 
-    document.getElementById("cart-total-price").innerHTML = "PLN " + priceTotal1;
+    document.getElementById("cart-total-price").innerHTML = "Do zapłaty: " + priceTotal1+" PLN";
 } else {
-    document.getElementById("cart-total-price").innerHTML = "PLN " + priceTotal;
+    document.getElementById("cart-total-price").innerHTML = "Do zapłaty: " + priceTotal+" PLN";
 }
 document.getElementById("numberOfPassengers").innerHTML = 'Liczba pasazerów: ' + passenger;
 
@@ -167,7 +167,7 @@ if (businessClassPrice === "true") {
                 }
             })
         }
-        
+
     }
 }
 // premium class
@@ -857,22 +857,31 @@ window.addEventListener("load", function loadWather() {
     transformedCityName = changeCityNameToAirportName(arrivalPlace)
 
     const weatherAfterLoad = transformedCityName;
-    showOption = document.getElementById("option-selected");
 
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${weatherAfterLoad}&cnt=5&appid=ecd6ba7cde8d46460f0cdb7d0b261058`)
         .then((resp) => resp.json())
         .then(function (data) {
             console.log(data)
-            let weatherIcon = data.weather[0].icon
+            let image = document.createElement("img");
+            image.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+            document.getElementById("icon").appendChild(image);
 
-            showOption.innerHTML = `temperatura aktualna ${weatherAfterLoad} ${data.weather[0].main} ${(data.main.temp-273.15).toFixed(1)} &#x2103 temperatura odczuwalna ${(data.main.feels_like-273.15).toFixed(1)} &#x2103`;
+            document.getElementById('city').innerHTML = weatherAfterLoad;
 
-            let icons = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+            document.getElementById(
+                `weather`
+            ).innerHTML = `${data.weather[0].description}`;
 
-            document.getElementById("weatherIcon").setAttribute("src", icons)
+            document.getElementById(
+                `temp`
+            ).innerHTML = `${(
+            data.main.temp - 273.15
+          ).toFixed(1)} &#x2103`;
 
-        })
+        });
+
 })
+
 
 // prevent back
 

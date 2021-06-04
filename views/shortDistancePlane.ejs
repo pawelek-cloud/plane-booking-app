@@ -3,7 +3,6 @@
 
 <head>
 	<meta charset="utf-8">
-	<title><%= title %></title>
 
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -26,31 +25,41 @@
 	<script>var seatReturn = '<%- JSON.stringify(seatReturn) %>'</script>
 	
 	<div class="container">
-		<nav class="navbar navbar-light bg-light">
-			<a class="navbar-brand">
+		<nav class="navbar navbar-light">
+			<a class="navbar-brand color padding border font-size">
 				<%= title %>
 			</a>
 			<ul class="list-unstyled list-inline pull-right">
 
 		</nav>
 		<div class="login-form">
-			<center><a href="/"><button type="button" class="btn btn-primary">Przejdź do strony głównej</button></a>
+			<center><a href="/"><button type="button" class="btn btn-primary font-size border padding">Przejdź do strony głównej</button></a>
 			</center>
 			
 		</div>
 
 		<header>
-			<p id="option-selected"></p>
-			<img id="weatherIcon" src>
+			<div class="box grid-horizontal">
+                <div class="location">
+                    <div class="city" id="city"></div>
+                   
+                </div>
+                <div class="current">
+                    <div class="temp" id="temp"><span></span></div>
+                    <div class="icon" id="icon"></div>
+                    <div class="weather" id="weather"></div>
+                </div>
+
+            </div>
 		</header>
 		<main>
 
 			<article>
-				<p>Wybierz miejsca na lot docelowy:</p>
+				<p class="font-size">Wybierz miejsca na lot docelowy:</p>
 				<svg height=35% width=100% version="1.1" xmlns="http://www.w3.org/2000/svg"
 					xmlns:xlink="http://www.w3.org/1999/xlink">
 					<g fill="none" fill-rule="evenodd">
-						<path fill="#FFF" d="M0 0h800v300H0z" />
+						<path fill="" d="M0 0h800v300H0z" />
 						<g transform="rotate(-90 104.685 101.339)" fill="#F5F5F5">
 							<ellipse transform="rotate(90 56.748 557.551)" cx="56.748" cy="557.551" rx="22.393"
 								ry="56.948" />
@@ -677,12 +686,12 @@
 						</g>
 					</g>
 				</svg>
-				<p>Wybierz miejsca na lot powrotny:</p>
+				<p class="font-size">Wybierz miejsca na lot powrotny:</p>
 
 				<svg height=35% width=100% version="1.1" xmlns="http://www.w3.org/2000/svg"
 					xmlns:xlink="http://www.w3.org/1999/xlink">
 					<g fill="none" fill-rule="evenodd">
-						<path fill="#FFF" d="M0 0h800v300H0z" />
+						<path  fill="" d="M0 0h800v300H0z" />
 						<g transform="rotate(-90 104.685 101.339)" fill="#F5F5F5">
 							<ellipse transform="rotate(90 56.748 557.551)" cx="56.748" cy="557.551" rx="22.393"
 								ry="56.948" />
@@ -1337,7 +1346,7 @@
 				<table class="table">
 
 					<tbody>
-						<thead class="thead-light">
+						<thead class="thead-light font-size">
 							<tr>
 								<th scope="col">Elementy wyposażenia</th>
 								<th scope="col">Klasa biznes</th>
@@ -1347,7 +1356,7 @@
 						</thead>
 
 						<tr>
-							<th scope="row">Liczba miejsc</th>
+							<th scope="row" class="font-size">Liczba miejsc</th>
 							<td>
 								12 </td>
 							<td>
@@ -1356,7 +1365,7 @@
 								87 </td>
 						</tr>
 						<tr>
-							<th scope="row">Numeracja miejsc</th>
+							<th scope="row" class="font-size">Numeracja miejsc</th>
 							<td>
 								1A-3F </td>
 							<td>
@@ -1374,37 +1383,37 @@
 				<section class="content-section sticky-top">
 					<h2 class="section-header"></h2>
 					<div class="cart-row">
-						<p id="cartDepartureDate" class="cart-item cart-header cart-column"></p>
-						<p id="cartDeparturePlace" class="cart-item cart-header cart-column"></p>
-						<p id="cartArrivalPlace" class="cart-item cart-header cart-column"></p>
+						<p id="cartDepartureDate" class="cart-item cart-header cart-column font-size border padding"></p>
+						<p id="cartDeparturePlace" class="cart-item cart-header cart-column font-size border padding"></p>
+						<p id="cartArrivalPlace" class="cart-item cart-header cart-column font-size border padding"></p>
 					</div>
 					<div class="cart-row">
-						<p id="cartDepartureReturnDate" class="cart-item cart-header cart-column"></p>
-						<p id="cartDepartureReturnPlace" class="cart-item cart-header cart-column"></p>
-						<p id="cartArrivalReturnPlace" class="cart-item cart-header cart-column"></p>
+						<p id="cartDepartureReturnDate" class="cart-item cart-header cart-column font-size border padding"></p>
+						<p id="cartDepartureReturnPlace" class="cart-item cart-header cart-column font-size border padding"></p>
+						<p id="cartArrivalReturnPlace" class="cart-item cart-header cart-column font-size border padding"></p>
 					</div>
 					<div>
-						<p id="numberOfPassengers" class="cart-item cart-header cart-column"></p>
+						<p id="numberOfPassengers" class="cart-item cart-header cart-column font-size border padding"></p>
 					</div>
 					<div class="cart-row">
-						<p class="cart-item cart-header cart-column">Wybrane miejsca: </p>
-						<p id="seatNumberDeparture" class="cart-item cart-header cart-column"></p>
+						<p class="cart-item cart-header cart-column font-size padding border">Wybrane miejsca: </p>
+						<p id="seatNumberDeparture" class="cart-item cart-header cart-column font-size"></p>
 						<p id="seatNumberArrival" class="cart-item cart-header cart-column"></p>
 					</div>
 					<div class="cart-items">
 					</div>
 					<div class="cart-total">
-						<strong class="cart-total-title">Do zapłaty</strong>
-						<p id="cart-total-price" class="cart-total-price">PLN 0</p>
+						<strong class="cart-total-title"></strong>
+						<p id="cart-total-price" class="cart-total-price font-size border padding">Do zapłaty: PLN 0</p>
 					</div>
-					<select name="" id="currencies">
+					<select name="" id="currencies" class="border font-size padding">
 						<option value="" disable selected>Wybierz walute</option>
 						<option value="EUR">EUR</option>
 						<option value="USD">USD</option>
 
 					</select>
 
-					<button id="continueButton" class="btn btn-primary btn-sm btn-purchase" type="button">Przejdź do
+					<button id="continueButton" class="btn btn-primary btn-sm btn-purchase font-size1 border" type="button">Przejdź do
 						płatnosci</button>
 				</section>
 			</aside>
