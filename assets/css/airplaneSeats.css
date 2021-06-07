@@ -219,14 +219,9 @@ aside {
 
 }
 
-@media (max-width:1250px) {
+@media (max-width:1357px) {
     .font-size {
         font-size: 15px;
-        font-weight: 600;
-    }
-
-    .font-size1 {
-        font-size: 20px;
         font-weight: 600;
     }
 
@@ -234,12 +229,6 @@ aside {
         border: 3px solid #fff !important;
     }
 
-    .padding {
-        padding: 2% !important;
-    }
-}
-
-@media (max-width:1125px) {
     .font-size1 {
         font-size: 15px;
         font-weight: 600;
@@ -293,7 +282,7 @@ aside {
     }
 }
 
-@media (max-width:925px) {
+@media (max-width:1025px) {
     .grid-horizontal {
         gap: 0px;
         grid-template-columns: 1fr 3fr;
@@ -304,20 +293,15 @@ aside {
 
     }
 
-
-}
-
-@media (max-width:750px) {
-
     .container1 {
         display: block;
-        height: 300vh;
+        height: 400vh;
     }
 
     .container2 {
         display: flex;
         align-items: center;
-        min-height: 600px;
+        min-height: 930px;
         min-width: 300px;
         margin: 30px;
         padding: 0;
@@ -329,12 +313,12 @@ aside {
 
     article {
         padding: 0;
-        min-height: 600px;
+        min-height: 930px;
         min-width: 300px;
     }
 
     main {
-        min-height: 600px;
+        min-height: 930px;
         min-width: 300px;
     }
 
@@ -343,14 +327,14 @@ aside {
         /* margin: 0 auto;
         display: block; */
         min-height: 300px;
-        min-width: 600px;
+        min-width: 930px;
 
     }
 }
 
 @media (max-width:650px) {
     .container1 {
-        height: 350vh;
+        height: 420vh;
     }
 
     .grid-horizontal {

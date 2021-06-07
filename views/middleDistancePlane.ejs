@@ -2,53 +2,67 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title><%= title %></title>
+	<meta charset="utf-8">
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 
-    <meta charset="UTF-8">
-    <meta name="description" content="sotre">
-    <meta name="keywords" content=>
-    <meta name="author" content=>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">  -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./../assets/css/airplaneSeats.css">
+	<meta charset="UTF-8">
+	<meta name="description" content="sotre">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">  -->
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./../assets/css/airplaneSeats.css">
 </head>
 
 <body>
-    <script>var seats = '<%- JSON.stringify(seats) %>'</script>
-	<script>var seatReturn = '<%- JSON.stringify(seatReturn) %>'</script>
-	
-    <div class="container">
-        <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand">
-                <%= title %>
-            </a>
-            <ul class="list-unstyled list-inline pull-right">
+	<script>
+		var seats = '<%- JSON.stringify(seats) %>'
+	</script>
+	<script>
+		var seatReturn = '<%- JSON.stringify(seatReturn) %>'
+	</script>
 
-        </nav>
-        <div class="login-form">
+	<div class="container1">
+		<nav class="navbar navbar-light">
+			<a class="navbar-brand color padding border font-size">
+				<%= title %>
+			</a>
+			<ul class="list-unstyled list-inline pull-right">
 
-            <center><a href="/"><button type="button" class="btn btn-primary">Przejdź do strony głównej</button></a>
-            </center>
+		</nav>
+		<div class="login-form">
+			<center><a href="/"><button type="button" class="btn btn-primary font-size border padding">Przejdź do strony
+						głównej</button></a>
+			</center>
 
-        </div>
+		</div>
 
-        <header>
-            <p id="option-selected"></p>
-            <img id="weatherIcon" src>
-        </header>
-        <main>
+		<header>
+			<div class="box grid-horizontal">
+				<div class="location">
+					<div class="city" id="city"></div>
 
-            <article>
+				</div>
+				<div class="current">
+					<div class="temp" id="temp"><span></span></div>
+					<div class="icon" id="icon"></div>
+					<div class="weather" id="weather"></div>
+				</div>
 
-                <svg width=100% height=35% version="1.1" xmlns="http://www.w3.org/2000/svg"
+			</div>
+		</header>
+		<main>
+
+			<article>
+				<div class="font-size">Wybierz miejsca na lot docelowy:</div>
+				<div class="container2">
+                    <svg width=100% height=350px version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink">
                     <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
                     <title>737-700</title>
@@ -61,7 +75,7 @@
                     <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g id="700" transform="translate(-190.000000, -880.000000)">
                             <g id="737-700" transform="translate(190.000000, 880.000000)">
-                                <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="972" height="285"></rect>
+                                <rect id="Rectangle" fill="" x="0" y="0" width="972" height="285"></rect>
                                 <g id="Plane"
                                     transform="translate(395.500000, 106.500000) rotate(-90.000000) translate(-395.500000, -106.500000) translate(289.000000, -288.000000)"
                                     fill="#F5F5F5">
@@ -1730,7 +1744,10 @@
                         </g>
                     </g>
                 </svg>
-                <svg width=100% height=35% version="1.1" xmlns="http://www.w3.org/2000/svg"
+				</div>
+				<div class="font-size">Wybierz miejsca na lot powrotny:</div>
+				<div class="container2">
+                    <svg width=100% height=350px version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink">
                     <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
                     <title>737-700</title>
@@ -1743,7 +1760,7 @@
                     <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <g id="700" transform="translate(-190.000000, -880.000000)">
                             <g id="737-700" transform="translate(190.000000, 880.000000)">
-                                <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="972" height="285"></rect>
+                                <rect id="Rectangle" fill="" x="0" y="0" width="972" height="285"></rect>
                                 <g id="Plane"
                                     transform="translate(395.500000, 106.500000) rotate(-90.000000) translate(-395.500000, -106.500000) translate(289.000000, -288.000000)"
                                     fill="#F5F5F5">
@@ -3413,6 +3430,8 @@
                     </g>
                 </svg>
 
+				</div>
+
                 <table class="table">
 
 
@@ -3448,50 +3467,52 @@
                     </tbody>
                 </table>
 
-            </article>
-            <aside>
-                <section class="content-section sticky-top">
-                    <h2 class="section-header"></h2>
-                    <div class="cart-row">
-                        <p id="cartDepartureDate" class="cart-item cart-header cart-column"></p>
-                        <p id="cartDeparturePlace" class="cart-item cart-header cart-column"></p>
-                        <p id="cartArrivalPlace" class="cart-item cart-header cart-column"></p>
-                    </div>
-                    <div class="cart-row">
-                        <p id="cartDepartureReturnDate" class="cart-item cart-header cart-column"></p>
-                        <p id="cartDepartureReturnPlace" class="cart-item cart-header cart-column"></p>
-                        <p id="cartArrivalReturnPlace" class="cart-item cart-header cart-column"></p>
-                    </div>
-                    <div>
-                        <p id="numberOfPassengers" class="cart-item cart-header cart-column"></p>
-                    </div>
-                    <div class="cart-row">
-                        <p class="cart-item cart-header cart-column">Wybrane miejsca: </p>
-                        <p id="seatNumberDeparture" class="cart-item cart-header cart-column"></p>
-                        <p id="seatNumberArrival" class="cart-item cart-header cart-column"></p>
-                    </div>
-                    <div class="cart-items">
-                    </div>
-                    <div class="cart-total">
-                        <strong class="cart-total-title">Do zapłaty</strong>
-                        <p id="cart-total-price" class="cart-total-price">PLN 0</p>
-                    </div>
-                    <select name="" id="currencies">
-                        <option value=disable selected>Wybierz walute</option>
-                        <option value="EUR">EUR</option>
-                        <option value="USD">USD</option>
 
-                    </select>
-                    <button id="continueButton" class="btn btn-primary btn-sm btn-purchase" type="button">Przejdź do
-                        płatnosci</button>
-                </section>
-            </aside>
+			</article>
+			<aside>
+				<section class="content-section sticky-top">
+					<h2 class="section-header"></h2>
+					<div class="cart-row">
+						<p id="cartDepartureDate" class="cart-column font-size border padding"></p>
+						<p id="cartDeparturePlace" class="cart-column font-size border padding"></p>
+						<p id="cartArrivalPlace" class="cart-column font-size border padding"></p>
+					</div>
+					<div class="cart-row">
+						<p id="cartDepartureReturnDate" class="cart-column font-size border padding"></p>
+						<p id="cartDepartureReturnPlace" class="cart-column font-size border padding"></p>
+						<p id="cartArrivalReturnPlace" class="cart-column font-size border padding"></p>
+					</div>
+					<div>
+						<p id="numberOfPassengers" class="cart-column font-size border padding"></p>
+					</div>
+					<div class="cart-row">
+						<p class="cart-column font-size padding border">Wybrane miejsca: </p>
+						<p id="seatNumberDeparture" class="cart-column font-size"></p>
+						<p id="seatNumberArrival" class="cart-column"></p>
+					</div>
+					<div class="cart-items">
+					</div>
+					<div class="cart-total">
+						<strong class="cart-total-title"></strong>
+						<p id="cart-total-price" class="cart-total-price font-size border padding">Do zapłaty: PLN 0</p>
+					</div>
+					<select name="" id="currencies" class="border font-size padding">
+						<option value="" disable selected>Wybierz walute</option>
+						<option value="EUR">EUR</option>
+						<option value="USD">USD</option>
 
-        </main>
+					</select>
 
+					<button id="continueButton" class="btn btn-primary btn-sm btn-purchase font-size1 border"
+						type="button">Przejdź do
+						płatnosci</button>
+				</section>
+			</aside>
 
-        <script src="./../js/airplaneSeats.js"></script>
-    </div>>
+		</main>
+
+		<script src="./../js/airplaneSeats.js"></script>
+	</div>>
 </body>
 
 </html>
